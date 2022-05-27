@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration= \
+ru.acuma.shufflerlib.config.JooqConfig
