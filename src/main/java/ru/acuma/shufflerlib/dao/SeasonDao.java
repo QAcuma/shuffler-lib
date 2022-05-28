@@ -6,6 +6,6 @@ public interface SeasonDao {
 
     Season getCurrentSeason();
 
-    void startNewSeason();
+    void startNewSeason(String name);
 
 }

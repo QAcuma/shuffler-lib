@@ -27,15 +27,15 @@ public class SeasonDaoImpl implements SeasonDao {
 
     @Override
     @Transactional
-    public void startNewSeason() {
+    public void startNewSeason(String name) {
         dsl.update(SEASON)
                 .set(SEASON.FINISHED_AT, OffsetDateTime.now())
                 .where(SEASON.FINISHED_AT.isNull())
                 .execute();
 
-        Season season = new Season();
-        season.setStartedAt(OffsetDateTime.now());
-
+        Season season = new Season()
+                .setStartedAt(OffsetDateTime.now())
+                .setName(name);
         dsl.newRecord(SEASON, season).store();
     }
 
