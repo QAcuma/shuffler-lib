@@ -12,7 +12,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row8;
+import org.jooq.Row6;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -77,16 +77,6 @@ public class Player extends TableImpl<PlayerRecord> {
      * The column <code>public.player.season_id</code>.
      */
     public final TableField<PlayerRecord, Long> SEASON_ID = createField(DSL.name("season_id"), SQLDataType.BIGINT, this, "");
-
-    /**
-     * The column <code>public.player.first_player_id</code>.
-     */
-    public final TableField<PlayerRecord, Long> FIRST_PLAYER_ID = createField(DSL.name("first_player_id"), SQLDataType.BIGINT, this, "");
-
-    /**
-     * The column <code>public.player.second_player_id</code>.
-     */
-    public final TableField<PlayerRecord, Long> SECOND_PLAYER_ID = createField(DSL.name("second_player_id"), SQLDataType.BIGINT, this, "");
 
     private Player(Name alias, Table<PlayerRecord> aliased) {
         this(alias, aliased, null);
@@ -202,11 +192,11 @@ public class Player extends TableImpl<PlayerRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row8 type methods
+    // Row6 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<Long, Long, Long, Integer, String, Long, Long, Long> fieldsRow() {
-        return (Row8) super.fieldsRow();
+    public Row6<Long, Long, Long, Integer, String, Long> fieldsRow() {
+        return (Row6) super.fieldsRow();
     }
 }

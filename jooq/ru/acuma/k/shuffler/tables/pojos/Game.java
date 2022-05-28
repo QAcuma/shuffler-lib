@@ -21,10 +21,6 @@ public class Game implements Serializable {
     private Integer        index;
     private OffsetDateTime startedAt;
     private OffsetDateTime finishedAt;
-    private Long           winnerTeamId;
-    private Long           loserTeamId;
-    private String         discipline;
-    private Long           seasonId;
 
     public Game() {}
 
@@ -34,10 +30,6 @@ public class Game implements Serializable {
         this.index = value.index;
         this.startedAt = value.startedAt;
         this.finishedAt = value.finishedAt;
-        this.winnerTeamId = value.winnerTeamId;
-        this.loserTeamId = value.loserTeamId;
-        this.discipline = value.discipline;
-        this.seasonId = value.seasonId;
     }
 
     public Game(
@@ -45,21 +37,13 @@ public class Game implements Serializable {
         Long           eventId,
         Integer        index,
         OffsetDateTime startedAt,
-        OffsetDateTime finishedAt,
-        Long           winnerTeamId,
-        Long           loserTeamId,
-        String         discipline,
-        Long           seasonId
+        OffsetDateTime finishedAt
     ) {
         this.id = id;
         this.eventId = eventId;
         this.index = index;
         this.startedAt = startedAt;
         this.finishedAt = finishedAt;
-        this.winnerTeamId = winnerTeamId;
-        this.loserTeamId = loserTeamId;
-        this.discipline = discipline;
-        this.seasonId = seasonId;
     }
 
     /**
@@ -137,66 +121,6 @@ public class Game implements Serializable {
         return this;
     }
 
-    /**
-     * Getter for <code>public.game.winner_team_id</code>.
-     */
-    public Long getWinnerTeamId() {
-        return this.winnerTeamId;
-    }
-
-    /**
-     * Setter for <code>public.game.winner_team_id</code>.
-     */
-    public Game setWinnerTeamId(Long winnerTeamId) {
-        this.winnerTeamId = winnerTeamId;
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.game.loser_team_id</code>.
-     */
-    public Long getLoserTeamId() {
-        return this.loserTeamId;
-    }
-
-    /**
-     * Setter for <code>public.game.loser_team_id</code>.
-     */
-    public Game setLoserTeamId(Long loserTeamId) {
-        this.loserTeamId = loserTeamId;
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.game.discipline</code>.
-     */
-    public String getDiscipline() {
-        return this.discipline;
-    }
-
-    /**
-     * Setter for <code>public.game.discipline</code>.
-     */
-    public Game setDiscipline(String discipline) {
-        this.discipline = discipline;
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.game.season_id</code>.
-     */
-    public Long getSeasonId() {
-        return this.seasonId;
-    }
-
-    /**
-     * Setter for <code>public.game.season_id</code>.
-     */
-    public Game setSeasonId(Long seasonId) {
-        this.seasonId = seasonId;
-        return this;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Game (");
@@ -206,10 +130,6 @@ public class Game implements Serializable {
         sb.append(", ").append(index);
         sb.append(", ").append(startedAt);
         sb.append(", ").append(finishedAt);
-        sb.append(", ").append(winnerTeamId);
-        sb.append(", ").append(loserTeamId);
-        sb.append(", ").append(discipline);
-        sb.append(", ").append(seasonId);
 
         sb.append(")");
         return sb.toString();

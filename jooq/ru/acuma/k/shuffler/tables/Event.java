@@ -11,10 +11,9 @@ import java.util.List;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Identity;
-import org.jooq.JSONB;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row9;
+import org.jooq.Row8;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -61,16 +60,6 @@ public class Event extends TableImpl<EventRecord> {
     public final TableField<EventRecord, Long> CHAT_ID = createField(DSL.name("chat_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>public.event.messages</code>.
-     */
-    public final TableField<EventRecord, JSONB> MESSAGES = createField(DSL.name("messages"), SQLDataType.JSONB, this, "");
-
-    /**
-     * The column <code>public.event.kickerplayers</code>.
-     */
-    public final TableField<EventRecord, JSONB> KICKERPLAYERS = createField(DSL.name("kickerplayers"), SQLDataType.JSONB, this, "");
-
-    /**
      * The column <code>public.event.status</code>.
      */
     public final TableField<EventRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.CLOB.nullable(false), this, "");
@@ -94,6 +83,11 @@ public class Event extends TableImpl<EventRecord> {
      * The column <code>public.event.season_id</code>.
      */
     public final TableField<EventRecord, Long> SEASON_ID = createField(DSL.name("season_id"), SQLDataType.BIGINT, this, "");
+
+    /**
+     * The column <code>public.event.index</code>.
+     */
+    public final TableField<EventRecord, Long> INDEX = createField(DSL.name("index"), SQLDataType.BIGINT, this, "");
 
     private Event(Name alias, Table<EventRecord> aliased) {
         this(alias, aliased, null);
@@ -198,11 +192,11 @@ public class Event extends TableImpl<EventRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row9 type methods
+    // Row8 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row9<Long, Long, JSONB, JSONB, String, OffsetDateTime, OffsetDateTime, String, Long> fieldsRow() {
-        return (Row9) super.fieldsRow();
+    public Row8<Long, Long, String, OffsetDateTime, OffsetDateTime, String, Long, Long> fieldsRow() {
+        return (Row8) super.fieldsRow();
     }
 }

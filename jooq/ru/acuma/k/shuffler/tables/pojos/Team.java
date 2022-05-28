@@ -5,7 +5,6 @@ package ru.acuma.k.shuffler.tables.pojos;
 
 
 import java.io.Serializable;
-import java.time.OffsetDateTime;
 
 
 /**
@@ -16,30 +15,26 @@ public class Team implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long           id;
-    private Long           gameId;
-    private OffsetDateTime startedAt;
-    private OffsetDateTime finishedAt;
+    private Long    id;
+    private Long    gameId;
+    private Boolean winner;
 
     public Team() {}
 
     public Team(Team value) {
         this.id = value.id;
         this.gameId = value.gameId;
-        this.startedAt = value.startedAt;
-        this.finishedAt = value.finishedAt;
+        this.winner = value.winner;
     }
 
     public Team(
-        Long           id,
-        Long           gameId,
-        OffsetDateTime startedAt,
-        OffsetDateTime finishedAt
+        Long    id,
+        Long    gameId,
+        Boolean winner
     ) {
         this.id = id;
         this.gameId = gameId;
-        this.startedAt = startedAt;
-        this.finishedAt = finishedAt;
+        this.winner = winner;
     }
 
     /**
@@ -73,32 +68,17 @@ public class Team implements Serializable {
     }
 
     /**
-     * Getter for <code>public.team.started_at</code>.
+     * Getter for <code>public.team.winner</code>.
      */
-    public OffsetDateTime getStartedAt() {
-        return this.startedAt;
+    public Boolean getWinner() {
+        return this.winner;
     }
 
     /**
-     * Setter for <code>public.team.started_at</code>.
+     * Setter for <code>public.team.winner</code>.
      */
-    public Team setStartedAt(OffsetDateTime startedAt) {
-        this.startedAt = startedAt;
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.team.finished_at</code>.
-     */
-    public OffsetDateTime getFinishedAt() {
-        return this.finishedAt;
-    }
-
-    /**
-     * Setter for <code>public.team.finished_at</code>.
-     */
-    public Team setFinishedAt(OffsetDateTime finishedAt) {
-        this.finishedAt = finishedAt;
+    public Team setWinner(Boolean winner) {
+        this.winner = winner;
         return this;
     }
 
@@ -108,8 +88,7 @@ public class Team implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(gameId);
-        sb.append(", ").append(startedAt);
-        sb.append(", ").append(finishedAt);
+        sb.append(", ").append(winner);
 
         sb.append(")");
         return sb.toString();

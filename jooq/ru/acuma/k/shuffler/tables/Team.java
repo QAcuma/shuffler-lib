@@ -4,7 +4,6 @@
 package ru.acuma.k.shuffler.tables;
 
 
-import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row4;
+import org.jooq.Row3;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -60,14 +59,9 @@ public class Team extends TableImpl<TeamRecord> {
     public final TableField<TeamRecord, Long> GAME_ID = createField(DSL.name("game_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>public.team.started_at</code>.
+     * The column <code>public.team.winner</code>.
      */
-    public final TableField<TeamRecord, OffsetDateTime> STARTED_AT = createField(DSL.name("started_at"), SQLDataType.TIMESTAMPWITHTIMEZONE(6).nullable(false), this, "");
-
-    /**
-     * The column <code>public.team.finished_at</code>.
-     */
-    public final TableField<TeamRecord, OffsetDateTime> FINISHED_AT = createField(DSL.name("finished_at"), SQLDataType.TIMESTAMPWITHTIMEZONE(6), this, "");
+    public final TableField<TeamRecord, Boolean> WINNER = createField(DSL.name("winner"), SQLDataType.BOOLEAN, this, "");
 
     private Team(Name alias, Table<TeamRecord> aliased) {
         this(alias, aliased, null);
@@ -161,11 +155,11 @@ public class Team extends TableImpl<TeamRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row3 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Long, Long, OffsetDateTime, OffsetDateTime> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row3<Long, Long, Boolean> fieldsRow() {
+        return (Row3) super.fieldsRow();
     }
 }
