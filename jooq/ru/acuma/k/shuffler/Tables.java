@@ -13,6 +13,7 @@ import ru.acuma.k.shuffler.tables.Rating;
 import ru.acuma.k.shuffler.tables.RatingHistory;
 import ru.acuma.k.shuffler.tables.Season;
 import ru.acuma.k.shuffler.tables.Team;
+import ru.acuma.k.shuffler.tables.TeamPlayer;
 import ru.acuma.k.shuffler.tables.UserInfo;
 
 
@@ -66,6 +67,11 @@ public class Tables {
      * The table <code>public.team</code>.
      */
     public static final Team TEAM = Team.TEAM;
+
+    /**
+     * The table <code>public.team_player</code>.
+     */
+    public static final TeamPlayer TEAM_PLAYER = TeamPlayer.TEAM_PLAYER;
 
     /**
      * The table <code>public.user_info</code>.

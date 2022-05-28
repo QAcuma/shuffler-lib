@@ -5,6 +5,7 @@ import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 import ru.acuma.k.shuffler.tables.pojos.Game;
 import ru.acuma.shufflerlib.dao.GameDao;
+import ru.acuma.shufflerlib.model.Discipline;
 
 import java.util.List;
 
@@ -20,17 +21,17 @@ public class GameDaoImpl implements GameDao {
     }
 
     @Override
-    public List<Game> findAllBySeasonId(Long seasonId) {
+    public List<Game> findAllBySeasonId(Long seasonId, Long chatId, Discipline discipline) {
         return null;
     }
 
     @Override
-    public List<Game> findAllByEventId(Long eventId) {
+    public List<Game> findAllByEventId(Long eventId, Long chatId, Discipline discipline) {
         return null;
     }
 
     @Override
-    public List<Game> findAllByPlayerIdAndSeasonIds(Long playerId, List<Long> seasonIds) {
+    public List<Game> findAllByPlayerIdAndSeasonIds(Long playerId, List<Long> seasonIds, Long chatId, Discipline discipline) {
         return null;
     }
 }

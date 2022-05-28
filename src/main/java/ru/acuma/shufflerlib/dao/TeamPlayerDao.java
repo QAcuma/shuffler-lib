@@ -6,6 +6,4 @@ public interface TeamPlayerDao {
 
     void save(TeamPlayer teamPlayer);
 
-
-
 }

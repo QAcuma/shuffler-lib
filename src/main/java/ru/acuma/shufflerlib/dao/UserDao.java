@@ -12,8 +12,6 @@ public interface UserDao {
 
     long save(UserInfo user);
 
-    UserInfo update(Long telegramId);
-
     void delete(Long userId);
 
 }

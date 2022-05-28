@@ -5,6 +5,7 @@ import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 import ru.acuma.k.shuffler.tables.pojos.Event;
 import ru.acuma.shufflerlib.dao.EventDao;
+import ru.acuma.shufflerlib.model.Discipline;
 
 import java.util.List;
 
@@ -20,12 +21,17 @@ public class EventDaoImpl implements EventDao {
     }
 
     @Override
-    public List<Event> findAllBySeasonId(Long seasonId) {
+    public Event findById(Long id) {
         return null;
     }
 
     @Override
-    public List<Event> findAllByPlayerId(Long playerId) {
+    public List<Event> findAllBySeasonId(Long seasonId, Long chatId, Discipline discipline) {
+        return null;
+    }
+
+    @Override
+    public List<Event> findAllByPlayerId(Long playerId, Long chatId, Discipline discipline) {
         return null;
     }
 }

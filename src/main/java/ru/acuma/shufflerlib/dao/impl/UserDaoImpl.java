@@ -55,11 +55,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public UserInfo update(Long userId) {
-        return null;
-    }
-
-    @Override
     public void delete(Long telegramId) {
         dsl.update(USER_INFO)
                 .set(USER_INFO.DELETED_AT, OffsetDateTime.now())

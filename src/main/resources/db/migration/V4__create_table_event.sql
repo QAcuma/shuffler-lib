@@ -10,9 +10,9 @@ create table if not exists event
 
     CONSTRAINT fk_exists_chat
         FOREIGN KEY (chat_id)
-            REFERENCES group_info(chat_id),
+            REFERENCES group_info (chat_id),
 
     CONSTRAINT fk_exists_season
         FOREIGN KEY (season_id)
-        REFERENCES season (id)
+            REFERENCES season (id)
 );

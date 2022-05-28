@@ -1,6 +1,7 @@
 package ru.acuma.shufflerlib.dao;
 
 import ru.acuma.k.shuffler.tables.pojos.Event;
+import ru.acuma.shufflerlib.model.Discipline;
 
 import java.util.List;
 
@@ -8,7 +9,9 @@ public interface EventDao {
 
     void save(Event event);
 
-    List<Event> findAllBySeasonId(Long seasonId);
+    Event findById(Long id);
 
-    List<Event> findAllByPlayerId(Long playerId);
+    List<Event> findAllBySeasonId(Long seasonId, Long chatId, Discipline discipline);
+
+    List<Event> findAllByPlayerId(Long playerId, Long chatId, Discipline discipline);
 }
