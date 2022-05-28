@@ -17,24 +17,24 @@ public class Team implements Serializable {
 
     private Long    id;
     private Long    gameId;
-    private Boolean winner;
+    private Boolean isWinner;
 
     public Team() {}
 
     public Team(Team value) {
         this.id = value.id;
         this.gameId = value.gameId;
-        this.winner = value.winner;
+        this.isWinner = value.isWinner;
     }
 
     public Team(
         Long    id,
         Long    gameId,
-        Boolean winner
+        Boolean isWinner
     ) {
         this.id = id;
         this.gameId = gameId;
-        this.winner = winner;
+        this.isWinner = isWinner;
     }
 
     /**
@@ -68,17 +68,17 @@ public class Team implements Serializable {
     }
 
     /**
-     * Getter for <code>public.team.winner</code>.
+     * Getter for <code>public.team.is_winner</code>.
      */
-    public Boolean getWinner() {
-        return this.winner;
+    public Boolean getIsWinner() {
+        return this.isWinner;
     }
 
     /**
-     * Setter for <code>public.team.winner</code>.
+     * Setter for <code>public.team.is_winner</code>.
      */
-    public Team setWinner(Boolean winner) {
-        this.winner = winner;
+    public Team setIsWinner(Boolean isWinner) {
+        this.isWinner = isWinner;
         return this;
     }
 
@@ -88,7 +88,7 @@ public class Team implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(gameId);
-        sb.append(", ").append(winner);
+        sb.append(", ").append(isWinner);
 
         sb.append(")");
         return sb.toString();

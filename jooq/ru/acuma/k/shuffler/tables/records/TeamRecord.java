@@ -52,17 +52,17 @@ public class TeamRecord extends UpdatableRecordImpl<TeamRecord> implements Recor
     }
 
     /**
-     * Setter for <code>public.team.winner</code>.
+     * Setter for <code>public.team.is_winner</code>.
      */
-    public TeamRecord setWinner(Boolean value) {
+    public TeamRecord setIsWinner(Boolean value) {
         set(2, value);
         return this;
     }
 
     /**
-     * Getter for <code>public.team.winner</code>.
+     * Getter for <code>public.team.is_winner</code>.
      */
-    public Boolean getWinner() {
+    public Boolean getIsWinner() {
         return (Boolean) get(2);
     }
 
@@ -101,7 +101,7 @@ public class TeamRecord extends UpdatableRecordImpl<TeamRecord> implements Recor
 
     @Override
     public Field<Boolean> field3() {
-        return Team.TEAM.WINNER;
+        return Team.TEAM.IS_WINNER;
     }
 
     @Override
@@ -116,7 +116,7 @@ public class TeamRecord extends UpdatableRecordImpl<TeamRecord> implements Recor
 
     @Override
     public Boolean component3() {
-        return getWinner();
+        return getIsWinner();
     }
 
     @Override
@@ -131,7 +131,7 @@ public class TeamRecord extends UpdatableRecordImpl<TeamRecord> implements Recor
 
     @Override
     public Boolean value3() {
-        return getWinner();
+        return getIsWinner();
     }
 
     @Override
@@ -148,7 +148,7 @@ public class TeamRecord extends UpdatableRecordImpl<TeamRecord> implements Recor
 
     @Override
     public TeamRecord value3(Boolean value) {
-        setWinner(value);
+        setIsWinner(value);
         return this;
     }
 
@@ -174,12 +174,12 @@ public class TeamRecord extends UpdatableRecordImpl<TeamRecord> implements Recor
     /**
      * Create a detached, initialised TeamRecord
      */
-    public TeamRecord(Long id, Long gameId, Boolean winner) {
+    public TeamRecord(Long id, Long gameId, Boolean isWinner) {
         super(Team.TEAM);
 
         setId(id);
         setGameId(gameId);
-        setWinner(winner);
+        setIsWinner(isWinner);
     }
 
     /**
@@ -191,7 +191,7 @@ public class TeamRecord extends UpdatableRecordImpl<TeamRecord> implements Recor
         if (value != null) {
             setId(value.getId());
             setGameId(value.getGameId());
-            setWinner(value.getWinner());
+            setIsWinner(value.getIsWinner());
         }
     }
 }

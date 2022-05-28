@@ -23,9 +23,6 @@ public class UserInfo implements Serializable {
     private String         lastName;
     private String         userName;
     private Boolean        isBlocked;
-    private Boolean        canJoinGroups;
-    private Boolean        canReadAllGroupMessage;
-    private Boolean        supportInlineQueries;
     private OffsetDateTime lastMessageAt;
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
@@ -41,9 +38,6 @@ public class UserInfo implements Serializable {
         this.lastName = value.lastName;
         this.userName = value.userName;
         this.isBlocked = value.isBlocked;
-        this.canJoinGroups = value.canJoinGroups;
-        this.canReadAllGroupMessage = value.canReadAllGroupMessage;
-        this.supportInlineQueries = value.supportInlineQueries;
         this.lastMessageAt = value.lastMessageAt;
         this.createdAt = value.createdAt;
         this.updatedAt = value.updatedAt;
@@ -58,9 +52,6 @@ public class UserInfo implements Serializable {
         String         lastName,
         String         userName,
         Boolean        isBlocked,
-        Boolean        canJoinGroups,
-        Boolean        canReadAllGroupMessage,
-        Boolean        supportInlineQueries,
         OffsetDateTime lastMessageAt,
         OffsetDateTime createdAt,
         OffsetDateTime updatedAt,
@@ -73,9 +64,6 @@ public class UserInfo implements Serializable {
         this.lastName = lastName;
         this.userName = userName;
         this.isBlocked = isBlocked;
-        this.canJoinGroups = canJoinGroups;
-        this.canReadAllGroupMessage = canReadAllGroupMessage;
-        this.supportInlineQueries = supportInlineQueries;
         this.lastMessageAt = lastMessageAt;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -188,51 +176,6 @@ public class UserInfo implements Serializable {
     }
 
     /**
-     * Getter for <code>public.user_info.can_join_groups</code>.
-     */
-    public Boolean getCanJoinGroups() {
-        return this.canJoinGroups;
-    }
-
-    /**
-     * Setter for <code>public.user_info.can_join_groups</code>.
-     */
-    public UserInfo setCanJoinGroups(Boolean canJoinGroups) {
-        this.canJoinGroups = canJoinGroups;
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.user_info.can_read_all_group_message</code>.
-     */
-    public Boolean getCanReadAllGroupMessage() {
-        return this.canReadAllGroupMessage;
-    }
-
-    /**
-     * Setter for <code>public.user_info.can_read_all_group_message</code>.
-     */
-    public UserInfo setCanReadAllGroupMessage(Boolean canReadAllGroupMessage) {
-        this.canReadAllGroupMessage = canReadAllGroupMessage;
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.user_info.support_inline_queries</code>.
-     */
-    public Boolean getSupportInlineQueries() {
-        return this.supportInlineQueries;
-    }
-
-    /**
-     * Setter for <code>public.user_info.support_inline_queries</code>.
-     */
-    public UserInfo setSupportInlineQueries(Boolean supportInlineQueries) {
-        this.supportInlineQueries = supportInlineQueries;
-        return this;
-    }
-
-    /**
      * Getter for <code>public.user_info.last_message_at</code>.
      */
     public OffsetDateTime getLastMessageAt() {
@@ -303,9 +246,6 @@ public class UserInfo implements Serializable {
         sb.append(", ").append(lastName);
         sb.append(", ").append(userName);
         sb.append(", ").append(isBlocked);
-        sb.append(", ").append(canJoinGroups);
-        sb.append(", ").append(canReadAllGroupMessage);
-        sb.append(", ").append(supportInlineQueries);
         sb.append(", ").append(lastMessageAt);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(updatedAt);

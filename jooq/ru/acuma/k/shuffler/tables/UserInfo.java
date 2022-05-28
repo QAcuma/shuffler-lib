@@ -10,7 +10,7 @@ import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row14;
+import org.jooq.Row11;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -80,21 +80,6 @@ public class UserInfo extends TableImpl<UserInfoRecord> {
      * The column <code>public.user_info.is_blocked</code>.
      */
     public final TableField<UserInfoRecord, Boolean> IS_BLOCKED = createField(DSL.name("is_blocked"), SQLDataType.BOOLEAN.nullable(false), this, "");
-
-    /**
-     * The column <code>public.user_info.can_join_groups</code>.
-     */
-    public final TableField<UserInfoRecord, Boolean> CAN_JOIN_GROUPS = createField(DSL.name("can_join_groups"), SQLDataType.BOOLEAN, this, "");
-
-    /**
-     * The column <code>public.user_info.can_read_all_group_message</code>.
-     */
-    public final TableField<UserInfoRecord, Boolean> CAN_READ_ALL_GROUP_MESSAGE = createField(DSL.name("can_read_all_group_message"), SQLDataType.BOOLEAN, this, "");
-
-    /**
-     * The column <code>public.user_info.support_inline_queries</code>.
-     */
-    public final TableField<UserInfoRecord, Boolean> SUPPORT_INLINE_QUERIES = createField(DSL.name("support_inline_queries"), SQLDataType.BOOLEAN, this, "");
 
     /**
      * The column <code>public.user_info.last_message_at</code>.
@@ -186,11 +171,11 @@ public class UserInfo extends TableImpl<UserInfoRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row14 type methods
+    // Row11 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row14<Long, String, Boolean, String, String, String, Boolean, Boolean, Boolean, Boolean, OffsetDateTime, OffsetDateTime, OffsetDateTime, OffsetDateTime> fieldsRow() {
-        return (Row14) super.fieldsRow();
+    public Row11<Long, String, Boolean, String, String, String, Boolean, OffsetDateTime, OffsetDateTime, OffsetDateTime, OffsetDateTime> fieldsRow() {
+        return (Row11) super.fieldsRow();
     }
 }

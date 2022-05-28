@@ -13,7 +13,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row8;
+import org.jooq.Row7;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -60,6 +60,11 @@ public class Event extends TableImpl<EventRecord> {
     public final TableField<EventRecord, Long> CHAT_ID = createField(DSL.name("chat_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
+     * The column <code>public.event.season_id</code>.
+     */
+    public final TableField<EventRecord, Long> SEASON_ID = createField(DSL.name("season_id"), SQLDataType.BIGINT.nullable(false), this, "");
+
+    /**
      * The column <code>public.event.status</code>.
      */
     public final TableField<EventRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.CLOB.nullable(false), this, "");
@@ -77,17 +82,7 @@ public class Event extends TableImpl<EventRecord> {
     /**
      * The column <code>public.event.discipline</code>.
      */
-    public final TableField<EventRecord, String> DISCIPLINE = createField(DSL.name("discipline"), SQLDataType.VARCHAR(32), this, "");
-
-    /**
-     * The column <code>public.event.season_id</code>.
-     */
-    public final TableField<EventRecord, Long> SEASON_ID = createField(DSL.name("season_id"), SQLDataType.BIGINT, this, "");
-
-    /**
-     * The column <code>public.event.index</code>.
-     */
-    public final TableField<EventRecord, Long> INDEX = createField(DSL.name("index"), SQLDataType.BIGINT, this, "");
+    public final TableField<EventRecord, String> DISCIPLINE = createField(DSL.name("discipline"), SQLDataType.VARCHAR(32).nullable(false), this, "");
 
     private Event(Name alias, Table<EventRecord> aliased) {
         this(alias, aliased, null);
@@ -192,11 +187,11 @@ public class Event extends TableImpl<EventRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row8 type methods
+    // Row7 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<Long, Long, String, OffsetDateTime, OffsetDateTime, String, Long, Long> fieldsRow() {
-        return (Row8) super.fieldsRow();
+    public Row7<Long, Long, Long, String, OffsetDateTime, OffsetDateTime, String> fieldsRow() {
+        return (Row7) super.fieldsRow();
     }
 }

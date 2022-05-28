@@ -15,12 +15,11 @@ public class Player implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long    id;
-    private Long    chatId;
-    private Long    userId;
-    private Integer rating;
-    private String  discipline;
-    private Long    seasonId;
+    private Long id;
+    private Long chatId;
+    private Long userId;
+    private Long seasonId;
+    private Long discipline;
 
     public Player() {}
 
@@ -28,25 +27,22 @@ public class Player implements Serializable {
         this.id = value.id;
         this.chatId = value.chatId;
         this.userId = value.userId;
-        this.rating = value.rating;
-        this.discipline = value.discipline;
         this.seasonId = value.seasonId;
+        this.discipline = value.discipline;
     }
 
     public Player(
-        Long    id,
-        Long    chatId,
-        Long    userId,
-        Integer rating,
-        String  discipline,
-        Long    seasonId
+        Long id,
+        Long chatId,
+        Long userId,
+        Long seasonId,
+        Long discipline
     ) {
         this.id = id;
         this.chatId = chatId;
         this.userId = userId;
-        this.rating = rating;
-        this.discipline = discipline;
         this.seasonId = seasonId;
+        this.discipline = discipline;
     }
 
     /**
@@ -95,36 +91,6 @@ public class Player implements Serializable {
     }
 
     /**
-     * Getter for <code>public.player.rating</code>.
-     */
-    public Integer getRating() {
-        return this.rating;
-    }
-
-    /**
-     * Setter for <code>public.player.rating</code>.
-     */
-    public Player setRating(Integer rating) {
-        this.rating = rating;
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.player.discipline</code>.
-     */
-    public String getDiscipline() {
-        return this.discipline;
-    }
-
-    /**
-     * Setter for <code>public.player.discipline</code>.
-     */
-    public Player setDiscipline(String discipline) {
-        this.discipline = discipline;
-        return this;
-    }
-
-    /**
      * Getter for <code>public.player.season_id</code>.
      */
     public Long getSeasonId() {
@@ -139,6 +105,21 @@ public class Player implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.player.discipline</code>.
+     */
+    public Long getDiscipline() {
+        return this.discipline;
+    }
+
+    /**
+     * Setter for <code>public.player.discipline</code>.
+     */
+    public Player setDiscipline(Long discipline) {
+        this.discipline = discipline;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Player (");
@@ -146,9 +127,8 @@ public class Player implements Serializable {
         sb.append(id);
         sb.append(", ").append(chatId);
         sb.append(", ").append(userId);
-        sb.append(", ").append(rating);
-        sb.append(", ").append(discipline);
         sb.append(", ").append(seasonId);
+        sb.append(", ").append(discipline);
 
         sb.append(")");
         return sb.toString();

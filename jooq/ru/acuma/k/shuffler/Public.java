@@ -20,7 +20,6 @@ import ru.acuma.k.shuffler.tables.Rating;
 import ru.acuma.k.shuffler.tables.RatingHistory;
 import ru.acuma.k.shuffler.tables.Season;
 import ru.acuma.k.shuffler.tables.Team;
-import ru.acuma.k.shuffler.tables.TeamPlayer;
 import ru.acuma.k.shuffler.tables.UserInfo;
 
 
@@ -83,11 +82,6 @@ public class Public extends SchemaImpl {
     public final Team TEAM = Team.TEAM;
 
     /**
-     * The table <code>public.team_player</code>.
-     */
-    public final TeamPlayer TEAM_PLAYER = TeamPlayer.TEAM_PLAYER;
-
-    /**
      * The table <code>public.user_info</code>.
      */
     public final UserInfo USER_INFO = UserInfo.USER_INFO;
@@ -117,7 +111,6 @@ public class Public extends SchemaImpl {
             RatingHistory.RATING_HISTORY,
             Season.SEASON,
             Team.TEAM,
-            TeamPlayer.TEAM_PLAYER,
             UserInfo.USER_INFO
         );
     }

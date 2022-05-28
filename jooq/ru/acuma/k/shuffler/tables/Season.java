@@ -55,7 +55,7 @@ public class Season extends TableImpl<SeasonRecord> {
     /**
      * The column <code>public.season.started_at</code>.
      */
-    public final TableField<SeasonRecord, OffsetDateTime> STARTED_AT = createField(DSL.name("started_at"), SQLDataType.TIMESTAMPWITHTIMEZONE(6), this, "");
+    public final TableField<SeasonRecord, OffsetDateTime> STARTED_AT = createField(DSL.name("started_at"), SQLDataType.TIMESTAMPWITHTIMEZONE(6).nullable(false), this, "");
 
     /**
      * The column <code>public.season.finished_at</code>.
@@ -65,7 +65,7 @@ public class Season extends TableImpl<SeasonRecord> {
     /**
      * The column <code>public.season.name</code>.
      */
-    public final TableField<SeasonRecord, String> NAME = createField(DSL.name("name"), SQLDataType.CLOB, this, "");
+    public final TableField<SeasonRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(64), this, "");
 
     private Season(Name alias, Table<SeasonRecord> aliased) {
         this(alias, aliased, null);

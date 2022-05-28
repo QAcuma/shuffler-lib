@@ -13,7 +13,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row5;
+import org.jooq.Row4;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -58,11 +58,6 @@ public class Game extends TableImpl<GameRecord> {
      * The column <code>public.game.event_id</code>.
      */
     public final TableField<GameRecord, Long> EVENT_ID = createField(DSL.name("event_id"), SQLDataType.BIGINT.nullable(false), this, "");
-
-    /**
-     * The column <code>public.game.index</code>.
-     */
-    public final TableField<GameRecord, Integer> INDEX = createField(DSL.name("index"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>public.game.started_at</code>.
@@ -166,11 +161,11 @@ public class Game extends TableImpl<GameRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row5 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Long, Long, Integer, OffsetDateTime, OffsetDateTime> fieldsRow() {
-        return (Row5) super.fieldsRow();
+    public Row4<Long, Long, OffsetDateTime, OffsetDateTime> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 }

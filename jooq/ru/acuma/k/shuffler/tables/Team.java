@@ -59,9 +59,9 @@ public class Team extends TableImpl<TeamRecord> {
     public final TableField<TeamRecord, Long> GAME_ID = createField(DSL.name("game_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>public.team.winner</code>.
+     * The column <code>public.team.is_winner</code>.
      */
-    public final TableField<TeamRecord, Boolean> WINNER = createField(DSL.name("winner"), SQLDataType.BOOLEAN, this, "");
+    public final TableField<TeamRecord, Boolean> IS_WINNER = createField(DSL.name("is_winner"), SQLDataType.BOOLEAN, this, "");
 
     private Team(Name alias, Table<TeamRecord> aliased) {
         this(alias, aliased, null);

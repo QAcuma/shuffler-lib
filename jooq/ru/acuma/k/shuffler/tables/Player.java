@@ -12,7 +12,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row6;
+import org.jooq.Row5;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -56,27 +56,22 @@ public class Player extends TableImpl<PlayerRecord> {
     /**
      * The column <code>public.player.chat_id</code>.
      */
-    public final TableField<PlayerRecord, Long> CHAT_ID = createField(DSL.name("chat_id"), SQLDataType.BIGINT, this, "");
+    public final TableField<PlayerRecord, Long> CHAT_ID = createField(DSL.name("chat_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>public.player.user_id</code>.
      */
-    public final TableField<PlayerRecord, Long> USER_ID = createField(DSL.name("user_id"), SQLDataType.BIGINT, this, "");
-
-    /**
-     * The column <code>public.player.rating</code>.
-     */
-    public final TableField<PlayerRecord, Integer> RATING = createField(DSL.name("rating"), SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
-     * The column <code>public.player.discipline</code>.
-     */
-    public final TableField<PlayerRecord, String> DISCIPLINE = createField(DSL.name("discipline"), SQLDataType.VARCHAR(32), this, "");
+    public final TableField<PlayerRecord, Long> USER_ID = createField(DSL.name("user_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>public.player.season_id</code>.
      */
-    public final TableField<PlayerRecord, Long> SEASON_ID = createField(DSL.name("season_id"), SQLDataType.BIGINT, this, "");
+    public final TableField<PlayerRecord, Long> SEASON_ID = createField(DSL.name("season_id"), SQLDataType.BIGINT.nullable(false), this, "");
+
+    /**
+     * The column <code>public.player.discipline</code>.
+     */
+    public final TableField<PlayerRecord, Long> DISCIPLINE = createField(DSL.name("discipline"), SQLDataType.BIGINT.nullable(false), this, "");
 
     private Player(Name alias, Table<PlayerRecord> aliased) {
         this(alias, aliased, null);
@@ -192,11 +187,11 @@ public class Player extends TableImpl<PlayerRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row6 type methods
+    // Row5 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row6<Long, Long, Long, Integer, String, Long> fieldsRow() {
-        return (Row6) super.fieldsRow();
+    public Row5<Long, Long, Long, Long, Long> fieldsRow() {
+        return (Row5) super.fieldsRow();
     }
 }
