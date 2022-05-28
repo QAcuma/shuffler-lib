@@ -14,7 +14,7 @@ import org.jooq.Identity;
 import org.jooq.JSONB;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row7;
+import org.jooq.Row9;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -85,6 +85,16 @@ public class Event extends TableImpl<EventRecord> {
      */
     public final TableField<EventRecord, OffsetDateTime> FINISHED_AT = createField(DSL.name("finished_at"), SQLDataType.TIMESTAMPWITHTIMEZONE(6), this, "");
 
+    /**
+     * The column <code>public.event.discipline</code>.
+     */
+    public final TableField<EventRecord, String> DISCIPLINE = createField(DSL.name("discipline"), SQLDataType.VARCHAR(32), this, "");
+
+    /**
+     * The column <code>public.event.season_id</code>.
+     */
+    public final TableField<EventRecord, Long> SEASON_ID = createField(DSL.name("season_id"), SQLDataType.BIGINT, this, "");
+
     private Event(Name alias, Table<EventRecord> aliased) {
         this(alias, aliased, null);
     }
@@ -135,10 +145,11 @@ public class Event extends TableImpl<EventRecord> {
 
     @Override
     public List<ForeignKey<EventRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.EVENT__FK_EXISTS_CHAT);
+        return Arrays.asList(Keys.EVENT__FK_EXISTS_CHAT, Keys.EVENT__FK_EXISTS_SEASON);
     }
 
     private transient GroupInfo _groupInfo;
+    private transient Season _season;
 
     /**
      * Get the implicit join path to the <code>public.group_info</code> table.
@@ -148,6 +159,16 @@ public class Event extends TableImpl<EventRecord> {
             _groupInfo = new GroupInfo(this, Keys.EVENT__FK_EXISTS_CHAT);
 
         return _groupInfo;
+    }
+
+    /**
+     * Get the implicit join path to the <code>public.season</code> table.
+     */
+    public Season season() {
+        if (_season == null)
+            _season = new Season(this, Keys.EVENT__FK_EXISTS_SEASON);
+
+        return _season;
     }
 
     @Override
@@ -177,11 +198,11 @@ public class Event extends TableImpl<EventRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row7 type methods
+    // Row9 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<Long, Long, JSONB, JSONB, String, OffsetDateTime, OffsetDateTime> fieldsRow() {
-        return (Row7) super.fieldsRow();
+    public Row9<Long, Long, JSONB, JSONB, String, OffsetDateTime, OffsetDateTime, String, Long> fieldsRow() {
+        return (Row9) super.fieldsRow();
     }
 }

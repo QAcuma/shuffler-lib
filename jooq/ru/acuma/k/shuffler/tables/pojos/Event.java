@@ -25,6 +25,8 @@ public class Event implements Serializable {
     private String         status;
     private OffsetDateTime startedAt;
     private OffsetDateTime finishedAt;
+    private String         discipline;
+    private Long           seasonId;
 
     public Event() {}
 
@@ -36,6 +38,8 @@ public class Event implements Serializable {
         this.status = value.status;
         this.startedAt = value.startedAt;
         this.finishedAt = value.finishedAt;
+        this.discipline = value.discipline;
+        this.seasonId = value.seasonId;
     }
 
     public Event(
@@ -45,7 +49,9 @@ public class Event implements Serializable {
         JSONB          kickerplayers,
         String         status,
         OffsetDateTime startedAt,
-        OffsetDateTime finishedAt
+        OffsetDateTime finishedAt,
+        String         discipline,
+        Long           seasonId
     ) {
         this.id = id;
         this.chatId = chatId;
@@ -54,6 +60,8 @@ public class Event implements Serializable {
         this.status = status;
         this.startedAt = startedAt;
         this.finishedAt = finishedAt;
+        this.discipline = discipline;
+        this.seasonId = seasonId;
     }
 
     /**
@@ -161,6 +169,36 @@ public class Event implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.event.discipline</code>.
+     */
+    public String getDiscipline() {
+        return this.discipline;
+    }
+
+    /**
+     * Setter for <code>public.event.discipline</code>.
+     */
+    public Event setDiscipline(String discipline) {
+        this.discipline = discipline;
+        return this;
+    }
+
+    /**
+     * Getter for <code>public.event.season_id</code>.
+     */
+    public Long getSeasonId() {
+        return this.seasonId;
+    }
+
+    /**
+     * Setter for <code>public.event.season_id</code>.
+     */
+    public Event setSeasonId(Long seasonId) {
+        this.seasonId = seasonId;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Event (");
@@ -172,6 +210,8 @@ public class Event implements Serializable {
         sb.append(", ").append(status);
         sb.append(", ").append(startedAt);
         sb.append(", ").append(finishedAt);
+        sb.append(", ").append(discipline);
+        sb.append(", ").append(seasonId);
 
         sb.append(")");
         return sb.toString();

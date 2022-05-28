@@ -19,6 +19,7 @@ public class Season implements Serializable {
     private Long           id;
     private OffsetDateTime startedAt;
     private OffsetDateTime finishedAt;
+    private String         name;
 
     public Season() {}
 
@@ -26,16 +27,19 @@ public class Season implements Serializable {
         this.id = value.id;
         this.startedAt = value.startedAt;
         this.finishedAt = value.finishedAt;
+        this.name = value.name;
     }
 
     public Season(
         Long           id,
         OffsetDateTime startedAt,
-        OffsetDateTime finishedAt
+        OffsetDateTime finishedAt,
+        String         name
     ) {
         this.id = id;
         this.startedAt = startedAt;
         this.finishedAt = finishedAt;
+        this.name = name;
     }
 
     /**
@@ -83,6 +87,21 @@ public class Season implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.season.name</code>.
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Setter for <code>public.season.name</code>.
+     */
+    public Season setName(String name) {
+        this.name = name;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Season (");
@@ -90,6 +109,7 @@ public class Season implements Serializable {
         sb.append(id);
         sb.append(", ").append(startedAt);
         sb.append(", ").append(finishedAt);
+        sb.append(", ").append(name);
 
         sb.append(")");
         return sb.toString();

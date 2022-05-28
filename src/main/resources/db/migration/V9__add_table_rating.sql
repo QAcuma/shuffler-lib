@@ -1,8 +1,8 @@
 create table if not exists rating
 (
-    id        bigint generated always as identity primary key,
-    player_id bigint not null,
-    season_id bigint not null,
+    id         bigint generated always as identity primary key,
+    player_id  bigint not null,
+    season_id  bigint not null,
     discipline varchar(32),
 
     CONSTRAINT fk_exists_player

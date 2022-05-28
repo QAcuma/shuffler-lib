@@ -24,6 +24,7 @@ public class Game implements Serializable {
     private Long           winnerTeamId;
     private Long           loserTeamId;
     private String         discipline;
+    private Long           seasonId;
 
     public Game() {}
 
@@ -36,6 +37,7 @@ public class Game implements Serializable {
         this.winnerTeamId = value.winnerTeamId;
         this.loserTeamId = value.loserTeamId;
         this.discipline = value.discipline;
+        this.seasonId = value.seasonId;
     }
 
     public Game(
@@ -46,7 +48,8 @@ public class Game implements Serializable {
         OffsetDateTime finishedAt,
         Long           winnerTeamId,
         Long           loserTeamId,
-        String         discipline
+        String         discipline,
+        Long           seasonId
     ) {
         this.id = id;
         this.eventId = eventId;
@@ -56,6 +59,7 @@ public class Game implements Serializable {
         this.winnerTeamId = winnerTeamId;
         this.loserTeamId = loserTeamId;
         this.discipline = discipline;
+        this.seasonId = seasonId;
     }
 
     /**
@@ -178,6 +182,21 @@ public class Game implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.game.season_id</code>.
+     */
+    public Long getSeasonId() {
+        return this.seasonId;
+    }
+
+    /**
+     * Setter for <code>public.game.season_id</code>.
+     */
+    public Game setSeasonId(Long seasonId) {
+        this.seasonId = seasonId;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Game (");
@@ -190,6 +209,7 @@ public class Game implements Serializable {
         sb.append(", ").append(winnerTeamId);
         sb.append(", ").append(loserTeamId);
         sb.append(", ").append(discipline);
+        sb.append(", ").append(seasonId);
 
         sb.append(")");
         return sb.toString();

@@ -11,4 +11,5 @@ public interface PlayerDao {
     Player save(Player player);
 
     void updateRating(Player player);
+
 }

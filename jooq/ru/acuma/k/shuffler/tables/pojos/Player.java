@@ -20,6 +20,9 @@ public class Player implements Serializable {
     private Long    userId;
     private Integer rating;
     private String  discipline;
+    private Long    seasonId;
+    private Long    firstPlayerId;
+    private Long    secondPlayerId;
 
     public Player() {}
 
@@ -29,6 +32,9 @@ public class Player implements Serializable {
         this.userId = value.userId;
         this.rating = value.rating;
         this.discipline = value.discipline;
+        this.seasonId = value.seasonId;
+        this.firstPlayerId = value.firstPlayerId;
+        this.secondPlayerId = value.secondPlayerId;
     }
 
     public Player(
@@ -36,13 +42,19 @@ public class Player implements Serializable {
         Long    chatId,
         Long    userId,
         Integer rating,
-        String  discipline
+        String  discipline,
+        Long    seasonId,
+        Long    firstPlayerId,
+        Long    secondPlayerId
     ) {
         this.id = id;
         this.chatId = chatId;
         this.userId = userId;
         this.rating = rating;
         this.discipline = discipline;
+        this.seasonId = seasonId;
+        this.firstPlayerId = firstPlayerId;
+        this.secondPlayerId = secondPlayerId;
     }
 
     /**
@@ -120,6 +132,51 @@ public class Player implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.player.season_id</code>.
+     */
+    public Long getSeasonId() {
+        return this.seasonId;
+    }
+
+    /**
+     * Setter for <code>public.player.season_id</code>.
+     */
+    public Player setSeasonId(Long seasonId) {
+        this.seasonId = seasonId;
+        return this;
+    }
+
+    /**
+     * Getter for <code>public.player.first_player_id</code>.
+     */
+    public Long getFirstPlayerId() {
+        return this.firstPlayerId;
+    }
+
+    /**
+     * Setter for <code>public.player.first_player_id</code>.
+     */
+    public Player setFirstPlayerId(Long firstPlayerId) {
+        this.firstPlayerId = firstPlayerId;
+        return this;
+    }
+
+    /**
+     * Getter for <code>public.player.second_player_id</code>.
+     */
+    public Long getSecondPlayerId() {
+        return this.secondPlayerId;
+    }
+
+    /**
+     * Setter for <code>public.player.second_player_id</code>.
+     */
+    public Player setSecondPlayerId(Long secondPlayerId) {
+        this.secondPlayerId = secondPlayerId;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Player (");
@@ -129,6 +186,9 @@ public class Player implements Serializable {
         sb.append(", ").append(userId);
         sb.append(", ").append(rating);
         sb.append(", ").append(discipline);
+        sb.append(", ").append(seasonId);
+        sb.append(", ").append(firstPlayerId);
+        sb.append(", ").append(secondPlayerId);
 
         sb.append(")");
         return sb.toString();
