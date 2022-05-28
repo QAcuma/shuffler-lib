@@ -5,6 +5,6 @@ public enum Discipline {
     KICKER_1VS1,
     KICKER_2VS2,
     PING_PONG_1VS1,
-    PING_PONG_2S2;
+    PING_PONG_2VS2;
 
 }

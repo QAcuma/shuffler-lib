@@ -2,6 +2,8 @@ package ru.acuma.shufflerlib.dao;
 
 import ru.acuma.k.shuffler.tables.pojos.Player;
 
+import java.util.List;
+
 public interface PlayerDao {
 
     boolean isPresent(Long chatId, Long userId);

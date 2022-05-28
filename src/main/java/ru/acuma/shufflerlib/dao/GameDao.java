@@ -10,6 +10,8 @@ public interface GameDao {
 
     List<Game> findAllBySeasonId(Long seasonId);
 
-    List<Game> findAllByPlayerId(Long playerId);
+    List<Game> findAllByEventId(Long eventId);
+
+    List<Game> findAllByPlayerIdAndSeasonIds(Long playerId, List<Long> seasonIds);
 
 }

@@ -25,7 +25,12 @@ public class GameDaoImpl implements GameDao {
     }
 
     @Override
-    public List<Game> findAllByPlayerId(Long playerId) {
+    public List<Game> findAllByEventId(Long eventId) {
+        return null;
+    }
+
+    @Override
+    public List<Game> findAllByPlayerIdAndSeasonIds(Long playerId, List<Long> seasonIds) {
         return null;
     }
 }
