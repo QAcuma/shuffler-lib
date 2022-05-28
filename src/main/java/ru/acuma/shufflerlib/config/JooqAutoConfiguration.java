@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan("ru.acuma.shufflerlib.dao.impl")
 @RequiredArgsConstructor
-public class JooqConfig {
+public class JooqAutoConfiguration {
 
     private final DataSource dataSource;
 

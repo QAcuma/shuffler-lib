@@ -124,6 +124,9 @@ public class Team extends TableImpl<TeamRecord> {
 
     private transient Game _game;
 
+    /**
+     * Get the implicit join path to the <code>public.game</code> table.
+     */
     public Game game() {
         if (_game == null)
             _game = new Game(this, Keys.TEAM__FK_EXISTS_GAME);

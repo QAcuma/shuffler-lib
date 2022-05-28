@@ -12,7 +12,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row4;
+import org.jooq.Row5;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -67,6 +67,11 @@ public class Player extends TableImpl<PlayerRecord> {
      * The column <code>public.player.rating</code>.
      */
     public final TableField<PlayerRecord, Integer> RATING = createField(DSL.name("rating"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>public.player.discipline</code>.
+     */
+    public final TableField<PlayerRecord, String> DISCIPLINE = createField(DSL.name("discipline"), SQLDataType.VARCHAR(32), this, "");
 
     private Player(Name alias, Table<PlayerRecord> aliased) {
         this(alias, aliased, null);
@@ -124,6 +129,9 @@ public class Player extends TableImpl<PlayerRecord> {
     private transient GroupInfo _groupInfo;
     private transient UserInfo _userInfo;
 
+    /**
+     * Get the implicit join path to the <code>public.group_info</code> table.
+     */
     public GroupInfo groupInfo() {
         if (_groupInfo == null)
             _groupInfo = new GroupInfo(this, Keys.PLAYER__FK_EXISTS_CHAT);
@@ -131,6 +139,9 @@ public class Player extends TableImpl<PlayerRecord> {
         return _groupInfo;
     }
 
+    /**
+     * Get the implicit join path to the <code>public.user_info</code> table.
+     */
     public UserInfo userInfo() {
         if (_userInfo == null)
             _userInfo = new UserInfo(this, Keys.PLAYER__FK_EXISTS_USER);
@@ -165,11 +176,11 @@ public class Player extends TableImpl<PlayerRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row5 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Long, Long, Long, Integer> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row5<Long, Long, Long, Integer, String> fieldsRow() {
+        return (Row5) super.fieldsRow();
     }
 }

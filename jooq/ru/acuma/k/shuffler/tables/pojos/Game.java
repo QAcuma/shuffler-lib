@@ -18,36 +18,44 @@ public class Game implements Serializable {
 
     private Long           id;
     private Long           eventId;
-    private Long           winnerId;
     private Integer        index;
     private OffsetDateTime startedAt;
     private OffsetDateTime finishedAt;
+    private Long           winnerTeamId;
+    private Long           loserTeamId;
+    private String         discipline;
 
     public Game() {}
 
     public Game(Game value) {
         this.id = value.id;
         this.eventId = value.eventId;
-        this.winnerId = value.winnerId;
         this.index = value.index;
         this.startedAt = value.startedAt;
         this.finishedAt = value.finishedAt;
+        this.winnerTeamId = value.winnerTeamId;
+        this.loserTeamId = value.loserTeamId;
+        this.discipline = value.discipline;
     }
 
     public Game(
         Long           id,
         Long           eventId,
-        Long           winnerId,
         Integer        index,
         OffsetDateTime startedAt,
-        OffsetDateTime finishedAt
+        OffsetDateTime finishedAt,
+        Long           winnerTeamId,
+        Long           loserTeamId,
+        String         discipline
     ) {
         this.id = id;
         this.eventId = eventId;
-        this.winnerId = winnerId;
         this.index = index;
         this.startedAt = startedAt;
         this.finishedAt = finishedAt;
+        this.winnerTeamId = winnerTeamId;
+        this.loserTeamId = loserTeamId;
+        this.discipline = discipline;
     }
 
     /**
@@ -77,21 +85,6 @@ public class Game implements Serializable {
      */
     public Game setEventId(Long eventId) {
         this.eventId = eventId;
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.game.winner_id</code>.
-     */
-    public Long getWinnerId() {
-        return this.winnerId;
-    }
-
-    /**
-     * Setter for <code>public.game.winner_id</code>.
-     */
-    public Game setWinnerId(Long winnerId) {
-        this.winnerId = winnerId;
         return this;
     }
 
@@ -140,16 +133,63 @@ public class Game implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.game.winner_team_id</code>.
+     */
+    public Long getWinnerTeamId() {
+        return this.winnerTeamId;
+    }
+
+    /**
+     * Setter for <code>public.game.winner_team_id</code>.
+     */
+    public Game setWinnerTeamId(Long winnerTeamId) {
+        this.winnerTeamId = winnerTeamId;
+        return this;
+    }
+
+    /**
+     * Getter for <code>public.game.loser_team_id</code>.
+     */
+    public Long getLoserTeamId() {
+        return this.loserTeamId;
+    }
+
+    /**
+     * Setter for <code>public.game.loser_team_id</code>.
+     */
+    public Game setLoserTeamId(Long loserTeamId) {
+        this.loserTeamId = loserTeamId;
+        return this;
+    }
+
+    /**
+     * Getter for <code>public.game.discipline</code>.
+     */
+    public String getDiscipline() {
+        return this.discipline;
+    }
+
+    /**
+     * Setter for <code>public.game.discipline</code>.
+     */
+    public Game setDiscipline(String discipline) {
+        this.discipline = discipline;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Game (");
 
         sb.append(id);
         sb.append(", ").append(eventId);
-        sb.append(", ").append(winnerId);
         sb.append(", ").append(index);
         sb.append(", ").append(startedAt);
         sb.append(", ").append(finishedAt);
+        sb.append(", ").append(winnerTeamId);
+        sb.append(", ").append(loserTeamId);
+        sb.append(", ").append(discipline);
 
         sb.append(")");
         return sb.toString();

@@ -140,6 +140,9 @@ public class Event extends TableImpl<EventRecord> {
 
     private transient GroupInfo _groupInfo;
 
+    /**
+     * Get the implicit join path to the <code>public.group_info</code> table.
+     */
     public GroupInfo groupInfo() {
         if (_groupInfo == null)
             _groupInfo = new GroupInfo(this, Keys.EVENT__FK_EXISTS_CHAT);

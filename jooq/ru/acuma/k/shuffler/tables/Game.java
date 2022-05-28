@@ -13,7 +13,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row6;
+import org.jooq.Row8;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -60,11 +60,6 @@ public class Game extends TableImpl<GameRecord> {
     public final TableField<GameRecord, Long> EVENT_ID = createField(DSL.name("event_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>public.game.winner_id</code>.
-     */
-    public final TableField<GameRecord, Long> WINNER_ID = createField(DSL.name("winner_id"), SQLDataType.BIGINT, this, "");
-
-    /**
      * The column <code>public.game.index</code>.
      */
     public final TableField<GameRecord, Integer> INDEX = createField(DSL.name("index"), SQLDataType.INTEGER.nullable(false), this, "");
@@ -78,6 +73,21 @@ public class Game extends TableImpl<GameRecord> {
      * The column <code>public.game.finished_at</code>.
      */
     public final TableField<GameRecord, OffsetDateTime> FINISHED_AT = createField(DSL.name("finished_at"), SQLDataType.TIMESTAMPWITHTIMEZONE(6), this, "");
+
+    /**
+     * The column <code>public.game.winner_team_id</code>.
+     */
+    public final TableField<GameRecord, Long> WINNER_TEAM_ID = createField(DSL.name("winner_team_id"), SQLDataType.BIGINT, this, "");
+
+    /**
+     * The column <code>public.game.loser_team_id</code>.
+     */
+    public final TableField<GameRecord, Long> LOSER_TEAM_ID = createField(DSL.name("loser_team_id"), SQLDataType.BIGINT, this, "");
+
+    /**
+     * The column <code>public.game.discipline</code>.
+     */
+    public final TableField<GameRecord, String> DISCIPLINE = createField(DSL.name("discipline"), SQLDataType.VARCHAR(32), this, "");
 
     private Game(Name alias, Table<GameRecord> aliased) {
         this(alias, aliased, null);
@@ -134,6 +144,9 @@ public class Game extends TableImpl<GameRecord> {
 
     private transient Event _event;
 
+    /**
+     * Get the implicit join path to the <code>public.event</code> table.
+     */
     public Event event() {
         if (_event == null)
             _event = new Event(this, Keys.GAME__FK_EXISTS_EVENT);
@@ -168,11 +181,11 @@ public class Game extends TableImpl<GameRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row6 type methods
+    // Row8 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row6<Long, Long, Long, Integer, OffsetDateTime, OffsetDateTime> fieldsRow() {
-        return (Row6) super.fieldsRow();
+    public Row8<Long, Long, Integer, OffsetDateTime, OffsetDateTime, Long, Long, String> fieldsRow() {
+        return (Row8) super.fieldsRow();
     }
 }

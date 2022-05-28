@@ -16,6 +16,8 @@ import ru.acuma.k.shuffler.tables.FlywaySchemaHistory;
 import ru.acuma.k.shuffler.tables.Game;
 import ru.acuma.k.shuffler.tables.GroupInfo;
 import ru.acuma.k.shuffler.tables.Player;
+import ru.acuma.k.shuffler.tables.Rating;
+import ru.acuma.k.shuffler.tables.Season;
 import ru.acuma.k.shuffler.tables.Team;
 import ru.acuma.k.shuffler.tables.UserInfo;
 
@@ -59,6 +61,16 @@ public class Public extends SchemaImpl {
     public final Player PLAYER = Player.PLAYER;
 
     /**
+     * The table <code>public.rating</code>.
+     */
+    public final Rating RATING = Rating.RATING;
+
+    /**
+     * The table <code>public.season</code>.
+     */
+    public final Season SEASON = Season.SEASON;
+
+    /**
      * The table <code>public.team</code>.
      */
     public final Team TEAM = Team.TEAM;
@@ -89,6 +101,8 @@ public class Public extends SchemaImpl {
             Game.GAME,
             GroupInfo.GROUP_INFO,
             Player.PLAYER,
+            Rating.RATING,
+            Season.SEASON,
             Team.TEAM,
             UserInfo.USER_INFO
         );

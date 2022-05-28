@@ -15,6 +15,8 @@ import ru.acuma.k.shuffler.tables.FlywaySchemaHistory;
 import ru.acuma.k.shuffler.tables.Game;
 import ru.acuma.k.shuffler.tables.GroupInfo;
 import ru.acuma.k.shuffler.tables.Player;
+import ru.acuma.k.shuffler.tables.Rating;
+import ru.acuma.k.shuffler.tables.Season;
 import ru.acuma.k.shuffler.tables.Team;
 import ru.acuma.k.shuffler.tables.UserInfo;
 import ru.acuma.k.shuffler.tables.records.EventRecord;
@@ -22,6 +24,8 @@ import ru.acuma.k.shuffler.tables.records.FlywaySchemaHistoryRecord;
 import ru.acuma.k.shuffler.tables.records.GameRecord;
 import ru.acuma.k.shuffler.tables.records.GroupInfoRecord;
 import ru.acuma.k.shuffler.tables.records.PlayerRecord;
+import ru.acuma.k.shuffler.tables.records.RatingRecord;
+import ru.acuma.k.shuffler.tables.records.SeasonRecord;
 import ru.acuma.k.shuffler.tables.records.TeamRecord;
 import ru.acuma.k.shuffler.tables.records.UserInfoRecord;
 
@@ -42,6 +46,8 @@ public class Keys {
     public static final UniqueKey<GameRecord> GAME_PKEY = Internal.createUniqueKey(Game.GAME, DSL.name("game_pkey"), new TableField[] { Game.GAME.ID }, true);
     public static final UniqueKey<GroupInfoRecord> GROUP_INFO_PKEY = Internal.createUniqueKey(GroupInfo.GROUP_INFO, DSL.name("group_info_pkey"), new TableField[] { GroupInfo.GROUP_INFO.CHAT_ID }, true);
     public static final UniqueKey<PlayerRecord> PLAYER_PKEY = Internal.createUniqueKey(Player.PLAYER, DSL.name("player_pkey"), new TableField[] { Player.PLAYER.ID }, true);
+    public static final UniqueKey<RatingRecord> RATING_PKEY = Internal.createUniqueKey(Rating.RATING, DSL.name("rating_pkey"), new TableField[] { Rating.RATING.ID }, true);
+    public static final UniqueKey<SeasonRecord> SEASON_PKEY = Internal.createUniqueKey(Season.SEASON, DSL.name("season_pkey"), new TableField[] { Season.SEASON.ID }, true);
     public static final UniqueKey<TeamRecord> TEAM_PKEY = Internal.createUniqueKey(Team.TEAM, DSL.name("team_pkey"), new TableField[] { Team.TEAM.ID }, true);
     public static final UniqueKey<UserInfoRecord> USER_INFO_PKEY = Internal.createUniqueKey(UserInfo.USER_INFO, DSL.name("user_info_pkey"), new TableField[] { UserInfo.USER_INFO.TELEGRAM_ID }, true);
 
@@ -53,5 +59,7 @@ public class Keys {
     public static final ForeignKey<GameRecord, EventRecord> GAME__FK_EXISTS_EVENT = Internal.createForeignKey(Game.GAME, DSL.name("fk_exists_event"), new TableField[] { Game.GAME.EVENT_ID }, Keys.EVENT_PKEY, new TableField[] { Event.EVENT.ID }, true);
     public static final ForeignKey<PlayerRecord, GroupInfoRecord> PLAYER__FK_EXISTS_CHAT = Internal.createForeignKey(Player.PLAYER, DSL.name("fk_exists_chat"), new TableField[] { Player.PLAYER.CHAT_ID }, Keys.GROUP_INFO_PKEY, new TableField[] { GroupInfo.GROUP_INFO.CHAT_ID }, true);
     public static final ForeignKey<PlayerRecord, UserInfoRecord> PLAYER__FK_EXISTS_USER = Internal.createForeignKey(Player.PLAYER, DSL.name("fk_exists_user"), new TableField[] { Player.PLAYER.USER_ID }, Keys.USER_INFO_PKEY, new TableField[] { UserInfo.USER_INFO.TELEGRAM_ID }, true);
+    public static final ForeignKey<RatingRecord, PlayerRecord> RATING__FK_EXISTS_PLAYER = Internal.createForeignKey(Rating.RATING, DSL.name("fk_exists_player"), new TableField[] { Rating.RATING.PLAYER_ID }, Keys.PLAYER_PKEY, new TableField[] { Player.PLAYER.ID }, true);
+    public static final ForeignKey<RatingRecord, SeasonRecord> RATING__FK_EXISTS_SEASON = Internal.createForeignKey(Rating.RATING, DSL.name("fk_exists_season"), new TableField[] { Rating.RATING.SEASON_ID }, Keys.SEASON_PKEY, new TableField[] { Season.SEASON.ID }, true);
     public static final ForeignKey<TeamRecord, GameRecord> TEAM__FK_EXISTS_GAME = Internal.createForeignKey(Team.TEAM, DSL.name("fk_exists_game"), new TableField[] { Team.TEAM.GAME_ID }, Keys.GAME_PKEY, new TableField[] { Game.GAME.ID }, true);
 }

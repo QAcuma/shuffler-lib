@@ -9,6 +9,8 @@ import ru.acuma.k.shuffler.tables.FlywaySchemaHistory;
 import ru.acuma.k.shuffler.tables.Game;
 import ru.acuma.k.shuffler.tables.GroupInfo;
 import ru.acuma.k.shuffler.tables.Player;
+import ru.acuma.k.shuffler.tables.Rating;
+import ru.acuma.k.shuffler.tables.Season;
 import ru.acuma.k.shuffler.tables.Team;
 import ru.acuma.k.shuffler.tables.UserInfo;
 
@@ -43,6 +45,16 @@ public class Tables {
      * The table <code>public.player</code>.
      */
     public static final Player PLAYER = Player.PLAYER;
+
+    /**
+     * The table <code>public.rating</code>.
+     */
+    public static final Rating RATING = Rating.RATING;
+
+    /**
+     * The table <code>public.season</code>.
+     */
+    public static final Season SEASON = Season.SEASON;
 
     /**
      * The table <code>public.team</code>.
