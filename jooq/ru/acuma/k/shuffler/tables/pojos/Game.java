@@ -18,32 +18,32 @@ public class Game implements Serializable {
 
     private Long           id;
     private Long           eventId;
+    private String         state;
     private OffsetDateTime startedAt;
     private OffsetDateTime finishedAt;
-    private String         status;
 
     public Game() {}
 
     public Game(Game value) {
         this.id = value.id;
         this.eventId = value.eventId;
+        this.state = value.state;
         this.startedAt = value.startedAt;
         this.finishedAt = value.finishedAt;
-        this.status = value.status;
     }
 
     public Game(
         Long           id,
         Long           eventId,
+        String         state,
         OffsetDateTime startedAt,
-        OffsetDateTime finishedAt,
-        String         status
+        OffsetDateTime finishedAt
     ) {
         this.id = id;
         this.eventId = eventId;
+        this.state = state;
         this.startedAt = startedAt;
         this.finishedAt = finishedAt;
-        this.status = status;
     }
 
     /**
@@ -77,6 +77,21 @@ public class Game implements Serializable {
     }
 
     /**
+     * Getter for <code>public.game.state</code>.
+     */
+    public String getState() {
+        return this.state;
+    }
+
+    /**
+     * Setter for <code>public.game.state</code>.
+     */
+    public Game setState(String state) {
+        this.state = state;
+        return this;
+    }
+
+    /**
      * Getter for <code>public.game.started_at</code>.
      */
     public OffsetDateTime getStartedAt() {
@@ -106,30 +121,15 @@ public class Game implements Serializable {
         return this;
     }
 
-    /**
-     * Getter for <code>public.game.status</code>.
-     */
-    public String getStatus() {
-        return this.status;
-    }
-
-    /**
-     * Setter for <code>public.game.status</code>.
-     */
-    public Game setStatus(String status) {
-        this.status = status;
-        return this;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Game (");
 
         sb.append(id);
         sb.append(", ").append(eventId);
+        sb.append(", ").append(state);
         sb.append(", ").append(startedAt);
         sb.append(", ").append(finishedAt);
-        sb.append(", ").append(status);
 
         sb.append(")");
         return sb.toString();

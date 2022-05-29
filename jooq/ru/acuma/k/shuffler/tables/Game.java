@@ -60,6 +60,11 @@ public class Game extends TableImpl<GameRecord> {
     public final TableField<GameRecord, Long> EVENT_ID = createField(DSL.name("event_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
+     * The column <code>public.game.state</code>.
+     */
+    public final TableField<GameRecord, String> STATE = createField(DSL.name("state"), SQLDataType.VARCHAR(32).nullable(false), this, "");
+
+    /**
      * The column <code>public.game.started_at</code>.
      */
     public final TableField<GameRecord, OffsetDateTime> STARTED_AT = createField(DSL.name("started_at"), SQLDataType.TIMESTAMPWITHTIMEZONE(6).nullable(false), this, "");
@@ -68,11 +73,6 @@ public class Game extends TableImpl<GameRecord> {
      * The column <code>public.game.finished_at</code>.
      */
     public final TableField<GameRecord, OffsetDateTime> FINISHED_AT = createField(DSL.name("finished_at"), SQLDataType.TIMESTAMPWITHTIMEZONE(6), this, "");
-
-    /**
-     * The column <code>public.game.status</code>.
-     */
-    public final TableField<GameRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.VARCHAR(32).nullable(false), this, "");
 
     private Game(Name alias, Table<GameRecord> aliased) {
         this(alias, aliased, null);
@@ -170,7 +170,7 @@ public class Game extends TableImpl<GameRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Long, Long, OffsetDateTime, OffsetDateTime, String> fieldsRow() {
+    public Row5<Long, Long, String, OffsetDateTime, OffsetDateTime> fieldsRow() {
         return (Row5) super.fieldsRow();
     }
 }

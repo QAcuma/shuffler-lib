@@ -19,10 +19,10 @@ public class Event implements Serializable {
     private Long           id;
     private Long           chatId;
     private Long           seasonId;
-    private String         status;
+    private String         state;
+    private String         discipline;
     private OffsetDateTime startedAt;
     private OffsetDateTime finishedAt;
-    private String         discipline;
 
     public Event() {}
 
@@ -30,28 +30,28 @@ public class Event implements Serializable {
         this.id = value.id;
         this.chatId = value.chatId;
         this.seasonId = value.seasonId;
-        this.status = value.status;
+        this.state = value.state;
+        this.discipline = value.discipline;
         this.startedAt = value.startedAt;
         this.finishedAt = value.finishedAt;
-        this.discipline = value.discipline;
     }
 
     public Event(
         Long           id,
         Long           chatId,
         Long           seasonId,
-        String         status,
+        String         state,
+        String         discipline,
         OffsetDateTime startedAt,
-        OffsetDateTime finishedAt,
-        String         discipline
+        OffsetDateTime finishedAt
     ) {
         this.id = id;
         this.chatId = chatId;
         this.seasonId = seasonId;
-        this.status = status;
+        this.state = state;
+        this.discipline = discipline;
         this.startedAt = startedAt;
         this.finishedAt = finishedAt;
-        this.discipline = discipline;
     }
 
     /**
@@ -100,17 +100,32 @@ public class Event implements Serializable {
     }
 
     /**
-     * Getter for <code>public.event.status</code>.
+     * Getter for <code>public.event.state</code>.
      */
-    public String getStatus() {
-        return this.status;
+    public String getState() {
+        return this.state;
     }
 
     /**
-     * Setter for <code>public.event.status</code>.
+     * Setter for <code>public.event.state</code>.
      */
-    public Event setStatus(String status) {
-        this.status = status;
+    public Event setState(String state) {
+        this.state = state;
+        return this;
+    }
+
+    /**
+     * Getter for <code>public.event.discipline</code>.
+     */
+    public String getDiscipline() {
+        return this.discipline;
+    }
+
+    /**
+     * Setter for <code>public.event.discipline</code>.
+     */
+    public Event setDiscipline(String discipline) {
+        this.discipline = discipline;
         return this;
     }
 
@@ -144,21 +159,6 @@ public class Event implements Serializable {
         return this;
     }
 
-    /**
-     * Getter for <code>public.event.discipline</code>.
-     */
-    public String getDiscipline() {
-        return this.discipline;
-    }
-
-    /**
-     * Setter for <code>public.event.discipline</code>.
-     */
-    public Event setDiscipline(String discipline) {
-        this.discipline = discipline;
-        return this;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Event (");
@@ -166,10 +166,10 @@ public class Event implements Serializable {
         sb.append(id);
         sb.append(", ").append(chatId);
         sb.append(", ").append(seasonId);
-        sb.append(", ").append(status);
+        sb.append(", ").append(state);
+        sb.append(", ").append(discipline);
         sb.append(", ").append(startedAt);
         sb.append(", ").append(finishedAt);
-        sb.append(", ").append(discipline);
 
         sb.append(")");
         return sb.toString();

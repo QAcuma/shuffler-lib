@@ -65,9 +65,14 @@ public class Event extends TableImpl<EventRecord> {
     public final TableField<EventRecord, Long> SEASON_ID = createField(DSL.name("season_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>public.event.status</code>.
+     * The column <code>public.event.state</code>.
      */
-    public final TableField<EventRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.VARCHAR(32).nullable(false), this, "");
+    public final TableField<EventRecord, String> STATE = createField(DSL.name("state"), SQLDataType.VARCHAR(32).nullable(false), this, "");
+
+    /**
+     * The column <code>public.event.discipline</code>.
+     */
+    public final TableField<EventRecord, String> DISCIPLINE = createField(DSL.name("discipline"), SQLDataType.VARCHAR(32).nullable(false), this, "");
 
     /**
      * The column <code>public.event.started_at</code>.
@@ -78,11 +83,6 @@ public class Event extends TableImpl<EventRecord> {
      * The column <code>public.event.finished_at</code>.
      */
     public final TableField<EventRecord, OffsetDateTime> FINISHED_AT = createField(DSL.name("finished_at"), SQLDataType.TIMESTAMPWITHTIMEZONE(6), this, "");
-
-    /**
-     * The column <code>public.event.discipline</code>.
-     */
-    public final TableField<EventRecord, String> DISCIPLINE = createField(DSL.name("discipline"), SQLDataType.VARCHAR(32).nullable(false), this, "");
 
     private Event(Name alias, Table<EventRecord> aliased) {
         this(alias, aliased, null);
@@ -191,7 +191,7 @@ public class Event extends TableImpl<EventRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<Long, Long, Long, String, OffsetDateTime, OffsetDateTime, String> fieldsRow() {
+    public Row7<Long, Long, Long, String, String, OffsetDateTime, OffsetDateTime> fieldsRow() {
         return (Row7) super.fieldsRow();
     }
 }
