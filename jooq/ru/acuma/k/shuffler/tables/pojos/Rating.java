@@ -15,11 +15,11 @@ public class Rating implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long   id;
-    private Long   playerId;
-    private Long   seasonId;
-    private String discipline;
-    private Long   rating;
+    private Long    id;
+    private Long    playerId;
+    private Long    seasonId;
+    private String  discipline;
+    private Integer rating;
 
     public Rating() {}
 
@@ -32,11 +32,11 @@ public class Rating implements Serializable {
     }
 
     public Rating(
-        Long   id,
-        Long   playerId,
-        Long   seasonId,
-        String discipline,
-        Long   rating
+        Long    id,
+        Long    playerId,
+        Long    seasonId,
+        String  discipline,
+        Integer rating
     ) {
         this.id = id;
         this.playerId = playerId;
@@ -108,14 +108,14 @@ public class Rating implements Serializable {
     /**
      * Getter for <code>public.rating.rating</code>.
      */
-    public Long getRating() {
+    public Integer getRating() {
         return this.rating;
     }
 
     /**
      * Setter for <code>public.rating.rating</code>.
      */
-    public Rating setRating(Long rating) {
+    public Rating setRating(Integer rating) {
         this.rating = rating;
         return this;
     }

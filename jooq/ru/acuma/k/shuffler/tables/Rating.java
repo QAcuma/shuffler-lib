@@ -71,7 +71,7 @@ public class Rating extends TableImpl<RatingRecord> {
     /**
      * The column <code>public.rating.rating</code>.
      */
-    public final TableField<RatingRecord, Long> RATING_ = createField(DSL.name("rating"), SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<RatingRecord, Integer> RATING_ = createField(DSL.name("rating"), SQLDataType.INTEGER.nullable(false), this, "");
 
     private Rating(Name alias, Table<RatingRecord> aliased) {
         this(alias, aliased, null);
@@ -180,7 +180,7 @@ public class Rating extends TableImpl<RatingRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Long, Long, Long, String, Long> fieldsRow() {
+    public Row5<Long, Long, Long, String, Integer> fieldsRow() {
         return (Row5) super.fieldsRow();
     }
 }
