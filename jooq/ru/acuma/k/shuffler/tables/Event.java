@@ -67,7 +67,7 @@ public class Event extends TableImpl<EventRecord> {
     /**
      * The column <code>public.event.status</code>.
      */
-    public final TableField<EventRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.CLOB.nullable(false), this, "");
+    public final TableField<EventRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.VARCHAR(32).nullable(false), this, "");
 
     /**
      * The column <code>public.event.started_at</code>.

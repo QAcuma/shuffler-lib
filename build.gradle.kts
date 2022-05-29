@@ -14,11 +14,11 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-val dbHost = System.getenv("K_SHUFFLER_DB_SERVER_HOST") ?: "80.85.139.74" as String?
+val dbHost = System.getenv("K_SHUFFLER_DB_SERVER_HOST") ?: "localhost" as String?
 val dbPort = System.getenv("K_SHUFFLER_DB_SERVER_PORT") ?: "5432" as String?
-val dbName = System.getenv("K_SHUFFLER_DB_NAME") ?: "shuffler_beta" as String?
-val dbUser = System.getenv("K_SHUFFLER_DB_USER") ?: "ks_local" as String?
-val dbPassword = System.getenv("K_SHUFFLER_DB_PASSWORD") ?: "kicker" as String?
+val dbName = System.getenv("K_SHUFFLER_DB_NAME") ?: "shuffler_local" as String?
+val dbUser = System.getenv("K_SHUFFLER_DB_USER") ?: "local" as String?
+val dbPassword = System.getenv("K_SHUFFLER_DB_PASSWORD") ?: "root" as String?
 
 var springBootVersion = "2.6.7"
 var lombokBootVersion = "1.18.24"
@@ -69,7 +69,8 @@ flyway {
     url = "jdbc:postgresql://$dbHost:$dbPort/$dbName"
     user = dbUser
     password = dbPassword
-    cleanDisabled = false
+    cleanDisabled = true
+    encoding = "UTF-8"
 }
 
 jooq {

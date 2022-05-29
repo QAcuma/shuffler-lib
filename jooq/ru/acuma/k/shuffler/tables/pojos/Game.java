@@ -20,6 +20,7 @@ public class Game implements Serializable {
     private Long           eventId;
     private OffsetDateTime startedAt;
     private OffsetDateTime finishedAt;
+    private String         status;
 
     public Game() {}
 
@@ -28,18 +29,21 @@ public class Game implements Serializable {
         this.eventId = value.eventId;
         this.startedAt = value.startedAt;
         this.finishedAt = value.finishedAt;
+        this.status = value.status;
     }
 
     public Game(
         Long           id,
         Long           eventId,
         OffsetDateTime startedAt,
-        OffsetDateTime finishedAt
+        OffsetDateTime finishedAt,
+        String         status
     ) {
         this.id = id;
         this.eventId = eventId;
         this.startedAt = startedAt;
         this.finishedAt = finishedAt;
+        this.status = status;
     }
 
     /**
@@ -102,6 +106,21 @@ public class Game implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.game.status</code>.
+     */
+    public String getStatus() {
+        return this.status;
+    }
+
+    /**
+     * Setter for <code>public.game.status</code>.
+     */
+    public Game setStatus(String status) {
+        this.status = status;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Game (");
@@ -110,6 +129,7 @@ public class Game implements Serializable {
         sb.append(", ").append(eventId);
         sb.append(", ").append(startedAt);
         sb.append(", ").append(finishedAt);
+        sb.append(", ").append(status);
 
         sb.append(")");
         return sb.toString();

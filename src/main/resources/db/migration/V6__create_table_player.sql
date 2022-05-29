@@ -4,7 +4,6 @@ create table if not exists player
     chat_id    bigint not null,
     user_id    bigint not null,
     season_id  bigint not null,
-    discipline bigint not null,
 
     CONSTRAINT fk_exists_chat
         FOREIGN KEY (chat_id)
