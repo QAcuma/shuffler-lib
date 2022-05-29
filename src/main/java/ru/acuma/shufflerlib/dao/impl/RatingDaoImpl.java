@@ -3,6 +3,7 @@ package ru.acuma.shufflerlib.dao.impl;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
+import ru.acuma.k.shuffler.tables.pojos.Player;
 import ru.acuma.k.shuffler.tables.pojos.Rating;
 import ru.acuma.k.shuffler.tables.records.PlayerRecord;
 import ru.acuma.k.shuffler.tables.records.RatingRecord;
@@ -20,7 +21,11 @@ public class RatingDaoImpl implements RatingDao {
 
     @Override
     public Rating getRating(Long playerId, Discipline discipline) {
-        return null;
+        return dsl.select()
+                .from(RATING)
+                .where(RATING.PLAYER_ID.eq(playerId))
+                .and(RATING.DISCIPLINE.eq(discipline.name()))
+                .fetchOneInto(Rating.class);
     }
 
     @Override

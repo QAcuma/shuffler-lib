@@ -34,10 +34,10 @@ public class PlayerDaoImpl implements PlayerDao {
     }
 
     @Override
-    public Player save(Player player) {
+    public long save(Player player) {
         PlayerRecord record = dsl.newRecord(PLAYER, player);
         record.store();
-        return player.setId(record.getId());
+        return record.getId();
     }
 
     @Override

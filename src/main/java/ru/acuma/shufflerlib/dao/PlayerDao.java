@@ -8,7 +8,7 @@ public interface PlayerDao {
 
     Player get(Long chatId, Long userId);
 
-    Player save(Player player);
+    long save(Player player);
 
     void updateRating(Player player);
 
