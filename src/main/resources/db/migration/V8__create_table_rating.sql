@@ -4,6 +4,7 @@ create table if not exists rating
     player_id  bigint not null,
     season_id  bigint not null,
     discipline varchar(32),
+    rating     bigint not null,
 
     CONSTRAINT fk_exists_player
         FOREIGN KEY (player_id)
