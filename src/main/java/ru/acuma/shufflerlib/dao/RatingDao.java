@@ -7,6 +7,9 @@ public interface RatingDao {
 
     long save(Rating rating);
 
+    void update(Rating rating);
+
+
     Rating getRating(Long playerId, Discipline discipline);
 
 }

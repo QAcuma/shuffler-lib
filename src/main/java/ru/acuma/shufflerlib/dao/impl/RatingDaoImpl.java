@@ -31,4 +31,12 @@ public class RatingDaoImpl implements RatingDao {
         record.store();
         return record.getId();
     }
+
+    @Override
+    public void update(Rating rating) {
+        dsl.update(RATING)
+                .set(RATING.RATING_, rating.getRating())
+                .where(RATING.ID.eq(rating.getId()))
+                .execute();
+    }
 }
