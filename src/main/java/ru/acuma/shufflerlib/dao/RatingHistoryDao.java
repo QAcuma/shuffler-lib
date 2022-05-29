@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RatingHistoryDao {
 
-    void save(RatingHistory ratingHistory);
+    long save(RatingHistory ratingHistory);
 
     List<RatingHistory> findAllByPlayerId(Long playerId);
 

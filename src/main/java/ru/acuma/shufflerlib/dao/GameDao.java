@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface GameDao {
 
-    void save(Game game);
+    long save(Game game);
 
     List<Game> findAllBySeasonId(Long seasonId, Long chatId, Discipline discipline);
 

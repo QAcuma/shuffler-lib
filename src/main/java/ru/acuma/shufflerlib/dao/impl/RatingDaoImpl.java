@@ -4,8 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 import ru.acuma.k.shuffler.tables.pojos.Rating;
+import ru.acuma.k.shuffler.tables.records.PlayerRecord;
+import ru.acuma.k.shuffler.tables.records.RatingRecord;
 import ru.acuma.shufflerlib.dao.RatingDao;
 import ru.acuma.shufflerlib.model.Discipline;
+
+import static ru.acuma.k.shuffler.tables.Player.PLAYER;
+import static ru.acuma.k.shuffler.tables.Rating.RATING;
 
 @Repository
 @RequiredArgsConstructor
@@ -19,7 +24,9 @@ public class RatingDaoImpl implements RatingDao {
     }
 
     @Override
-    public void save(Rating rating) {
-
+    public long save(Rating rating) {
+        RatingRecord record = dsl.newRecord(RATING, rating);
+        record.store();
+        return record.getId();
     }
 }

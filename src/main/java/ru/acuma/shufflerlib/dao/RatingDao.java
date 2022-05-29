@@ -5,7 +5,7 @@ import ru.acuma.shufflerlib.model.Discipline;
 
 public interface RatingDao {
 
-    void save(Rating rating);
+    long save(Rating rating);
 
     Rating getRating(Long playerId, Discipline discipline);
 

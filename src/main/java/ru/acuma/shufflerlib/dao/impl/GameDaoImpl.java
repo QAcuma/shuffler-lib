@@ -4,10 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 import ru.acuma.k.shuffler.tables.pojos.Game;
+import ru.acuma.k.shuffler.tables.records.GameRecord;
 import ru.acuma.shufflerlib.dao.GameDao;
 import ru.acuma.shufflerlib.model.Discipline;
 
 import java.util.List;
+
+import static ru.acuma.k.shuffler.tables.Game.GAME;
 
 @Repository
 @RequiredArgsConstructor
@@ -16,8 +19,10 @@ public class GameDaoImpl implements GameDao {
     private final DSLContext dsl;
 
     @Override
-    public void save(Game game) {
-
+    public long save(Game game) {
+        GameRecord record = dsl.newRecord(GAME, game);
+        record.store();
+        return record.getId();
     }
 
     @Override

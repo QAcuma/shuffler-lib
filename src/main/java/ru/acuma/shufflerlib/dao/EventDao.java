@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface EventDao {
 
-    void save(Event event);
+    long save(Event event);
 
     Event findById(Long id);
 

@@ -51,7 +51,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public long save(UserInfo userInfo) {
         UserInfoRecord record = dsl.newRecord(USER_INFO, userInfo);
-        return record.store();
+        record.store();
+        return record.getTelegramId();
     }
 
     @Override

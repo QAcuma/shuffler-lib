@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface TeamDao {
 
-    void save(Team team);
+    long save(Team team);
+
+    List<Team> saveAll(List<Team> teams);
 
     List<Team> findAllByPlayerId(Long playerId);
 

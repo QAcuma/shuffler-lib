@@ -37,7 +37,7 @@ public class PlayerDaoImpl implements PlayerDao {
     public Player save(Player player) {
         PlayerRecord record = dsl.newRecord(PLAYER, player);
         record.store();
-        return player;
+        return player.setId(record.getId());
     }
 
     @Override
