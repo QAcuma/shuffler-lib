@@ -10,6 +10,4 @@ public interface PlayerDao {
 
     long save(Player player);
 
-    void updateRating(Player player);
-
 }

@@ -10,7 +10,10 @@ import ru.acuma.shufflerlib.model.Discipline;
 
 import java.util.List;
 
+import static ru.acuma.k.shuffler.tables.Event.EVENT;
 import static ru.acuma.k.shuffler.tables.Game.GAME;
+import static ru.acuma.k.shuffler.tables.Team.TEAM;
+import static ru.acuma.k.shuffler.tables.TeamPlayer.TEAM_PLAYER;
 
 @Repository
 @RequiredArgsConstructor
@@ -27,16 +30,37 @@ public class GameDaoImpl implements GameDao {
 
     @Override
     public List<Game> findAllBySeasonId(Long seasonId, Long chatId, Discipline discipline) {
-        return null;
+        return dsl.select(GAME.fields())
+                .from(GAME)
+                .join(EVENT).on(EVENT.ID.eq(GAME.EVENT_ID))
+                .where(EVENT.SEASON_ID.eq(seasonId))
+                .and(EVENT.CHAT_ID.eq(chatId))
+                .and(EVENT.DISCIPLINE.eq(discipline.name()))
+                .fetchInto(Game.class);
     }
 
     @Override
     public List<Game> findAllByEventId(Long eventId, Long chatId, Discipline discipline) {
-        return null;
+        return dsl.select(GAME.fields())
+                .from(GAME)
+                .join(EVENT).on(EVENT.ID.eq(GAME.EVENT_ID))
+                .where(GAME.EVENT_ID.eq(eventId))
+                .and(EVENT.CHAT_ID.eq(chatId))
+                .and(EVENT.DISCIPLINE.eq(discipline.name()))
+                .fetchInto(Game.class);
     }
 
     @Override
     public List<Game> findAllByPlayerIdAndSeasonIds(Long playerId, List<Long> seasonIds, Long chatId, Discipline discipline) {
-        return null;
+        return dsl.select(GAME.fields())
+                .from(GAME)
+                .join(EVENT).on(EVENT.ID.eq(GAME.EVENT_ID))
+                .join(TEAM).on(TEAM.GAME_ID.eq(GAME.ID))
+                .join(TEAM_PLAYER).on(TEAM_PLAYER.TEAM_ID.eq(TEAM.ID))
+                .where(TEAM_PLAYER.PLAYER_ID.eq(playerId))
+                .and(EVENT.CHAT_ID.eq(chatId))
+                .and(EVENT.DISCIPLINE.eq(discipline.name()))
+                .and(EVENT.SEASON_ID.in(seasonIds))
+                .fetchInto(Game.class);
     }
 }
