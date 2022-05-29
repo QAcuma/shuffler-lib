@@ -10,6 +10,7 @@ import ru.acuma.shufflerlib.dao.TeamDao;
 import java.util.List;
 
 import static ru.acuma.k.shuffler.Tables.TEAM;
+import static ru.acuma.k.shuffler.Tables.TEAM_PLAYER;
 
 @Repository
 @RequiredArgsConstructor
@@ -32,6 +33,10 @@ public class TeamDaoImpl implements TeamDao {
 
     @Override
     public List<Team> findAllByPlayerId(Long playerId) {
-        return null;
+        return dsl.select(TEAM.fields())
+                .from(TEAM)
+                .join(TEAM_PLAYER).on(TEAM_PLAYER.TEAM_ID.eq(TEAM.ID))
+                .where(TEAM_PLAYER.PLAYER_ID.eq(playerId))
+                .fetchInto(Team.class);
     }
 }

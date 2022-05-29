@@ -40,8 +40,4 @@ public class PlayerDaoImpl implements PlayerDao {
         return record.getId();
     }
 
-    @Override
-    public void updateRating(Player player) {
-
-    }
 }
