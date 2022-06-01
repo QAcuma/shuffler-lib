@@ -12,7 +12,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row6;
+import org.jooq.Row7;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -78,6 +78,11 @@ public class RatingHistory extends TableImpl<RatingHistoryRecord> {
      */
     public final TableField<RatingHistoryRecord, Integer> CHANGE = createField(DSL.name("change"), SQLDataType.INTEGER.nullable(false), this, "");
 
+    /**
+     * The column <code>public.rating_history.chat_id</code>.
+     */
+    public final TableField<RatingHistoryRecord, Long> CHAT_ID = createField(DSL.name("chat_id"), SQLDataType.BIGINT.nullable(false), this, "");
+
     private RatingHistory(Name alias, Table<RatingHistoryRecord> aliased) {
         this(alias, aliased, null);
     }
@@ -128,12 +133,13 @@ public class RatingHistory extends TableImpl<RatingHistoryRecord> {
 
     @Override
     public List<ForeignKey<RatingHistoryRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.RATING_HISTORY__FK_EXISTS_PLAYER, Keys.RATING_HISTORY__FK_EXISTS_GAME, Keys.RATING_HISTORY__FK_EXISTS_SEASON);
+        return Arrays.asList(Keys.RATING_HISTORY__FK_EXISTS_PLAYER, Keys.RATING_HISTORY__FK_EXISTS_GAME, Keys.RATING_HISTORY__FK_EXISTS_SEASON, Keys.RATING_HISTORY__FK_EXISTS_CHAT);
     }
 
     private transient Player _player;
     private transient Game _game;
     private transient Season _season;
+    private transient GroupInfo _groupInfo;
 
     /**
      * Get the implicit join path to the <code>public.player</code> table.
@@ -165,6 +171,16 @@ public class RatingHistory extends TableImpl<RatingHistoryRecord> {
         return _season;
     }
 
+    /**
+     * Get the implicit join path to the <code>public.group_info</code> table.
+     */
+    public GroupInfo groupInfo() {
+        if (_groupInfo == null)
+            _groupInfo = new GroupInfo(this, Keys.RATING_HISTORY__FK_EXISTS_CHAT);
+
+        return _groupInfo;
+    }
+
     @Override
     public RatingHistory as(String alias) {
         return new RatingHistory(DSL.name(alias), this);
@@ -192,11 +208,11 @@ public class RatingHistory extends TableImpl<RatingHistoryRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row6 type methods
+    // Row7 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row6<Long, Long, Long, Long, String, Integer> fieldsRow() {
-        return (Row6) super.fieldsRow();
+    public Row7<Long, Long, Long, Long, String, Integer, Long> fieldsRow() {
+        return (Row7) super.fieldsRow();
     }
 }

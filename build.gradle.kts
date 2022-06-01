@@ -10,8 +10,8 @@ group = "ru.acuma"
 version = "1.0.0"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_13
+    targetCompatibility = JavaVersion.VERSION_13
 }
 
 val dbHost = System.getenv("K_SHUFFLER_DB_SERVER_HOST") ?: "localhost" as String?
@@ -25,12 +25,9 @@ var lombokBootVersion = "1.18.24"
 var lang3Version = "3.12.0"
 var log4jVersion = "1.2.17"
 var junitVersion = "5.8.1"
-var telegramBotVersion = "6.0.1"
 var psqlVersion = "42.3.4"
 var flywayVersion = "8.5.10"
 var jooqVersion = "3.16.6"
-val codeGsonVersion = "2.9.0"
-val orikaVersion = "2.2.7"
 
 repositories {
     mavenLocal()
@@ -39,14 +36,14 @@ repositories {
 
 dependencies {
     api("org.springframework.boot:spring-boot-starter-jooq:$springBootVersion")
-
     api("org.postgresql:postgresql:$psqlVersion")
     api("org.flywaydb:flyway-core:$flywayVersion")
     api("org.jooq:jooq:$jooqVersion")
+
     compileOnly("org.jooq:jooq-meta:$jooqVersion")
     compileOnly("org.jooq:jooq-codegen:$jooqVersion")
-    jooqGenerator("org.postgresql:postgresql:$psqlVersion")
 
+    jooqGenerator("org.postgresql:postgresql:$psqlVersion")
     compileOnly("org.projectlombok:lombok:$lombokBootVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokBootVersion")
 }
@@ -74,6 +71,7 @@ flyway {
 }
 
 jooq {
+//    System.setProperty(com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize)
     version.set(jooqVersion)
     edition.set(nu.studer.gradle.jooq.JooqEdition.OSS)
 

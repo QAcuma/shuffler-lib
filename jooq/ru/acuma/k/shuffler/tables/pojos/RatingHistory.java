@@ -21,6 +21,7 @@ public class RatingHistory implements Serializable {
     private Long    seasonId;
     private String  discipline;
     private Integer change;
+    private Long    chatId;
 
     public RatingHistory() {}
 
@@ -31,6 +32,7 @@ public class RatingHistory implements Serializable {
         this.seasonId = value.seasonId;
         this.discipline = value.discipline;
         this.change = value.change;
+        this.chatId = value.chatId;
     }
 
     public RatingHistory(
@@ -39,7 +41,8 @@ public class RatingHistory implements Serializable {
         Long    gameId,
         Long    seasonId,
         String  discipline,
-        Integer change
+        Integer change,
+        Long    chatId
     ) {
         this.id = id;
         this.playerId = playerId;
@@ -47,6 +50,7 @@ public class RatingHistory implements Serializable {
         this.seasonId = seasonId;
         this.discipline = discipline;
         this.change = change;
+        this.chatId = chatId;
     }
 
     /**
@@ -139,6 +143,21 @@ public class RatingHistory implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.rating_history.chat_id</code>.
+     */
+    public Long getChatId() {
+        return this.chatId;
+    }
+
+    /**
+     * Setter for <code>public.rating_history.chat_id</code>.
+     */
+    public RatingHistory setChatId(Long chatId) {
+        this.chatId = chatId;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("RatingHistory (");
@@ -149,6 +168,7 @@ public class RatingHistory implements Serializable {
         sb.append(", ").append(seasonId);
         sb.append(", ").append(discipline);
         sb.append(", ").append(change);
+        sb.append(", ").append(chatId);
 
         sb.append(")");
         return sb.toString();
