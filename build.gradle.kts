@@ -35,17 +35,10 @@ repositories {
 }
 
 dependencies {
-    api("org.springframework.boot:spring-boot-starter-jooq:$springBootVersion")
-    api("org.postgresql:postgresql:$psqlVersion")
-    api("org.flywaydb:flyway-core:$flywayVersion")
-    api("org.jooq:jooq:$jooqVersion")
-
-    compileOnly("org.jooq:jooq-meta:$jooqVersion")
-    compileOnly("org.jooq:jooq-codegen:$jooqVersion")
-
-    jooqGenerator("org.postgresql:postgresql:$psqlVersion")
-    compileOnly("org.projectlombok:lombok:$lombokBootVersion")
-    annotationProcessor("org.projectlombok:lombok:$lombokBootVersion")
+    api(libs.bundles.data)
+    jooqGenerator(libs.postgresql)
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok)
 }
 
 publishing {
@@ -71,8 +64,7 @@ flyway {
 }
 
 jooq {
-//    System.setProperty(com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize)
-    version.set(jooqVersion)
+    version.set(libs.versions.jooq.get())
     edition.set(nu.studer.gradle.jooq.JooqEdition.OSS)
 
     configurations {
