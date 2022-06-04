@@ -113,6 +113,8 @@ jooq {
                         )
                     }
                     generate.apply {
+                        isDaos = true
+                        isSpringAnnotations = true
                         isDeprecated = false
                         isRecords = true
                         isPojos = true

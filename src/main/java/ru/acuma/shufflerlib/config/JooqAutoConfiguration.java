@@ -16,7 +16,7 @@ import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan("ru.acuma.shufflerlib.dao.impl")
+@ComponentScan("ru.acuma.shufflerlib.repository.impl")
 @RequiredArgsConstructor
 public class JooqAutoConfiguration {
 
