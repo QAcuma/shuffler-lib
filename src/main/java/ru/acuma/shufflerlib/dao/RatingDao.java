@@ -1,6 +1,6 @@
 package ru.acuma.shufflerlib.dao;
 
-import ru.acuma.k.shuffler.tables.pojos.Rating;
+import ru.acuma.shuffler.tables.pojos.Rating;
 import ru.acuma.shufflerlib.model.Discipline;
 
 public interface RatingDao {

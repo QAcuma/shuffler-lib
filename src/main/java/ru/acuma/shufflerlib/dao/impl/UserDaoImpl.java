@@ -5,13 +5,13 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
-import ru.acuma.k.shuffler.tables.pojos.UserInfo;
-import ru.acuma.k.shuffler.tables.records.UserInfoRecord;
+import ru.acuma.shuffler.tables.pojos.UserInfo;
+import ru.acuma.shuffler.tables.records.UserInfoRecord;
 import ru.acuma.shufflerlib.dao.UserDao;
 
 import java.time.OffsetDateTime;
 
-import static ru.acuma.k.shuffler.Tables.USER_INFO;
+import static ru.acuma.shuffler.Tables.USER_INFO;
 
 @Slf4j
 @Repository

@@ -1,6 +1,6 @@
 package ru.acuma.shufflerlib.dao;
 
-import ru.acuma.k.shuffler.tables.pojos.Player;
+import ru.acuma.shuffler.tables.pojos.Player;
 
 public interface PlayerDao {
 

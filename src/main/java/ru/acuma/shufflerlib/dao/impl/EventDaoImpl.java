@@ -3,17 +3,17 @@ package ru.acuma.shufflerlib.dao.impl;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
-import ru.acuma.k.shuffler.tables.pojos.Event;
-import ru.acuma.k.shuffler.tables.records.EventRecord;
+import ru.acuma.shuffler.tables.pojos.Event;
+import ru.acuma.shuffler.tables.records.EventRecord;
 import ru.acuma.shufflerlib.dao.EventDao;
 import ru.acuma.shufflerlib.model.Discipline;
 
 import java.util.List;
 
-import static ru.acuma.k.shuffler.tables.Event.EVENT;
-import static ru.acuma.k.shuffler.tables.Game.GAME;
-import static ru.acuma.k.shuffler.tables.Team.TEAM;
-import static ru.acuma.k.shuffler.tables.TeamPlayer.TEAM_PLAYER;
+import static ru.acuma.shuffler.tables.Event.EVENT;
+import static ru.acuma.shuffler.tables.Game.GAME;
+import static ru.acuma.shuffler.tables.Team.TEAM;
+import static ru.acuma.shuffler.tables.TeamPlayer.TEAM_PLAYER;
 
 @Repository
 @RequiredArgsConstructor

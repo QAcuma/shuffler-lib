@@ -1,6 +1,6 @@
 package ru.acuma.shufflerlib.dao;
 
-import ru.acuma.k.shuffler.tables.pojos.GroupInfo;
+import ru.acuma.shuffler.tables.pojos.GroupInfo;
 
 public interface GroupDao {
 

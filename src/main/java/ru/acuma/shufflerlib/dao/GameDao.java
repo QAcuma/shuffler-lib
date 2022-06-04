@@ -1,6 +1,6 @@
 package ru.acuma.shufflerlib.dao;
 
-import ru.acuma.k.shuffler.tables.pojos.Game;
+import ru.acuma.shuffler.tables.pojos.Game;
 import ru.acuma.shufflerlib.model.Discipline;
 
 import java.util.List;

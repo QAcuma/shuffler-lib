@@ -4,12 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.acuma.k.shuffler.tables.pojos.Season;
+import ru.acuma.shuffler.tables.pojos.Season;
 import ru.acuma.shufflerlib.dao.SeasonDao;
 
 import java.time.OffsetDateTime;
 
-import static ru.acuma.k.shuffler.Tables.SEASON;
+import static ru.acuma.shuffler.Tables.SEASON;
 
 
 @Repository

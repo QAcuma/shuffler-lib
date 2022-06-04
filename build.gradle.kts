@@ -1,5 +1,6 @@
 plugins {
     id("java-library")
+    id("version-catalog")
     id("maven-publish")
     id("org.springframework.boot") version "2.6.1"
     id("org.flywaydb.flyway") version "8.2.3"
@@ -20,15 +21,6 @@ val dbName = System.getenv("K_SHUFFLER_DB_NAME") ?: "shuffler_local" as String?
 val dbUser = System.getenv("K_SHUFFLER_DB_USER") ?: "local" as String?
 val dbPassword = System.getenv("K_SHUFFLER_DB_PASSWORD") ?: "root" as String?
 
-var springBootVersion = "2.6.7"
-var lombokBootVersion = "1.18.24"
-var lang3Version = "3.12.0"
-var log4jVersion = "1.2.17"
-var junitVersion = "5.8.1"
-var psqlVersion = "42.3.4"
-var flywayVersion = "8.5.10"
-var jooqVersion = "3.16.6"
-
 repositories {
     mavenLocal()
     mavenCentral()
@@ -40,11 +32,33 @@ dependencies {
     compileOnly(libs.lombok)
     annotationProcessor(libs.lombok)
 }
+catalog {
+    versionCatalog {
+        version("spring-boot", "2.6.7")
+        version("postgresql", "42.3.4")
+        version("flyway", "8.5.10")
+        version("jooq", "3.16.6")
+        version("lombok", "1.18.24")
+
+        library("spring-jooq", "org.springframework.boot", "spring-boot-starter-jooq").versionRef("spring-boot")
+        library("postgresql", "org.postgresql", "postgresql").versionRef("postgresql")
+        library("flyway", "org.flywaydb", "flyway-core").versionRef("flyway")
+        library("lombok", "org.projectlombok", "lombok").versionRef("lombok")
+
+        bundle("data", listOf("spring-jooq", "postgresql", "flyway"))
+        bundle("lombok", listOf("lombok"))
+    }
+}
 
 publishing {
     publications {
         create<MavenPublication>("shuffler-lib") {
             from(components["java"])
+        }
+    }
+    publications {
+        create<MavenPublication>("shuffler-catalog") {
+            from(components["versionCatalog"])
         }
     }
     repositories {
@@ -106,7 +120,7 @@ jooq {
                         isFluentSetters = true
                     }
                     target.apply {
-                        packageName = "ru.acuma.k.shuffler"
+                        packageName = "ru.acuma.shuffler"
                         directory = "jooq"
                     }
                     strategy.name = "org.jooq.codegen.DefaultGeneratorStrategy"

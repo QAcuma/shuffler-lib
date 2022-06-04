@@ -3,11 +3,11 @@ package ru.acuma.shufflerlib.dao.impl;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
-import ru.acuma.k.shuffler.tables.pojos.GroupInfo;
-import ru.acuma.k.shuffler.tables.records.GroupInfoRecord;
+import ru.acuma.shuffler.tables.pojos.GroupInfo;
+import ru.acuma.shuffler.tables.records.GroupInfoRecord;
 import ru.acuma.shufflerlib.dao.GroupDao;
 
-import static ru.acuma.k.shuffler.Tables.GROUP_INFO;
+import static ru.acuma.shuffler.Tables.GROUP_INFO;
 
 @Repository
 @RequiredArgsConstructor

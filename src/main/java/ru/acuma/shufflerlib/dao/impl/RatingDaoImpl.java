@@ -3,12 +3,12 @@ package ru.acuma.shufflerlib.dao.impl;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
-import ru.acuma.k.shuffler.tables.pojos.Rating;
-import ru.acuma.k.shuffler.tables.records.RatingRecord;
+import ru.acuma.shuffler.tables.pojos.Rating;
+import ru.acuma.shuffler.tables.records.RatingRecord;
 import ru.acuma.shufflerlib.dao.RatingDao;
 import ru.acuma.shufflerlib.model.Discipline;
 
-import static ru.acuma.k.shuffler.tables.Rating.RATING;
+import static ru.acuma.shuffler.tables.Rating.RATING;
 
 @Repository
 @RequiredArgsConstructor

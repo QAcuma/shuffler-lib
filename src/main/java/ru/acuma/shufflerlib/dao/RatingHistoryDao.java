@@ -1,6 +1,6 @@
 package ru.acuma.shufflerlib.dao;
 
-import ru.acuma.k.shuffler.tables.pojos.RatingHistory;
+import ru.acuma.shuffler.tables.pojos.RatingHistory;
 import ru.acuma.shufflerlib.model.Filter;
 
 import java.util.List;
