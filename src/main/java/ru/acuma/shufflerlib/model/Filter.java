@@ -9,10 +9,11 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class Filter {
 
-    private long chatId;
-    private long playerId;
-    private long gameId;
-    private long seasonId;
     private Discipline discipline;
+    private String chatName;
+    private Long chatId;
+    private Long playerId;
+    private Long gameId;
+    private Long seasonId;
 
 }

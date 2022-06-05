@@ -28,8 +28,9 @@ repositories {
 
 dependencies {
     api(libs.bundles.data)
-    jooqGenerator(libs.postgresql)
+    api(libs.bundles.util)
     compileOnly(libs.lombok)
+    jooqGenerator(libs.postgresql)
     annotationProcessor(libs.lombok)
 }
 catalog {
