@@ -13,7 +13,7 @@ public class StatisticResult {
 
     private String firstName;
 
-    private Integer rating;
+    private Integer score;
 
 
 }
