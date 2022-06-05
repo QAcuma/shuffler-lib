@@ -69,9 +69,9 @@ public class Rating extends TableImpl<RatingRecord> {
     public final TableField<RatingRecord, String> DISCIPLINE = createField(DSL.name("discipline"), SQLDataType.VARCHAR(32), this, "");
 
     /**
-     * The column <code>public.rating.rating</code>.
+     * The column <code>public.rating.score</code>.
      */
-    public final TableField<RatingRecord, Integer> RATING_ = createField(DSL.name("rating"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<RatingRecord, Integer> SCORE = createField(DSL.name("score"), SQLDataType.INTEGER.nullable(false), this, "");
 
     private Rating(Name alias, Table<RatingRecord> aliased) {
         this(alias, aliased, null);

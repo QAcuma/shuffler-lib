@@ -118,17 +118,17 @@ public class RatingDao extends DAOImpl<RatingRecord, ru.acuma.shuffler.tables.po
     }
 
     /**
-     * Fetch records that have <code>rating BETWEEN lowerInclusive AND
+     * Fetch records that have <code>score BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<ru.acuma.shuffler.tables.pojos.Rating> fetchRangeOfRating(Integer lowerInclusive, Integer upperInclusive) {
-        return fetchRange(Rating.RATING.RATING_, lowerInclusive, upperInclusive);
+    public List<ru.acuma.shuffler.tables.pojos.Rating> fetchRangeOfScore(Integer lowerInclusive, Integer upperInclusive) {
+        return fetchRange(Rating.RATING.SCORE, lowerInclusive, upperInclusive);
     }
 
     /**
-     * Fetch records that have <code>rating IN (values)</code>
+     * Fetch records that have <code>score IN (values)</code>
      */
-    public List<ru.acuma.shuffler.tables.pojos.Rating> fetchByRating(Integer... values) {
-        return fetch(Rating.RATING.RATING_, values);
+    public List<ru.acuma.shuffler.tables.pojos.Rating> fetchByScore(Integer... values) {
+        return fetch(Rating.RATING.SCORE, values);
     }
 }

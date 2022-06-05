@@ -8,6 +8,7 @@ import ru.acuma.shuffler.tables.pojos.Season;
 import ru.acuma.shufflerlib.repository.SeasonRepository;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 import static ru.acuma.shuffler.Tables.SEASON;
 
@@ -37,6 +38,14 @@ public class SeasonRepositoryImpl implements SeasonRepository {
                 .setStartedAt(OffsetDateTime.now())
                 .setName(name);
         dsl.newRecord(SEASON, season).store();
+    }
+
+    @Override
+    public List<Season> findSeasons() {
+        return dsl.selectFrom(SEASON)
+                .orderBy(SEASON.STARTED_AT.desc())
+                .limit(10)
+                .fetchInto(Season.class);
     }
 
 }

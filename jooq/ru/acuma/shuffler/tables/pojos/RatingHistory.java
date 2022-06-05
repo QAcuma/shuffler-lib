@@ -19,6 +19,7 @@ public class RatingHistory implements Serializable {
     private Long    gameId;
     private Long    playerId;
     private Integer change;
+    private Integer score;
 
     public RatingHistory() {}
 
@@ -27,18 +28,21 @@ public class RatingHistory implements Serializable {
         this.gameId = value.gameId;
         this.playerId = value.playerId;
         this.change = value.change;
+        this.score = value.score;
     }
 
     public RatingHistory(
         Long    id,
         Long    gameId,
         Long    playerId,
-        Integer change
+        Integer change,
+        Integer score
     ) {
         this.id = id;
         this.gameId = gameId;
         this.playerId = playerId;
         this.change = change;
+        this.score = score;
     }
 
     /**
@@ -101,6 +105,21 @@ public class RatingHistory implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.rating_history.score</code>.
+     */
+    public Integer getScore() {
+        return this.score;
+    }
+
+    /**
+     * Setter for <code>public.rating_history.score</code>.
+     */
+    public RatingHistory setScore(Integer score) {
+        this.score = score;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("RatingHistory (");
@@ -109,6 +128,7 @@ public class RatingHistory implements Serializable {
         sb.append(", ").append(gameId);
         sb.append(", ").append(playerId);
         sb.append(", ").append(change);
+        sb.append(", ").append(score);
 
         sb.append(")");
         return sb.toString();

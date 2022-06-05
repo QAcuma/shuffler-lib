@@ -19,7 +19,7 @@ public class Rating implements Serializable {
     private Long    playerId;
     private Long    seasonId;
     private String  discipline;
-    private Integer rating;
+    private Integer score;
 
     public Rating() {}
 
@@ -28,7 +28,7 @@ public class Rating implements Serializable {
         this.playerId = value.playerId;
         this.seasonId = value.seasonId;
         this.discipline = value.discipline;
-        this.rating = value.rating;
+        this.score = value.score;
     }
 
     public Rating(
@@ -36,13 +36,13 @@ public class Rating implements Serializable {
         Long    playerId,
         Long    seasonId,
         String  discipline,
-        Integer rating
+        Integer score
     ) {
         this.id = id;
         this.playerId = playerId;
         this.seasonId = seasonId;
         this.discipline = discipline;
-        this.rating = rating;
+        this.score = score;
     }
 
     /**
@@ -106,17 +106,17 @@ public class Rating implements Serializable {
     }
 
     /**
-     * Getter for <code>public.rating.rating</code>.
+     * Getter for <code>public.rating.score</code>.
      */
-    public Integer getRating() {
-        return this.rating;
+    public Integer getScore() {
+        return this.score;
     }
 
     /**
-     * Setter for <code>public.rating.rating</code>.
+     * Setter for <code>public.rating.score</code>.
      */
-    public Rating setRating(Integer rating) {
-        this.rating = rating;
+    public Rating setScore(Integer score) {
+        this.score = score;
         return this;
     }
 
@@ -128,7 +128,7 @@ public class Rating implements Serializable {
         sb.append(", ").append(playerId);
         sb.append(", ").append(seasonId);
         sb.append(", ").append(discipline);
-        sb.append(", ").append(rating);
+        sb.append(", ").append(score);
 
         sb.append(")");
         return sb.toString();

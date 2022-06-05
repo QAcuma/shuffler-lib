@@ -9,6 +9,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class StatisticResult {
 
+    private Long id;
+
     private String firstName;
 
     private Integer rating;

@@ -82,17 +82,17 @@ public class RatingRecord extends UpdatableRecordImpl<RatingRecord> implements R
     }
 
     /**
-     * Setter for <code>public.rating.rating</code>.
+     * Setter for <code>public.rating.score</code>.
      */
-    public RatingRecord setRating(Integer value) {
+    public RatingRecord setScore(Integer value) {
         set(4, value);
         return this;
     }
 
     /**
-     * Getter for <code>public.rating.rating</code>.
+     * Getter for <code>public.rating.score</code>.
      */
-    public Integer getRating() {
+    public Integer getScore() {
         return (Integer) get(4);
     }
 
@@ -141,7 +141,7 @@ public class RatingRecord extends UpdatableRecordImpl<RatingRecord> implements R
 
     @Override
     public Field<Integer> field5() {
-        return Rating.RATING.RATING_;
+        return Rating.RATING.SCORE;
     }
 
     @Override
@@ -166,7 +166,7 @@ public class RatingRecord extends UpdatableRecordImpl<RatingRecord> implements R
 
     @Override
     public Integer component5() {
-        return getRating();
+        return getScore();
     }
 
     @Override
@@ -191,7 +191,7 @@ public class RatingRecord extends UpdatableRecordImpl<RatingRecord> implements R
 
     @Override
     public Integer value5() {
-        return getRating();
+        return getScore();
     }
 
     @Override
@@ -220,7 +220,7 @@ public class RatingRecord extends UpdatableRecordImpl<RatingRecord> implements R
 
     @Override
     public RatingRecord value5(Integer value) {
-        setRating(value);
+        setScore(value);
         return this;
     }
 
@@ -248,14 +248,14 @@ public class RatingRecord extends UpdatableRecordImpl<RatingRecord> implements R
     /**
      * Create a detached, initialised RatingRecord
      */
-    public RatingRecord(Long id, Long playerId, Long seasonId, String discipline, Integer rating) {
+    public RatingRecord(Long id, Long playerId, Long seasonId, String discipline, Integer score) {
         super(Rating.RATING);
 
         setId(id);
         setPlayerId(playerId);
         setSeasonId(seasonId);
         setDiscipline(discipline);
-        setRating(rating);
+        setScore(score);
     }
 
     /**
@@ -269,7 +269,7 @@ public class RatingRecord extends UpdatableRecordImpl<RatingRecord> implements R
             setPlayerId(value.getPlayerId());
             setSeasonId(value.getSeasonId());
             setDiscipline(value.getDiscipline());
-            setRating(value.getRating());
+            setScore(value.getScore());
         }
     }
 }

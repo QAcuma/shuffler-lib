@@ -25,7 +25,7 @@ public class StatisticRepositoryImpl implements StatisticRepository {
 
     @Override
     public List<StatisticResult> findAllByFilter(Filter filter) {
-        return dsl.select(USER_INFO.FIRST_NAME, RATING.RATING_)
+        return dsl.select(PLAYER.ID, USER_INFO.FIRST_NAME, RATING.SCORE)
                 .from(PLAYER)
                 .join(USER_INFO).on(PLAYER.USER_ID.eq(USER_INFO.TELEGRAM_ID))
                 .join(RATING).on(RATING.PLAYER_ID.eq(PLAYER.ID))
