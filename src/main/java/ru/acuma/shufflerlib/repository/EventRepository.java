@@ -5,9 +5,11 @@ import ru.acuma.shufflerlib.model.Discipline;
 
 import java.util.List;
 
-public interface EventDao {
+public interface EventRepository {
 
     long save(Event event);
+
+    void update(Event event);
 
     Event findById(Long id);
 

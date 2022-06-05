@@ -3,11 +3,14 @@ package ru.acuma.shufflerlib.repository.impl;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
+import ru.acuma.shuffler.tables.daos.EventDao;
+import ru.acuma.shuffler.tables.daos.GameDao;
 import ru.acuma.shuffler.tables.pojos.Event;
 import ru.acuma.shuffler.tables.records.EventRecord;
-import ru.acuma.shufflerlib.repository.EventDao;
+import ru.acuma.shufflerlib.repository.EventRepository;
 import ru.acuma.shufflerlib.model.Discipline;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 import static ru.acuma.shuffler.tables.Event.EVENT;
@@ -17,23 +20,31 @@ import static ru.acuma.shuffler.tables.TeamPlayer.TEAM_PLAYER;
 
 @Repository
 @RequiredArgsConstructor
-public class EventDaoImpl implements EventDao {
+public class EventRepositoryImpl implements EventRepository {
 
     private final DSLContext dsl;
 
+    private EventDao eventDao;
+
+    @PostConstruct
+    void initGameDao() {
+        eventDao = new EventDao(dsl.configuration());
+    }
+
     @Override
     public long save(Event event) {
-        EventRecord record = dsl.newRecord(EVENT, event);
-        record.store();
-        return record.getId();
+        eventDao.insert(event);
+        return event.getId();
+    }
+
+    @Override
+    public void update(Event event) {
+        eventDao.update(event);
     }
 
     @Override
     public Event findById(Long id) {
-        return dsl.select()
-                .from(EVENT)
-                .where(EVENT.ID.eq(id))
-                .fetchOneInto(Event.class);
+        return eventDao.findById(id);
     }
 
     @Override

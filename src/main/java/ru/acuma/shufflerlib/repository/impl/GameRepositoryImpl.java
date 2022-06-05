@@ -3,11 +3,14 @@ package ru.acuma.shufflerlib.repository.impl;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
+import ru.acuma.shuffler.tables.daos.GameDao;
+import ru.acuma.shuffler.tables.daos.RatingDao;
 import ru.acuma.shuffler.tables.pojos.Game;
 import ru.acuma.shuffler.tables.records.GameRecord;
-import ru.acuma.shufflerlib.repository.GameDao;
+import ru.acuma.shufflerlib.repository.GameRepository;
 import ru.acuma.shufflerlib.model.Discipline;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 import static ru.acuma.shuffler.tables.Event.EVENT;
@@ -17,15 +20,26 @@ import static ru.acuma.shuffler.tables.TeamPlayer.TEAM_PLAYER;
 
 @Repository
 @RequiredArgsConstructor
-public class GameDaoImpl implements GameDao {
+public class GameRepositoryImpl implements GameRepository {
 
     private final DSLContext dsl;
 
+    private GameDao gameDao;
+
+    @PostConstruct
+    void initGameDao() {
+        gameDao = new GameDao(dsl.configuration());
+    }
+
     @Override
     public long save(Game game) {
-        GameRecord record = dsl.newRecord(GAME, game);
-        record.store();
-        return record.getId();
+        gameDao.insert(game);
+        return game.getId();
+    }
+
+    @Override
+    public void update(Game game) {
+        gameDao.update(game);
     }
 
     @Override

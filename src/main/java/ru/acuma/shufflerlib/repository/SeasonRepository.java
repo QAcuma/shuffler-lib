@@ -2,7 +2,7 @@ package ru.acuma.shufflerlib.repository;
 
 import ru.acuma.shuffler.tables.pojos.Season;
 
-public interface SeasonDao {
+public interface SeasonRepository {
 
     Season getCurrentSeason();
 

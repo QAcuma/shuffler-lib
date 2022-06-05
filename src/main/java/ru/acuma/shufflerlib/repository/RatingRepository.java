@@ -1,7 +1,7 @@
 package ru.acuma.shufflerlib.repository;
 
 import ru.acuma.shuffler.tables.pojos.Rating;
-import ru.acuma.shufflerlib.model.Discipline;
+import ru.acuma.shufflerlib.model.Filter;
 
 public interface RatingRepository {
 
@@ -9,7 +9,6 @@ public interface RatingRepository {
 
     void update(Rating rating);
 
-
-    Rating getRating(Long playerId, Discipline discipline);
+    Rating getRatingByPlayerIdAndDisciplineAndSeasonId(Filter filter);
 
 }

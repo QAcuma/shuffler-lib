@@ -5,9 +5,11 @@ import ru.acuma.shufflerlib.model.Discipline;
 
 import java.util.List;
 
-public interface GameDao {
+public interface GameRepository {
 
     long save(Game game);
+
+    void update(Game game);
 
     List<Game> findAllBySeasonId(Long seasonId, Long chatId, Discipline discipline);
 

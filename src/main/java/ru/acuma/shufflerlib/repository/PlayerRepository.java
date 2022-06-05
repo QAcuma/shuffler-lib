@@ -2,7 +2,7 @@ package ru.acuma.shufflerlib.repository;
 
 import ru.acuma.shuffler.tables.pojos.Player;
 
-public interface PlayerDao {
+public interface PlayerRepository {
 
     boolean isPresent(Long chatId, Long userId);
 

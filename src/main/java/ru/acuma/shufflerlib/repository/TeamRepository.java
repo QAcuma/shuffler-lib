@@ -4,9 +4,11 @@ import ru.acuma.shuffler.tables.pojos.Team;
 
 import java.util.List;
 
-public interface TeamDao {
+public interface TeamRepository {
 
     long save(Team team);
+
+    long update(Team team);
 
     List<Team> saveAll(List<Team> teams);
 

@@ -5,7 +5,7 @@ import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 import ru.acuma.shuffler.tables.pojos.RatingHistory;
 import ru.acuma.shuffler.tables.records.RatingHistoryRecord;
-import ru.acuma.shufflerlib.repository.RatingHistoryDao;
+import ru.acuma.shufflerlib.repository.RatingHistoryRepository;
 import ru.acuma.shufflerlib.model.Filter;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import static ru.acuma.shuffler.Tables.RATING_HISTORY;
 
 @Repository
 @RequiredArgsConstructor
-public class RatingHistoryDaoImpl implements RatingHistoryDao {
+public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
 
     private final DSLContext dsl;
 

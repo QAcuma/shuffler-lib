@@ -2,7 +2,7 @@ package ru.acuma.shufflerlib.repository;
 
 import ru.acuma.shuffler.tables.pojos.UserInfo;
 
-public interface UserDao {
+public interface UserRepository {
 
     boolean isActive(Long telegramId);
 

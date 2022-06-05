@@ -2,7 +2,7 @@ package ru.acuma.shufflerlib.repository;
 
 import ru.acuma.shuffler.tables.pojos.GroupInfo;
 
-public interface GroupDao {
+public interface GroupRepository {
 
     long save(GroupInfo groupInfo);
 

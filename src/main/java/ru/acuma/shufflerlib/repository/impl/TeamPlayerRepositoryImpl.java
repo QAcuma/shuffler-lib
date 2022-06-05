@@ -5,13 +5,13 @@ import org.jooq.DSLContext;
 import org.springframework.stereotype.Component;
 import ru.acuma.shuffler.tables.pojos.TeamPlayer;
 import ru.acuma.shuffler.tables.records.TeamPlayerRecord;
-import ru.acuma.shufflerlib.repository.TeamPlayerDao;
+import ru.acuma.shufflerlib.repository.TeamPlayerRepository;
 
 import static ru.acuma.shuffler.Tables.TEAM_PLAYER;
 
 @Component
 @RequiredArgsConstructor
-public class TeamPlayerDaoImpl implements TeamPlayerDao {
+public class TeamPlayerRepositoryImpl implements TeamPlayerRepository {
 
     private final DSLContext dsl;
 

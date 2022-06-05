@@ -5,7 +5,7 @@ import ru.acuma.shufflerlib.model.Filter;
 
 import java.util.List;
 
-public interface RatingHistoryDao {
+public interface RatingHistoryRepository {
 
     long save(RatingHistory ratingHistory);
 

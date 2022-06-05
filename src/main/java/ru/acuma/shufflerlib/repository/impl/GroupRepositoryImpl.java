@@ -5,13 +5,13 @@ import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 import ru.acuma.shuffler.tables.pojos.GroupInfo;
 import ru.acuma.shuffler.tables.records.GroupInfoRecord;
-import ru.acuma.shufflerlib.repository.GroupDao;
+import ru.acuma.shufflerlib.repository.GroupRepository;
 
 import static ru.acuma.shuffler.Tables.GROUP_INFO;
 
 @Repository
 @RequiredArgsConstructor
-public class GroupDaoImpl implements GroupDao {
+public class GroupRepositoryImpl implements GroupRepository {
 
     private final DSLContext dsl;
 

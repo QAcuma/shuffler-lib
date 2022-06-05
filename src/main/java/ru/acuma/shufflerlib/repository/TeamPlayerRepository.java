@@ -2,7 +2,7 @@ package ru.acuma.shufflerlib.repository;
 
 import ru.acuma.shuffler.tables.pojos.TeamPlayer;
 
-public interface TeamPlayerDao {
+public interface TeamPlayerRepository {
 
     long save(TeamPlayer teamPlayer);
 

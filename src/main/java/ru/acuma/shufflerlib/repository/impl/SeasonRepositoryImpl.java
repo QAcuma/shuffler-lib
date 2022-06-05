@@ -5,7 +5,7 @@ import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.acuma.shuffler.tables.pojos.Season;
-import ru.acuma.shufflerlib.repository.SeasonDao;
+import ru.acuma.shufflerlib.repository.SeasonRepository;
 
 import java.time.OffsetDateTime;
 
@@ -14,7 +14,7 @@ import static ru.acuma.shuffler.Tables.SEASON;
 
 @Repository
 @RequiredArgsConstructor
-public class SeasonDaoImpl implements SeasonDao {
+public class SeasonRepositoryImpl implements SeasonRepository {
 
     private final DSLContext dsl;
 

@@ -7,7 +7,7 @@ import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 import ru.acuma.shuffler.tables.pojos.UserInfo;
 import ru.acuma.shuffler.tables.records.UserInfoRecord;
-import ru.acuma.shufflerlib.repository.UserDao;
+import ru.acuma.shufflerlib.repository.UserRepository;
 
 import java.time.OffsetDateTime;
 
@@ -16,7 +16,7 @@ import static ru.acuma.shuffler.Tables.USER_INFO;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class UserDaoImpl implements UserDao {
+public class UserRepositoryImpl implements UserRepository {
 
     private final DSLContext dsl;
 

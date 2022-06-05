@@ -5,13 +5,13 @@ import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 import ru.acuma.shuffler.tables.pojos.Player;
 import ru.acuma.shuffler.tables.records.PlayerRecord;
-import ru.acuma.shufflerlib.repository.PlayerDao;
+import ru.acuma.shufflerlib.repository.PlayerRepository;
 
 import static ru.acuma.shuffler.tables.Player.PLAYER;
 
 @Repository
 @RequiredArgsConstructor
-public class PlayerDaoImpl implements PlayerDao {
+public class PlayerRepositoryImpl implements PlayerRepository {
 
     private final DSLContext dsl;
 

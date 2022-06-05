@@ -3,10 +3,13 @@ package ru.acuma.shufflerlib.repository.impl;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
+import ru.acuma.shuffler.tables.daos.GameDao;
+import ru.acuma.shuffler.tables.daos.TeamDao;
 import ru.acuma.shuffler.tables.pojos.Team;
 import ru.acuma.shuffler.tables.records.TeamRecord;
-import ru.acuma.shufflerlib.repository.TeamDao;
+import ru.acuma.shufflerlib.repository.TeamRepository;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 import static ru.acuma.shuffler.Tables.TEAM;
@@ -14,15 +17,27 @@ import static ru.acuma.shuffler.Tables.TEAM_PLAYER;
 
 @Repository
 @RequiredArgsConstructor
-public class TeamDaoImpl implements TeamDao {
+public class TeamRepositoryImpl implements TeamRepository {
 
     private final DSLContext dsl;
 
+    private TeamDao teamDao;
+
+    @PostConstruct
+    private void initTeamDao() {
+        teamDao = new TeamDao(dsl.configuration());
+    }
+
     @Override
     public long save(Team team) {
-        TeamRecord record = dsl.newRecord(TEAM, team);
-        record.store();
-        return record.getId();
+        teamDao.insert(team);
+        return team.getId();
+    }
+
+    @Override
+    public long update(Team team) {
+        teamDao.update(team);
+        return team.getId();
     }
 
     @Override
