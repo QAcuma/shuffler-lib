@@ -21,6 +21,7 @@ dependencyResolutionManagement {
             version("lombok", "1.18.24")
 
             library("spring-jooq", "org.springframework.boot", "spring-boot-starter-jooq").versionRef("spring-boot")
+            library("spring-web", "org.springframework.boot", "spring-boot-starter-web").versionRef("spring-boot")
             library("postgresql", "org.postgresql", "postgresql").versionRef("postgresql")
             library("flyway", "org.flywaydb", "flyway-core").versionRef("flyway")
 
@@ -31,6 +32,7 @@ dependencyResolutionManagement {
             library("lombok", "org.projectlombok", "lombok").versionRef("lombok")
 
             bundle("data", listOf("spring-jooq", "postgresql", "flyway"))
+            bundle("spring", listOf("spring-web"))
             bundle("util", listOf("orika", "gson", "lang3"))
             bundle("lombok", listOf("lombok"))
         }

@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "ru.acuma"
-version = "1.0.1"
+version = "1.0.2"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_13
@@ -29,6 +29,7 @@ repositories {
 dependencies {
     api(libs.bundles.data)
     api(libs.bundles.util)
+    api(libs.bundles.spring)
     compileOnly(libs.lombok)
     jooqGenerator(libs.postgresql)
     annotationProcessor(libs.lombok)
