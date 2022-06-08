@@ -1,26 +1,29 @@
 package ru.acuma.shufflerlib.repository.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 import ru.acuma.shuffler.tables.daos.RatingHistoryDao;
 import ru.acuma.shuffler.tables.pojos.RatingHistory;
+import ru.acuma.shufflerlib.exception.MissingRequireArgumentException;
 import ru.acuma.shufflerlib.model.Filter;
-import ru.acuma.shufflerlib.model.web.WebGame;
-import ru.acuma.shufflerlib.model.web.WebPlayer;
-import ru.acuma.shufflerlib.model.web.WebTeam;
+import ru.acuma.shufflerlib.model.web.entity.WebGame;
+import ru.acuma.shufflerlib.model.web.entity.WebPlayer;
+import ru.acuma.shufflerlib.model.web.entity.WebTeam;
 import ru.acuma.shufflerlib.repository.RatingHistoryRepository;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Optional;
 
 import static org.jooq.Records.mapping;
 import static org.jooq.impl.DSL.field;
 import static org.jooq.impl.DSL.multiset;
-import static org.jooq.impl.DSL.param;
+import static org.jooq.impl.DSL.noCondition;
 import static org.jooq.impl.DSL.select;
 import static ru.acuma.shuffler.Tables.EVENT;
-import static ru.acuma.shuffler.Tables.RATING;
+import static ru.acuma.shuffler.Tables.GROUP_INFO;
 import static ru.acuma.shuffler.tables.Game.GAME;
 import static ru.acuma.shuffler.tables.Player.PLAYER;
 import static ru.acuma.shuffler.tables.RatingHistory.RATING_HISTORY;
@@ -82,32 +85,36 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
                                 )
                                         .from(TEAM)
                                         .where(RATING_HISTORY.GAME_ID.eq(TEAM.GAME_ID))
+                                        .orderBy(TEAM.ID)
                         ).as("teams").convertFrom(r -> r.map(mapping(WebTeam::new)))
                 )
                 .from(GAME)
+                .join(EVENT).on(EVENT.ID.eq(GAME.EVENT_ID))
                 .join(RATING_HISTORY).on(RATING_HISTORY.GAME_ID.eq(GAME.ID))
-                .join(PLAYER).on(PLAYER.ID.eq(RATING_HISTORY.PLAYER_ID))
-                .join(RATING).on(RATING.ID.eq(RATING_HISTORY.PLAYER_ID))
-                .where(RATING_HISTORY.PLAYER_ID.eq(filter.getPlayerId()))
-                .and(RATING.DISCIPLINE.eq(filter.getDiscipline().name()))
+                .join(GROUP_INFO).on(GROUP_INFO.CHAT_ID.eq(EVENT.CHAT_ID))
+                .where(condition(filter))
+                .orderBy(GAME.FINISHED_AT.desc())
                 .fetchInto(WebGame.class);
     }
 
-//    public Condition condition(Filter filter) {
-//        Condition result = noCondition();
-//
-//        if (filter.getChatId() != null)
-//            result = result.and(BOOK.TITLE.like("%" + request.getParameter("title") + "%"));
-//
-//        if (request.getParameter("author") != null)
-//            result = result.and(BOOK.AUTHOR_ID.in(
-//                    selectOne().from(AUTHOR).where(
-//                            AUTHOR.FIRST_NAME.like("%" + request.getParameter("author") + "%")
-//                                    .or(AUTHOR.LAST_NAME.like("%" + request.getParameter("author") + "%"))
-//                    )
-//            ));
-//
-//        return result;
-//    }
+    public Condition condition(Filter filter) {
+        Optional.of(filter.getSeasonId())
+                .orElseThrow(() -> new MissingRequireArgumentException("seasonId"));
+        Condition result = noCondition();
+        if (filter.getChatName() != null) {
+            result = result.and(GROUP_INFO.NAME.eq(filter.getChatName()));
+        } else if (filter.getPlayerId() != null) {
+            result = result.and(RATING_HISTORY.PLAYER_ID.eq(filter.getPlayerId()));
+        } else {
+            throw new MissingRequireArgumentException("chatName", "playerId");
+        }
+
+        result = result
+                .and(EVENT.SEASON_ID.eq(filter.getSeasonId()))
+                .and(EVENT.DISCIPLINE.eq(filter.getDiscipline().name()));
+
+
+        return result;
+    }
 
 }

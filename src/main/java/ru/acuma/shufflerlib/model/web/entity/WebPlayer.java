@@ -1,4 +1,4 @@
-package ru.acuma.shufflerlib.model.web;
+package ru.acuma.shufflerlib.model.web.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
