@@ -1,4 +1,4 @@
-package ru.acuma.shufflerlib.model.web.entity;
+package ru.acuma.shufflerlib.model.web.wrapper;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
