@@ -29,10 +29,11 @@ repositories {
 dependencies {
     api(libs.bundles.data)
     api(libs.bundles.util)
-    api(libs.bundles.spring)
-    compileOnly(libs.lombok)
+    api(libs.bundles.web)
     jooqGenerator(libs.postgresql)
     annotationProcessor(libs.lombok)
+    compileOnly(libs.lombok)
+
 }
 catalog {
     versionCatalog {

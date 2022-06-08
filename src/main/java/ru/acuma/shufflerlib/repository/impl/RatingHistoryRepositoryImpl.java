@@ -1,7 +1,6 @@
 package ru.acuma.shufflerlib.repository.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 import ru.acuma.shuffler.tables.daos.RatingHistoryDao;
@@ -18,8 +17,10 @@ import java.util.List;
 import static org.jooq.Records.mapping;
 import static org.jooq.impl.DSL.field;
 import static org.jooq.impl.DSL.multiset;
-import static org.jooq.impl.DSL.noCondition;
+import static org.jooq.impl.DSL.param;
 import static org.jooq.impl.DSL.select;
+import static ru.acuma.shuffler.Tables.EVENT;
+import static ru.acuma.shuffler.Tables.RATING;
 import static ru.acuma.shuffler.tables.Game.GAME;
 import static ru.acuma.shuffler.tables.Player.PLAYER;
 import static ru.acuma.shuffler.tables.RatingHistory.RATING_HISTORY;
@@ -57,7 +58,7 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
                                         TEAM.IS_WINNER,
                                         multiset(
                                                 select(
-                                                        TEAM_PLAYER.ID,
+                                                        TEAM_PLAYER.PLAYER_ID,
                                                         field(
                                                                 select(
                                                                         USER_INFO.FIRST_NAME
@@ -65,32 +66,31 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
                                                                         .from(PLAYER)
                                                                         .join(USER_INFO).on(USER_INFO.TELEGRAM_ID.eq(PLAYER.USER_ID))
                                                                         .where(PLAYER.ID.eq(TEAM_PLAYER.PLAYER_ID))
-                                                        ),
+                                                        ).as("name"),
                                                         field(
                                                                 select(
                                                                         RATING_HISTORY.SCORE
                                                                 )
                                                                         .from(RATING_HISTORY)
-                                                                        .join(USER_INFO).on(USER_INFO.TELEGRAM_ID.eq(PLAYER.USER_ID))
-                                                                        .where(RATING_HISTORY.PLAYER_ID.eq(TEAM_PLAYER.ID))
-                                                        )
+                                                                        .where(RATING_HISTORY.PLAYER_ID.eq(TEAM_PLAYER.PLAYER_ID))
+                                                                        .and(RATING_HISTORY.GAME_ID.eq(GAME.ID))
+                                                        ).as("score")
                                                 )
                                                         .from(TEAM_PLAYER)
                                                         .where(TEAM_PLAYER.TEAM_ID.eq(TEAM.ID))
                                         ).as("players").convertFrom(r -> r.map(mapping(WebPlayer::new)))
                                 )
                                         .from(TEAM)
-                                        .where(TEAM.GAME_ID.eq(GAME.ID))
+                                        .where(RATING_HISTORY.GAME_ID.eq(TEAM.GAME_ID))
                         ).as("teams").convertFrom(r -> r.map(mapping(WebTeam::new)))
                 )
                 .from(GAME)
                 .join(RATING_HISTORY).on(RATING_HISTORY.GAME_ID.eq(GAME.ID))
                 .join(PLAYER).on(PLAYER.ID.eq(RATING_HISTORY.PLAYER_ID))
-//                .where(RATING_HISTORY.PLAYER_ID.eq(filter.getPlayerId()))
+                .join(RATING).on(RATING.ID.eq(RATING_HISTORY.PLAYER_ID))
+                .where(RATING_HISTORY.PLAYER_ID.eq(filter.getPlayerId()))
+                .and(RATING.DISCIPLINE.eq(filter.getDiscipline().name()))
                 .fetchInto(WebGame.class);
-
-//        return null;
-
     }
 
 //    public Condition condition(Filter filter) {
