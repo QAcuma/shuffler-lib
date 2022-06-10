@@ -1,7 +1,6 @@
 package ru.acuma.shufflerlib.model.web.wrapper;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -14,16 +13,13 @@ import ru.acuma.shufflerlib.model.web.entity.WebPlayerDetails;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PlayerData extends WebEntity {
 
-    private WebPlayer player;
-
-    @JsonProperty("player")
-    private WebPlayerDetails playerDetails;
+    private WebPlayerDetails player;
 
     public PlayerData(WebPlayer player) {
-        this.player = player;
+        this.player = (WebPlayerDetails) player;
     }
 
-    public PlayerData(WebPlayerDetails playerDetails) {
-        this.playerDetails = playerDetails;
+    public PlayerData(WebPlayerDetails player) {
+        this.player = player;
     }
 }
