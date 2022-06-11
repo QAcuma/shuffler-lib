@@ -71,7 +71,7 @@ public class PlayerRepositoryImpl implements PlayerRepository {
                                 when(USER_INFO.FIRST_NAME.isNotNull(), USER_INFO.FIRST_NAME).otherwise(""),
                                 val(" "),
                                 when(USER_INFO.LAST_NAME.isNotNull(), USER_INFO.LAST_NAME).otherwise("")
-                        ),
+                        ).as("name"),
                         RATING.SCORE,
                         field(
                                 selectCount()

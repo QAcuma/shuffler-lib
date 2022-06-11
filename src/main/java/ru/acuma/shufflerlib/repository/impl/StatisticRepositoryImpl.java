@@ -1,17 +1,15 @@
 package ru.acuma.shufflerlib.repository.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 import ru.acuma.shufflerlib.model.Filter;
-import ru.acuma.shufflerlib.model.StatisticResult;
+import ru.acuma.shufflerlib.model.web.entity.WebPlayer;
 import ru.acuma.shufflerlib.repository.StatisticRepository;
 
 import java.util.List;
 
 import static org.jooq.impl.DSL.concat;
-import static org.jooq.impl.DSL.noCondition;
 import static org.jooq.impl.DSL.val;
 import static org.jooq.impl.DSL.when;
 import static ru.acuma.shuffler.tables.GroupInfo.GROUP_INFO;
@@ -26,7 +24,7 @@ public class StatisticRepositoryImpl implements StatisticRepository {
     private final DSLContext dsl;
 
     @Override
-    public List<StatisticResult> findAllByFilter(Filter filter) {
+    public List<WebPlayer> findAllByFilter(Filter filter) {
         return dsl.select(
                         PLAYER.ID,
                         concat(
@@ -42,13 +40,6 @@ public class StatisticRepositoryImpl implements StatisticRepository {
                 .join(GROUP_INFO).on(PLAYER.CHAT_ID.eq(GROUP_INFO.CHAT_ID))
                 .where(GROUP_INFO.NAME.eq(filter.getChatName()))
                 .and(RATING.DISCIPLINE.eq(filter.getDiscipline().name()))
-                .and(condition(filter))
-                .fetchInto(StatisticResult.class);
-    }
-
-    public Condition condition(Filter filter) {
-        Condition result = noCondition();
-
-        return result;
+                .fetchInto(WebPlayer.class);
     }
 }
