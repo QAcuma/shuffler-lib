@@ -4,18 +4,20 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
+import ru.acuma.shuffler.tables.daos.PlayerDao;
 import ru.acuma.shuffler.tables.pojos.Player;
-import ru.acuma.shuffler.tables.records.PlayerRecord;
 import ru.acuma.shufflerlib.model.Filter;
 import ru.acuma.shufflerlib.model.web.entity.WebPlayerDetails;
 import ru.acuma.shufflerlib.repository.PlayerRepository;
+import ru.acuma.shufflerlib.repository.util.FilterUtil;
 
-import java.time.LocalDateTime;
+import javax.annotation.PostConstruct;
 
 import static org.jooq.impl.DSL.concat;
 import static org.jooq.impl.DSL.field;
 import static org.jooq.impl.DSL.selectCount;
 import static org.jooq.impl.DSL.val;
+import static org.jooq.impl.DSL.when;
 import static ru.acuma.shuffler.Tables.EVENT;
 import static ru.acuma.shuffler.Tables.GAME;
 import static ru.acuma.shuffler.Tables.RATING;
@@ -30,6 +32,12 @@ import static ru.acuma.shuffler.tables.UserInfo.USER_INFO;
 public class PlayerRepositoryImpl implements PlayerRepository {
 
     private final DSLContext dsl;
+    private PlayerDao playerDao;
+
+    @PostConstruct
+    void initPlayerDao() {
+        playerDao = new PlayerDao(dsl.configuration());
+    }
 
     @Override
     public boolean isPresent(Long chatId, Long userId) {
@@ -51,17 +59,19 @@ public class PlayerRepositoryImpl implements PlayerRepository {
 
     @Override
     public long save(Player player) {
-        PlayerRecord record = dsl.newRecord(PLAYER, player);
-        record.store();
-        return record.getId();
+        playerDao.update(player);
+        return player.getId();
     }
 
     @Override
     public WebPlayerDetails findPlayerInfo(Filter filter) {
-        log.info(LocalDateTime.now());
-        var a = dsl.select(
+        return dsl.select(
                         PLAYER.ID,
-                        concat(USER_INFO.FIRST_NAME, val(" "), USER_INFO.LAST_NAME).as("name"),
+                        concat(
+                                when(USER_INFO.FIRST_NAME.isNotNull(), USER_INFO.FIRST_NAME).otherwise(""),
+                                val(" "),
+                                when(USER_INFO.LAST_NAME.isNotNull(), USER_INFO.LAST_NAME).otherwise("")
+                        ),
                         RATING.SCORE,
                         field(
                                 selectCount()
@@ -70,9 +80,7 @@ public class PlayerRepositoryImpl implements PlayerRepository {
                                         .join(GAME).on(GAME.ID.eq(TEAM.GAME_ID))
                                         .join(EVENT).on(EVENT.ID.eq(GAME.EVENT_ID))
                                         .where(TEAM.IS_WINNER.eq(Boolean.TRUE))
-                                        .and(TEAM_PLAYER.PLAYER_ID.eq(filter.getPlayerId()))
-                                        .and(EVENT.DISCIPLINE.eq(filter.getDiscipline().name()))
-                                        .and(GAME.STATE.eq("FINISHED"))
+                                        .and(FilterUtil.playerDisciplineSeasonGameStateCondition(filter))
                         ).as("winCount"),
                         field(
                                 selectCount()
@@ -81,9 +89,7 @@ public class PlayerRepositoryImpl implements PlayerRepository {
                                         .join(GAME).on(GAME.ID.eq(TEAM.GAME_ID))
                                         .join(EVENT).on(EVENT.ID.eq(GAME.EVENT_ID))
                                         .where(TEAM.IS_WINNER.eq(Boolean.FALSE))
-                                        .and(TEAM_PLAYER.PLAYER_ID.eq(filter.getPlayerId()))
-                                        .and(EVENT.DISCIPLINE.eq(filter.getDiscipline().name()))
-                                        .and(GAME.STATE.eq("FINISHED"))
+                                        .and(FilterUtil.playerDisciplineSeasonGameStateCondition(filter))
                         ).as("loseCount")
                 )
                 .from(PLAYER)
@@ -92,8 +98,6 @@ public class PlayerRepositoryImpl implements PlayerRepository {
                 .where(RATING.DISCIPLINE.eq(filter.getDiscipline().name()))
                 .and(PLAYER.ID.eq(filter.getPlayerId()))
                 .fetchOneInto(WebPlayerDetails.class);
-        log.info(LocalDateTime.now());
-        return a;
     }
 
 }
