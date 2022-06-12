@@ -14,7 +14,7 @@ import java.util.List;
 @Accessors(chain = true)
 @RequiredArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SeasonData extends WebEntity {
+public class SeasonData extends WebPayload {
 
     private final List<WebSeason> seasons;
 

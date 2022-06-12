@@ -6,5 +6,5 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @JsonTypeName("payload")
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.WRAPPER_OBJECT)
-public class WebEntity {
+public class WebPayload {
 }

@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import ru.acuma.shufflerlib.model.web.wrapper.WebEntity;
 
 @Getter
 @Setter

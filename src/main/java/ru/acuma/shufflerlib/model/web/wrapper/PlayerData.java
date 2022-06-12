@@ -11,7 +11,7 @@ import ru.acuma.shufflerlib.model.web.entity.WebPlayerDetails;
 @Setter
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PlayerData extends WebEntity {
+public class PlayerData extends WebPayload {
 
     private WebPlayerDetails player;
 

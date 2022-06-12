@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import ru.acuma.shufflerlib.model.web.entity.WebGame;
+import ru.acuma.shufflerlib.model.web.entity.WebGraph;
 
 import java.util.List;
 
@@ -14,7 +14,8 @@ import java.util.List;
 @Accessors(chain = true)
 @RequiredArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class GameData extends WebPayload {
+public class GraphData extends WebPayload {
 
-    private final List<WebGame> games;
+    private final List<WebGraph> graphs;
+
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @Accessors(chain = true)
 @RequiredArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LadderData extends WebEntity {
+public class LadderData extends WebPayload {
 
     private final List<WebPlayer> players;
 }
