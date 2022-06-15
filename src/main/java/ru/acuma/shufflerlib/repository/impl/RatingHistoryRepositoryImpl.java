@@ -16,9 +16,13 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 
 import static org.jooq.Records.mapping;
+import static org.jooq.impl.DSL.concat;
 import static org.jooq.impl.DSL.field;
 import static org.jooq.impl.DSL.multiset;
 import static org.jooq.impl.DSL.select;
+import static org.jooq.impl.DSL.substring;
+import static org.jooq.impl.DSL.val;
+import static org.jooq.impl.DSL.when;
 import static ru.acuma.shuffler.Tables.EVENT;
 import static ru.acuma.shuffler.Tables.GROUP_INFO;
 import static ru.acuma.shuffler.tables.Game.GAME;
@@ -61,7 +65,11 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
                                                         TEAM_PLAYER.PLAYER_ID,
                                                         field(
                                                                 select(
-                                                                        USER_INFO.FIRST_NAME
+                                                                        concat(
+                                                                                when(USER_INFO.FIRST_NAME.isNotNull(), USER_INFO.FIRST_NAME).otherwise(""),
+                                                                                val(" "),
+                                                                                when(USER_INFO.LAST_NAME.isNotNull(), substring(USER_INFO.LAST_NAME, 0, 2).concat(".")).otherwise("")
+                                                                        ).as("name")
                                                                 )
                                                                         .from(PLAYER)
                                                                         .join(USER_INFO).on(USER_INFO.TELEGRAM_ID.eq(PLAYER.USER_ID))

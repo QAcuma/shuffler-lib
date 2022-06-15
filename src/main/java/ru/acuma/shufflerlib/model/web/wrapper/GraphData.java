@@ -7,8 +7,6 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import ru.acuma.shufflerlib.model.web.entity.WebGraph;
 
-import java.util.List;
-
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -16,6 +14,6 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GraphData extends WebPayload {
 
-    private final List<WebGraph> graphs;
+    private final WebGraph graph;
 
 }

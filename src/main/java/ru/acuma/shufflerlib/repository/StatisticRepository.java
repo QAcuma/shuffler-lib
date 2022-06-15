@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface StatisticRepository {
 
-    List<WebPlayer> findAllByFilter(Filter filter);
+    List<WebPlayer> buildLadderData(Filter filter);
 
-    List<WebGraph> buildGraphsByFilter(Filter filter);
+    WebGraph buildGraphData(Filter filter);
 
 }

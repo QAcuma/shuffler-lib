@@ -16,6 +16,7 @@ import javax.annotation.PostConstruct;
 import static org.jooq.impl.DSL.concat;
 import static org.jooq.impl.DSL.field;
 import static org.jooq.impl.DSL.selectCount;
+import static org.jooq.impl.DSL.substring;
 import static org.jooq.impl.DSL.val;
 import static org.jooq.impl.DSL.when;
 import static ru.acuma.shuffler.Tables.EVENT;
@@ -70,7 +71,7 @@ public class PlayerRepositoryImpl implements PlayerRepository {
                         concat(
                                 when(USER_INFO.FIRST_NAME.isNotNull(), USER_INFO.FIRST_NAME).otherwise(""),
                                 val(" "),
-                                when(USER_INFO.LAST_NAME.isNotNull(), USER_INFO.LAST_NAME).otherwise("")
+                                when(USER_INFO.LAST_NAME.isNotNull(), substring(USER_INFO.LAST_NAME, 0, 2).concat(".")).otherwise("")
                         ).as("name"),
                         RATING.SCORE,
                         field(

@@ -13,8 +13,6 @@ import java.util.List;
 @Accessors(chain = true)
 public class WebGraph {
 
-    private Long playerId;
-
     private List<WebCoordinate> coordinates;
 
 }

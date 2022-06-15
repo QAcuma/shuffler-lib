@@ -10,14 +10,15 @@ import ru.acuma.shufflerlib.model.web.entity.WebPlayer;
 import ru.acuma.shufflerlib.repository.StatisticRepository;
 import ru.acuma.shufflerlib.repository.util.FilterUtil;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import static org.jooq.Records.mapping;
 import static org.jooq.impl.DSL.concat;
+import static org.jooq.impl.DSL.exists;
 import static org.jooq.impl.DSL.multiset;
 import static org.jooq.impl.DSL.select;
 import static org.jooq.impl.DSL.selectDistinct;
+import static org.jooq.impl.DSL.substring;
 import static org.jooq.impl.DSL.val;
 import static org.jooq.impl.DSL.when;
 import static ru.acuma.shuffler.tables.Event.EVENT;
@@ -37,14 +38,14 @@ public class StatisticRepositoryImpl implements StatisticRepository {
     private final DSLContext dsl;
 
     @Override
-    public List<WebPlayer> findAllByFilter(Filter filter) {
+    public List<WebPlayer> buildLadderData(Filter filter) {
         return dsl.select(
                         PLAYER.ID,
                         concat(
                                 when(USER_INFO.FIRST_NAME.isNotNull(), USER_INFO.FIRST_NAME).otherwise(""),
                                 val(" "),
-                                when(USER_INFO.LAST_NAME.isNotNull(), USER_INFO.LAST_NAME).otherwise("")
-                        ),
+                                when(USER_INFO.LAST_NAME.isNotNull(), substring(USER_INFO.LAST_NAME, 0, 2).concat(".")).otherwise("")
+                        ).as("name"),
                         RATING.SCORE
                 )
                 .from(PLAYER)
@@ -53,13 +54,22 @@ public class StatisticRepositoryImpl implements StatisticRepository {
                 .join(GROUP_INFO).on(PLAYER.CHAT_ID.eq(GROUP_INFO.CHAT_ID))
                 .where(GROUP_INFO.NAME.eq(filter.getChatName()))
                 .and(RATING.DISCIPLINE.eq(filter.getDiscipline().name()))
+                .and(
+                        exists(
+                                select(RATING_HISTORY.ID)
+                                        .from(RATING_HISTORY)
+                                        .join(GAME).on(GAME.ID.eq(RATING_HISTORY.GAME_ID))
+                                        .join(EVENT).on(EVENT.ID.eq(GAME.EVENT_ID))
+                                        .where(FilterUtil.eventSeasonAndDisciplineCondition(filter))
+                                        .and(RATING_HISTORY.PLAYER_ID.eq(PLAYER.ID))
+                        )
+                )
                 .fetchInto(WebPlayer.class);
     }
 
     @Override
-    public List<WebGraph> buildGraphsByFilter(Filter filter) {
+    public WebGraph buildGraphData(Filter filter) {
         return dsl.select(
-                        PLAYER.ID,
                         multiset(
                                 selectDistinct(
                                         GAME.FINISHED_AT,
@@ -71,16 +81,15 @@ public class StatisticRepositoryImpl implements StatisticRepository {
                                         .join(TEAM).on(TEAM.GAME_ID.eq(GAME.ID))
                                         .join(TEAM_PLAYER).on(TEAM_PLAYER.TEAM_ID.eq(TEAM.ID))
                                         .where(RATING_HISTORY.PLAYER_ID.eq(PLAYER.ID))
-                                        .and(EVENT.SEASON_ID.eq(filter.getSeasonId()))
-                                        .and(EVENT.DISCIPLINE.eq(filter.getDiscipline().name()))
+                                        .and(FilterUtil.eventSeasonAndDisciplineCondition(filter))
                                         .and(GAME.STATE.eq("FINISHED"))
                                         .orderBy(GAME.FINISHED_AT)
                         ).as("coordinates").convertFrom(r -> r.map(mapping(WebCoordinate::new)))
                 )
                 .from(PLAYER)
                 .join(GROUP_INFO).on(GROUP_INFO.CHAT_ID.eq(PLAYER.CHAT_ID))
-                .where(FilterUtil.requiredPlayerOrChatCondition(filter))
-                .fetchInto(WebGraph.class);
+                .where(FilterUtil.requiredPlayerCondition(filter))
+                .fetchOneInto(WebGraph.class);
     }
 
 }

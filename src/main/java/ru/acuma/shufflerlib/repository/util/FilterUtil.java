@@ -9,6 +9,7 @@ import static ru.acuma.shuffler.tables.Event.EVENT;
 import static ru.acuma.shuffler.tables.Game.GAME;
 import static ru.acuma.shuffler.tables.GroupInfo.GROUP_INFO;
 import static ru.acuma.shuffler.tables.Player.PLAYER;
+import static ru.acuma.shuffler.tables.Rating.RATING;
 import static ru.acuma.shuffler.tables.RatingHistory.RATING_HISTORY;
 import static ru.acuma.shuffler.tables.TeamPlayer.TEAM_PLAYER;
 
@@ -28,6 +29,39 @@ public class FilterUtil {
                 .and(EVENT.SEASON_ID.eq(filter.getSeasonId()))
                 .and(EVENT.DISCIPLINE.eq(filter.getDiscipline().name()));
 
+        return result;
+    }
+
+    public static Condition eventSeasonAndDisciplineCondition(Filter filter) {
+        Condition result = noCondition();
+        if (filter.getSeasonId() != null) {
+            result = result.and(EVENT.SEASON_ID.eq(filter.getSeasonId()));
+        } else {
+            throw new MissingRequireArgumentException(MissingRequireArgumentException.MISSING_ARG, "season");
+        }
+
+        if (filter.getDiscipline() != null) {
+            result = result.and(EVENT.DISCIPLINE.eq(filter.getDiscipline().name()));
+        } else {
+            throw new MissingRequireArgumentException(MissingRequireArgumentException.MISSING_ARG, "discipline");
+        }
+
+        return result;
+    }
+
+    public static Condition ratingSeasonAndDisciplineCondition(Filter filter) {
+        Condition result = noCondition();
+        if (filter.getSeasonId() != null) {
+            result = result.and(RATING.SEASON_ID.eq(filter.getSeasonId()));
+        } else {
+            throw new MissingRequireArgumentException(MissingRequireArgumentException.MISSING_ARG, "season");
+        }
+
+        if (filter.getDiscipline() != null) {
+            result = result.and(RATING.DISCIPLINE.eq(filter.getDiscipline().name()));
+        } else {
+            throw new MissingRequireArgumentException(MissingRequireArgumentException.MISSING_ARG, "discipline");
+        }
 
         return result;
     }
@@ -43,15 +77,13 @@ public class FilterUtil {
         return result;
     }
 
-    public static Condition requiredPlayerOrChatCondition(Filter filter) {
+    public static Condition requiredPlayerCondition(Filter filter) {
         Condition result = noCondition();
         if (filter.getPlayerId() != null) {
             result = result
                     .and(PLAYER.ID.eq(filter.getPlayerId()));
-        } else if (filter.getChatName() != null) {
-            result = result.and(GROUP_INFO.NAME.eq(filter.getChatName()));
         } else {
-            throw new MissingRequireArgumentException(MissingRequireArgumentException.MISSING_ONE_OF_ARG, "player", "chat");
+            throw new MissingRequireArgumentException(MissingRequireArgumentException.MISSING_ONE_OF_ARG, "playerId");
         }
 
         return result;
