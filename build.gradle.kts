@@ -33,7 +33,6 @@ dependencies {
     jooqGenerator(libs.postgresql)
     annotationProcessor(libs.lombok)
     compileOnly(libs.lombok)
-
 }
 catalog {
     versionCatalog {

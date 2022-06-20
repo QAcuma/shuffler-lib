@@ -222,4 +222,19 @@ public class UserInfoDao extends DAOImpl<UserInfoRecord, ru.acuma.shuffler.table
     public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchByDeletedAt(OffsetDateTime... values) {
         return fetch(UserInfo.USER_INFO.DELETED_AT, values);
     }
+
+    /**
+     * Fetch records that have <code>media_blob BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchRangeOfMediaBlob(byte[] lowerInclusive, byte[] upperInclusive) {
+        return fetchRange(UserInfo.USER_INFO.MEDIA_BLOB, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>media_blob IN (values)</code>
+     */
+    public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchByMediaBlob(byte[]... values) {
+        return fetch(UserInfo.USER_INFO.MEDIA_BLOB, values);
+    }
 }

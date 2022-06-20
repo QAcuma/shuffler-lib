@@ -5,10 +5,11 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
+import ru.acuma.shuffler.tables.daos.UserInfoDao;
 import ru.acuma.shuffler.tables.pojos.UserInfo;
-import ru.acuma.shuffler.tables.records.UserInfoRecord;
 import ru.acuma.shufflerlib.repository.UserRepository;
 
+import javax.annotation.PostConstruct;
 import java.time.OffsetDateTime;
 
 import static ru.acuma.shuffler.Tables.USER_INFO;
@@ -19,6 +20,13 @@ import static ru.acuma.shuffler.Tables.USER_INFO;
 public class UserRepositoryImpl implements UserRepository {
 
     private final DSLContext dsl;
+
+    private UserInfoDao userInfoDao;
+
+    @PostConstruct
+    void unitUserInfoDao() {
+        userInfoDao = new UserInfoDao(dsl.configuration());
+    }
 
     @Override
     public boolean isBlocked(Long telegramId) {
@@ -50,9 +58,24 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public long save(UserInfo userInfo) {
-        UserInfoRecord record = dsl.newRecord(USER_INFO, userInfo);
-        record.store();
-        return record.getTelegramId();
+        userInfoDao.insert(userInfo);
+
+        return userInfo.getTelegramId();
+    }
+
+    @Override
+    public long saveProfilePhoto(Long telegramId, byte[] blob) {
+        return dsl.update(USER_INFO)
+                .set(USER_INFO.MEDIA_BLOB, blob)
+                .where(USER_INFO.TELEGRAM_ID.eq(telegramId))
+                .execute();
+    }
+
+    @Override
+    public long update(UserInfo userInfo) {
+        userInfoDao.update(userInfo);
+
+        return userInfo.getTelegramId();
     }
 
     @Override

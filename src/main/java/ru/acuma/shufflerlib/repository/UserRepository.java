@@ -12,6 +12,10 @@ public interface UserRepository {
 
     long save(UserInfo user);
 
+    long saveProfilePhoto(Long telegramId, byte[] blob);
+
+    long update(UserInfo userInfo);
+
     void delete(Long userId);
 
 }

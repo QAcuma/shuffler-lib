@@ -46,6 +46,7 @@ public class StatisticRepositoryImpl implements StatisticRepository {
                                 val(" "),
                                 when(USER_INFO.LAST_NAME.isNotNull(), substring(USER_INFO.LAST_NAME, 0, 2).concat(".")).otherwise("")
                         ).as("name"),
+                        USER_INFO.MEDIA_BLOB,
                         RATING.SCORE
                 )
                 .from(PLAYER)

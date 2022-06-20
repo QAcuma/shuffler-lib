@@ -12,6 +12,8 @@ public interface PlayerRepository {
 
     long save(Player player);
 
+    long update(Player player);
+
     WebPlayerDetails findPlayerInfo(Filter filter);
 
 }

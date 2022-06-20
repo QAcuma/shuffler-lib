@@ -60,6 +60,12 @@ public class PlayerRepositoryImpl implements PlayerRepository {
 
     @Override
     public long save(Player player) {
+        playerDao.insert(player);
+        return player.getId();
+    }
+
+    @Override
+    public long update(Player player) {
         playerDao.update(player);
         return player.getId();
     }

@@ -69,12 +69,20 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
                                                                                 when(USER_INFO.FIRST_NAME.isNotNull(), USER_INFO.FIRST_NAME).otherwise(""),
                                                                                 val(" "),
                                                                                 when(USER_INFO.LAST_NAME.isNotNull(), substring(USER_INFO.LAST_NAME, 0, 2).concat(".")).otherwise("")
-                                                                        ).as("name")
+                                                                        )
                                                                 )
                                                                         .from(PLAYER)
                                                                         .join(USER_INFO).on(USER_INFO.TELEGRAM_ID.eq(PLAYER.USER_ID))
                                                                         .where(PLAYER.ID.eq(TEAM_PLAYER.PLAYER_ID))
                                                         ).as("name"),
+                                                        field(
+                                                                select(
+                                                                        USER_INFO.MEDIA_BLOB
+                                                                )
+                                                                        .from(PLAYER)
+                                                                        .join(USER_INFO).on(USER_INFO.TELEGRAM_ID.eq(PLAYER.USER_ID))
+                                                                        .where(PLAYER.ID.eq(TEAM_PLAYER.PLAYER_ID))
+                                                        ).as("avatar"),
                                                         field(
                                                                 select(
                                                                         RATING_HISTORY.SCORE

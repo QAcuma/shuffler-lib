@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.awt.*;
+
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -16,6 +18,8 @@ public class WebPlayer {
     private Long id;
 
     private String name;
+
+    private byte[] avatar;
 
     private Integer score;
 
