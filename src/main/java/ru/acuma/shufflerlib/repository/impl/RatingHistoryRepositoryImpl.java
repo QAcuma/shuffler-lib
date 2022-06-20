@@ -79,8 +79,8 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
                                                                 select(
                                                                         USER_INFO.MEDIA_BLOB
                                                                 )
-                                                                        .from(PLAYER)
-                                                                        .join(USER_INFO).on(USER_INFO.TELEGRAM_ID.eq(PLAYER.USER_ID))
+                                                                        .from(USER_INFO)
+                                                                        .join(PLAYER).on(PLAYER.USER_ID.eq(USER_INFO.TELEGRAM_ID))
                                                                         .where(PLAYER.ID.eq(TEAM_PLAYER.PLAYER_ID))
                                                         ).as("avatar"),
                                                         field(
