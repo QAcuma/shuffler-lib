@@ -28,6 +28,7 @@ public class UserInfo implements Serializable {
     private OffsetDateTime updatedAt;
     private OffsetDateTime deletedAt;
     private byte[]         mediaBlob;
+    private String         mediaId;
 
     public UserInfo() {}
 
@@ -44,6 +45,7 @@ public class UserInfo implements Serializable {
         this.updatedAt = value.updatedAt;
         this.deletedAt = value.deletedAt;
         this.mediaBlob = value.mediaBlob;
+        this.mediaId = value.mediaId;
     }
 
     public UserInfo(
@@ -58,7 +60,8 @@ public class UserInfo implements Serializable {
         OffsetDateTime createdAt,
         OffsetDateTime updatedAt,
         OffsetDateTime deletedAt,
-        byte[]         mediaBlob
+        byte[]         mediaBlob,
+        String         mediaId
     ) {
         this.telegramId = telegramId;
         this.languageCode = languageCode;
@@ -72,6 +75,7 @@ public class UserInfo implements Serializable {
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
         this.mediaBlob = mediaBlob;
+        this.mediaId = mediaId;
     }
 
     /**
@@ -254,6 +258,21 @@ public class UserInfo implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.user_info.media_id</code>.
+     */
+    public String getMediaId() {
+        return this.mediaId;
+    }
+
+    /**
+     * Setter for <code>public.user_info.media_id</code>.
+     */
+    public UserInfo setMediaId(String mediaId) {
+        this.mediaId = mediaId;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("UserInfo (");
@@ -270,6 +289,7 @@ public class UserInfo implements Serializable {
         sb.append(", ").append(updatedAt);
         sb.append(", ").append(deletedAt);
         sb.append(", ").append("[binary...]");
+        sb.append(", ").append(mediaId);
 
         sb.append(")");
         return sb.toString();

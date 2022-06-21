@@ -10,7 +10,7 @@ import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row12;
+import org.jooq.Row13;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -106,6 +106,11 @@ public class UserInfo extends TableImpl<UserInfoRecord> {
      */
     public final TableField<UserInfoRecord, byte[]> MEDIA_BLOB = createField(DSL.name("media_blob"), SQLDataType.BLOB, this, "");
 
+    /**
+     * The column <code>public.user_info.media_id</code>.
+     */
+    public final TableField<UserInfoRecord, String> MEDIA_ID = createField(DSL.name("media_id"), SQLDataType.CLOB, this, "");
+
     private UserInfo(Name alias, Table<UserInfoRecord> aliased) {
         this(alias, aliased, null);
     }
@@ -176,11 +181,11 @@ public class UserInfo extends TableImpl<UserInfoRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row12 type methods
+    // Row13 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row12<Long, String, Boolean, String, String, String, Boolean, OffsetDateTime, OffsetDateTime, OffsetDateTime, OffsetDateTime, byte[]> fieldsRow() {
-        return (Row12) super.fieldsRow();
+    public Row13<Long, String, Boolean, String, String, String, Boolean, OffsetDateTime, OffsetDateTime, OffsetDateTime, OffsetDateTime, byte[], String> fieldsRow() {
+        return (Row13) super.fieldsRow();
     }
 }
