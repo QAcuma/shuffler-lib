@@ -14,6 +14,8 @@ public interface UserRepository {
 
     long saveProfilePhoto(Long telegramId, byte[] blob);
 
+    long saveProfilePhotoId(Long telegramId, String mediaId);
+
     long update(UserInfo userInfo);
 
     void delete(Long userId);

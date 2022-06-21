@@ -72,6 +72,14 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public long saveProfilePhotoId(Long telegramId, String mediaId) {
+        return dsl.update(USER_INFO)
+                .set(USER_INFO.MEDIA_ID, mediaId)
+                .where(USER_INFO.TELEGRAM_ID.eq(telegramId))
+                .execute();
+    }
+
+    @Override
     public long update(UserInfo userInfo) {
         userInfoDao.update(userInfo);
 
