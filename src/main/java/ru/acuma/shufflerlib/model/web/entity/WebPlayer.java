@@ -19,7 +19,7 @@ public class WebPlayer {
 
     private String name;
 
-    private byte[] avatar;
+    private String avatar;
 
     private Integer score;
 

@@ -2,6 +2,7 @@ package ru.acuma.shufflerlib.repository.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import ru.acuma.shufflerlib.model.Filter;
 import ru.acuma.shufflerlib.model.web.entity.WebCoordinate;
@@ -35,6 +36,9 @@ import static ru.acuma.shuffler.tables.UserInfo.USER_INFO;
 @RequiredArgsConstructor
 public class StatisticRepositoryImpl implements StatisticRepository {
 
+    @Value("${media.link:localhost}")
+    private String mediaLink;
+
     private final DSLContext dsl;
 
     @Override
@@ -46,7 +50,10 @@ public class StatisticRepositoryImpl implements StatisticRepository {
                                 val(" "),
                                 when(USER_INFO.LAST_NAME.isNotNull(), substring(USER_INFO.LAST_NAME, 0, 2).concat(".")).otherwise("")
                         ).as("name"),
-                        USER_INFO.MEDIA_BLOB,
+                        concat(
+                                val(mediaLink),
+                                USER_INFO.MEDIA_ID
+                        ).as("avatar"),
                         RATING.SCORE
                 )
                 .from(PLAYER)

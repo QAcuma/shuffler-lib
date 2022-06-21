@@ -3,6 +3,7 @@ package ru.acuma.shufflerlib.repository.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.jooq.DSLContext;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import ru.acuma.shuffler.tables.daos.PlayerDao;
 import ru.acuma.shuffler.tables.pojos.Player;
@@ -31,6 +32,9 @@ import static ru.acuma.shuffler.tables.UserInfo.USER_INFO;
 @Repository
 @RequiredArgsConstructor
 public class PlayerRepositoryImpl implements PlayerRepository {
+
+    @Value("${media.link:localhost}")
+    private String mediaLink;
 
     private final DSLContext dsl;
     private PlayerDao playerDao;
@@ -79,7 +83,7 @@ public class PlayerRepositoryImpl implements PlayerRepository {
                                 val(" "),
                                 when(USER_INFO.LAST_NAME.isNotNull(), substring(USER_INFO.LAST_NAME, 0, 2).concat(".")).otherwise("")
                         ).as("name"),
-                        USER_INFO.MEDIA_BLOB.as("avatar"),
+                        concat(val(mediaLink), USER_INFO.MEDIA_ID).as("avatar"),
                         RATING.SCORE,
                         field(
                                 selectCount()

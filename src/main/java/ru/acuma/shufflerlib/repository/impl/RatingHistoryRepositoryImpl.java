@@ -2,6 +2,7 @@ package ru.acuma.shufflerlib.repository.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import ru.acuma.shuffler.tables.daos.RatingHistoryDao;
 import ru.acuma.shuffler.tables.pojos.RatingHistory;
@@ -35,6 +36,9 @@ import static ru.acuma.shuffler.tables.UserInfo.USER_INFO;
 @Repository
 @RequiredArgsConstructor
 public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
+
+    @Value("${media.link:localhost}")
+    private String mediaLink;
 
     private final DSLContext dsl;
 
@@ -75,13 +79,15 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
                                                                         .join(USER_INFO).on(USER_INFO.TELEGRAM_ID.eq(PLAYER.USER_ID))
                                                                         .where(PLAYER.ID.eq(TEAM_PLAYER.PLAYER_ID))
                                                         ).as("name"),
-                                                        field(
-                                                                select(
-                                                                        USER_INFO.MEDIA_BLOB
-                                                                )
-                                                                        .from(USER_INFO)
-                                                                        .join(PLAYER).on(PLAYER.USER_ID.eq(USER_INFO.TELEGRAM_ID))
-                                                                        .where(PLAYER.ID.eq(TEAM_PLAYER.PLAYER_ID))
+                                                        concat(
+                                                                val(mediaLink),
+                                                                field(
+                                                                        select(
+                                                                                USER_INFO.MEDIA_ID
+                                                                        )
+                                                                                .from(USER_INFO)
+                                                                                .join(PLAYER).on(PLAYER.USER_ID.eq(USER_INFO.TELEGRAM_ID))
+                                                                                .where(PLAYER.ID.eq(TEAM_PLAYER.PLAYER_ID)))
                                                         ).as("avatar"),
                                                         field(
                                                                 select(
