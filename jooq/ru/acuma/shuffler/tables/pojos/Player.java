@@ -18,7 +18,6 @@ public class Player implements Serializable {
     private Long id;
     private Long chatId;
     private Long userId;
-    private Long seasonId;
 
     public Player() {}
 
@@ -26,19 +25,16 @@ public class Player implements Serializable {
         this.id = value.id;
         this.chatId = value.chatId;
         this.userId = value.userId;
-        this.seasonId = value.seasonId;
     }
 
     public Player(
         Long id,
         Long chatId,
-        Long userId,
-        Long seasonId
+        Long userId
     ) {
         this.id = id;
         this.chatId = chatId;
         this.userId = userId;
-        this.seasonId = seasonId;
     }
 
     /**
@@ -86,21 +82,6 @@ public class Player implements Serializable {
         return this;
     }
 
-    /**
-     * Getter for <code>public.player.season_id</code>.
-     */
-    public Long getSeasonId() {
-        return this.seasonId;
-    }
-
-    /**
-     * Setter for <code>public.player.season_id</code>.
-     */
-    public Player setSeasonId(Long seasonId) {
-        this.seasonId = seasonId;
-        return this;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Player (");
@@ -108,7 +89,6 @@ public class Player implements Serializable {
         sb.append(id);
         sb.append(", ").append(chatId);
         sb.append(", ").append(userId);
-        sb.append(", ").append(seasonId);
 
         sb.append(")");
         return sb.toString();

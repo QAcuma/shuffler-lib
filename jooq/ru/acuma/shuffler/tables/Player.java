@@ -12,7 +12,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row4;
+import org.jooq.Row3;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -62,11 +62,6 @@ public class Player extends TableImpl<PlayerRecord> {
      * The column <code>public.player.user_id</code>.
      */
     public final TableField<PlayerRecord, Long> USER_ID = createField(DSL.name("user_id"), SQLDataType.BIGINT.nullable(false), this, "");
-
-    /**
-     * The column <code>public.player.season_id</code>.
-     */
-    public final TableField<PlayerRecord, Long> SEASON_ID = createField(DSL.name("season_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     private Player(Name alias, Table<PlayerRecord> aliased) {
         this(alias, aliased, null);
@@ -118,12 +113,11 @@ public class Player extends TableImpl<PlayerRecord> {
 
     @Override
     public List<ForeignKey<PlayerRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.PLAYER__FK_EXISTS_CHAT, Keys.PLAYER__FK_EXISTS_USER, Keys.PLAYER__FK_EXISTS_SEASON);
+        return Arrays.asList(Keys.PLAYER__FK_EXISTS_CHAT, Keys.PLAYER__FK_EXISTS_USER);
     }
 
     private transient GroupInfo _groupInfo;
     private transient UserInfo _userInfo;
-    private transient Season _season;
 
     /**
      * Get the implicit join path to the <code>public.group_info</code> table.
@@ -143,16 +137,6 @@ public class Player extends TableImpl<PlayerRecord> {
             _userInfo = new UserInfo(this, Keys.PLAYER__FK_EXISTS_USER);
 
         return _userInfo;
-    }
-
-    /**
-     * Get the implicit join path to the <code>public.season</code> table.
-     */
-    public Season season() {
-        if (_season == null)
-            _season = new Season(this, Keys.PLAYER__FK_EXISTS_SEASON);
-
-        return _season;
     }
 
     @Override
@@ -182,11 +166,11 @@ public class Player extends TableImpl<PlayerRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row3 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Long, Long, Long, Long> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row3<Long, Long, Long> fieldsRow() {
+        return (Row3) super.fieldsRow();
     }
 }
