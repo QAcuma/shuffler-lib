@@ -116,4 +116,26 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
                 .fetchInto(WebGame.class);
     }
 
+    @Override
+    public int findGamesCountBySeasonIdAndPlayerId(Long seasonId, Long playerId) {
+        return dsl.selectCount()
+                .from(RATING_HISTORY)
+                .where(RATING_HISTORY.SEASON_ID.eq(seasonId))
+                .and(RATING_HISTORY.PLAYER_ID.eq(playerId))
+                .execute();
+    }
+
+    @Override
+    public List<RatingHistory> findHistoryBySeasonIdAndPlayerId(Long seasonId, Long playerId) {
+        return dsl.selectCount()
+                .from(RATING_HISTORY)
+                .where(RATING_HISTORY.SEASON_ID.eq(seasonId))
+                .and(RATING_HISTORY.GAME_ID.in(
+                        select(RATING_HISTORY.GAME_ID)
+                                .where(RATING_HISTORY.SEASON_ID.eq(seasonId))
+                                .and(RATING_HISTORY.PLAYER_ID.eq(playerId)))
+                )
+                .fetchInto(RatingHistory.class);
+    }
+
 }
