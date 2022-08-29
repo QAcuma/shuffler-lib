@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "ru.acuma"
-version = "1.0.4"
+version = "1.0.5"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_13
@@ -36,36 +36,51 @@ dependencies {
 }
 catalog {
     versionCatalog {
-        version("spring-boot", "2.6.7")
+        plugin("springframework", "org.springframework.boot").versionRef("spring-boot")
+
+        version("shuffler-lib", "1.0.5")
+        version("spring-boot", "2.7.0")
         version("postgresql", "42.3.4")
         version("flyway", "8.5.10")
         version("jooq", "3.16.6")
         version("lombok", "1.18.24")
+        version("telegrambots", "6.0.1")
+        version("junit", "5.8.2")
+        version("mockito", "4.5.1")
+
+        library("shuffler-lib", "ru.acuma", "shuffler-lib").versionRef("shuffler-lib")
+
+        library("spring-starter", "org.springframework.boot", "spring-boot-starter").versionRef("spring-boot")
+        library("spring-web", "org.springframework.boot", "spring-boot-starter-web").versionRef("spring-boot")
+        library("spring-test", "org.springframework.boot", "spring-boot-starter-test").versionRef("spring-boot")
+
+        library("telegrambots", "org.telegram", "telegrambots").versionRef("telegrambots")
+        library("telegrambotsextensions", "org.telegram", "telegrambotsextensions").versionRef("telegrambots")
 
         library("spring-jooq", "org.springframework.boot", "spring-boot-starter-jooq").versionRef("spring-boot")
         library("postgresql", "org.postgresql", "postgresql").versionRef("postgresql")
         library("flyway", "org.flywaydb", "flyway-core").versionRef("flyway")
         library("lombok", "org.projectlombok", "lombok").versionRef("lombok")
 
+        library("junit", "org.junit.jupiter", "junit-jupiter-engine").versionRef("lombok")
+        library("mockito", "org.mockito", "mockito-core").versionRef("mockito")
+
         bundle("data", listOf("spring-jooq", "postgresql", "flyway"))
         bundle("lombok", listOf("lombok"))
+        bundle("telegram", listOf("telegrambots", "telegrambotsextensions"))
+        bundle("test", listOf("spring-test", "junit", "mockito"))
     }
 }
 
 publishing {
     publications {
         create<MavenPublication>("shuffler-lib") {
+            artifactId = "shuffler-lib"
             from(components["java"])
         }
-    }
-    publications {
         create<MavenPublication>("shuffler-catalog") {
+            artifactId = "shuffler-catalog"
             from(components["versionCatalog"])
-        }
-    }
-    repositories {
-        maven {
-            url = uri("${buildDir}/publishing-repository")
         }
     }
 }

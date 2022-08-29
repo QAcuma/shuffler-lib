@@ -20,6 +20,7 @@ dependencyResolutionManagement {
             version("lang3", "3.12.0")
             version("lombok", "1.18.24")
 
+            library("spring-starter", "org.springframework.boot", "spring-boot-starter").versionRef("spring-boot")
             library("spring-web", "org.springframework.boot", "spring-boot-starter-web").versionRef("spring-boot")
 
             library("spring-jooq", "org.springframework.boot", "spring-boot-starter-jooq").versionRef("spring-boot")
