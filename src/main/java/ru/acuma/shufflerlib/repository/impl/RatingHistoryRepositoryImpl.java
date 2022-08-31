@@ -118,7 +118,7 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
 
     @Override
     public int findGamesCountBySeasonIdAndPlayerId(Long seasonId, Long playerId) {
-        return dsl.selectCount()
+        return dsl.select()
                 .from(RATING_HISTORY)
                 .where(RATING_HISTORY.SEASON_ID.eq(seasonId))
                 .and(RATING_HISTORY.PLAYER_ID.eq(playerId))
@@ -127,11 +127,12 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
 
     @Override
     public List<RatingHistory> findHistoryBySeasonIdAndPlayerId(Long seasonId, Long playerId) {
-        return dsl.selectCount()
+        return dsl.select()
                 .from(RATING_HISTORY)
                 .where(RATING_HISTORY.SEASON_ID.eq(seasonId))
                 .and(RATING_HISTORY.GAME_ID.in(
-                        select(RATING_HISTORY.GAME_ID)
+                        dsl.select(RATING_HISTORY.GAME_ID)
+                                .from(RATING_HISTORY)
                                 .where(RATING_HISTORY.SEASON_ID.eq(seasonId))
                                 .and(RATING_HISTORY.PLAYER_ID.eq(playerId)))
                 )

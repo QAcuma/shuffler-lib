@@ -2,24 +2,24 @@ plugins {
     id("java-library")
     id("version-catalog")
     id("maven-publish")
-    id("org.springframework.boot") version "2.6.1"
+    id("org.springframework.boot") version "2.7.3"
     id("org.flywaydb.flyway") version "8.2.3"
     id("nu.studer.jooq") version "5.2"
 }
 
 group = "ru.acuma"
-version = "1.0.5"
+version = "1.0.6"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_13
     targetCompatibility = JavaVersion.VERSION_13
 }
 
-val dbHost = System.getenv("K_SHUFFLER_DB_SERVER_HOST") ?: "localhost" as String?
-val dbPort = System.getenv("K_SHUFFLER_DB_SERVER_PORT") ?: "5432" as String?
-val dbName = System.getenv("K_SHUFFLER_DB_NAME") ?: "shuffler_local" as String?
-val dbUser = System.getenv("K_SHUFFLER_DB_USER") ?: "local" as String?
-val dbPassword = System.getenv("K_SHUFFLER_DB_PASSWORD") ?: "root" as String?
+val dbHost = System.getenv("SHUFFLER_DB_SERVER_HOST") ?: "localhost" as String?
+val dbPort = System.getenv("SHUFFLER_DB_SERVER_PORT") ?: "5432" as String?
+val dbName = System.getenv("SHUFFLER_DB_NAME") ?: "shuffler_local" as String?
+val dbUser = System.getenv("SHUFFLER_DB_USER") ?: "local" as String?
+val dbPassword = System.getenv("SHUFFLER_DB_PASSWORD") ?: "root" as String?
 
 repositories {
     mavenLocal()
@@ -27,9 +27,9 @@ repositories {
 }
 
 dependencies {
-    api(libs.bundles.data)
-    api(libs.bundles.util)
-    api(libs.bundles.web)
+    implementation(libs.bundles.data)
+    implementation(libs.bundles.util)
+    implementation(libs.spring.web)
     jooqGenerator(libs.postgresql)
     annotationProcessor(libs.lombok)
     compileOnly(libs.lombok)
@@ -38,8 +38,8 @@ catalog {
     versionCatalog {
         plugin("springframework", "org.springframework.boot").versionRef("spring-boot")
 
-        version("shuffler-lib", "1.0.5")
-        version("spring-boot", "2.7.0")
+        version("shuffler-lib", "1.0.6")
+        version("spring-boot", "2.7.3")
         version("postgresql", "42.3.4")
         version("flyway", "8.5.10")
         version("jooq", "3.16.6")
@@ -47,6 +47,9 @@ catalog {
         version("telegrambots", "6.0.1")
         version("junit", "5.8.2")
         version("mockito", "4.5.1")
+        version("orika", "2.2.7")
+        version("gson", "2.9.0")
+        version("lang3", "3.12.0")
 
         library("shuffler-lib", "ru.acuma", "shuffler-lib").versionRef("shuffler-lib")
 
@@ -60,12 +63,19 @@ catalog {
         library("spring-jooq", "org.springframework.boot", "spring-boot-starter-jooq").versionRef("spring-boot")
         library("postgresql", "org.postgresql", "postgresql").versionRef("postgresql")
         library("flyway", "org.flywaydb", "flyway-core").versionRef("flyway")
+        library("jooq", "org.jooq", "jooq").versionRef("jooq")
+
         library("lombok", "org.projectlombok", "lombok").versionRef("lombok")
 
         library("junit", "org.junit.jupiter", "junit-jupiter-engine").versionRef("lombok")
         library("mockito", "org.mockito", "mockito-core").versionRef("mockito")
 
+        library("orika", "dev.akkinoc.spring.boot", "orika-spring-boot-starter").versionRef("orika")
+        library("gson", "com.google.code.gson", "gson").versionRef("gson")
+        library("lang3", "org.apache.commons", "commons-lang3").versionRef("lang3")
+
         bundle("data", listOf("spring-jooq", "postgresql", "flyway"))
+        bundle("util", listOf("orika", "gson", "lang3"))
         bundle("lombok", listOf("lombok"))
         bundle("telegram", listOf("telegrambots", "telegrambotsextensions"))
         bundle("test", listOf("spring-test", "junit", "mockito"))
@@ -90,7 +100,7 @@ flyway {
     url = "jdbc:postgresql://$dbHost:$dbPort/$dbName"
     user = dbUser
     password = dbPassword
-    cleanDisabled = true
+    cleanDisabled = false
     encoding = "UTF-8"
 }
 
@@ -102,45 +112,42 @@ jooq {
         create("main") {
             generateSchemaSourceOnCompilation.set(false)
             jooqConfiguration.apply {
-                logging = org.jooq.meta.jaxb.Logging.ERROR
-                onError = org.jooq.meta.jaxb.OnError.LOG
+                withLogging(org.jooq.meta.jaxb.Logging.ERROR)
+                withOnError(org.jooq.meta.jaxb.OnError.LOG)
                 jdbc.apply {
-                    driver = "org.postgresql.Driver"
-                    url = "jdbc:postgresql://$dbHost:$dbPort/$dbName"
-                    user = dbUser
-                    password = dbPassword
+                    withDriver("org.postgresql.Driver")
+                    withUrl("jdbc:postgresql://$dbHost:$dbPort/$dbName")
+                    withUser(dbUser)
+                    withPassword(dbPassword)
                 }
                 generator.apply {
-                    name = "org.jooq.codegen.DefaultGenerator"
+                    withName("org.jooq.codegen.DefaultGenerator")
                     database.apply {
-                        name = "org.jooq.meta.postgres.PostgresDatabase"
-                        inputSchema = "public"
-                        excludes = "(.*_[0-9]+|.*_default)"
-                        forcedTypes.addAll(
-                                arrayOf(
-                                        org.jooq.meta.jaxb.ForcedType()
-                                                .withUserType("com.google.gson.JsonElement")
-                                                .withName("varchar")
-                                                .withIncludeExpression(".*")
-                                                .withIncludeExpression(".*JSON.*")
-                                                .withIncludeTypes("JSONB?")
-                                                .withName("varchar")
-                                                .withIncludeTypes("INET")
-                                ).toList()
+                        withName("org.jooq.meta.postgres.PostgresDatabase")
+                        withInputSchema("public")
+                        withExcludes("(.*_[0-9]+|.*_default)")
+                        withForcedTypes(
+                            arrayOf(
+                                org.jooq.meta.jaxb.ForcedType()
+                                    .withUserType("com.google.gson.JsonElement")
+                                    .withName("varchar")
+                                    .withIncludeExpression(".*")
+                                    .withIncludeExpression(".*JSON.*")
+                                    .withIncludeTypes("JSONB?")
+                                    .withName("varchar")
+                                    .withIncludeTypes("INET")
+                            ).toList()
                         )
                     }
                     generate.apply {
-                        isDaos = true
-                        isSpringAnnotations = true
-                        isDeprecated = false
-                        isRecords = true
-                        isPojos = true
-                        isImmutablePojos = false
-                        isFluentSetters = true
+                        withDaos(true)
+                        withSpringAnnotations(true)
+                        withPojos(true)
+                        withFluentSetters(true)
                     }
                     target.apply {
-                        packageName = "ru.acuma.shuffler"
-                        directory = "jooq"
+                        withPackageName("ru.acuma.shuffler")
+                        withDirectory("jooq")
                     }
                     strategy.name = "org.jooq.codegen.DefaultGeneratorStrategy"
                 }
