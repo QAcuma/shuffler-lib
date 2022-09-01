@@ -12,7 +12,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row5;
+import org.jooq.Row6;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -72,6 +72,11 @@ public class Rating extends TableImpl<RatingRecord> {
      * The column <code>public.rating.score</code>.
      */
     public final TableField<RatingRecord, Integer> SCORE = createField(DSL.name("score"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>public.rating.is_calibrated</code>.
+     */
+    public final TableField<RatingRecord, Boolean> IS_CALIBRATED = createField(DSL.name("is_calibrated"), SQLDataType.BOOLEAN.defaultValue(DSL.field("false", SQLDataType.BOOLEAN)), this, "");
 
     private Rating(Name alias, Table<RatingRecord> aliased) {
         this(alias, aliased, null);
@@ -176,11 +181,11 @@ public class Rating extends TableImpl<RatingRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row5 type methods
+    // Row6 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Long, Long, Long, String, Integer> fieldsRow() {
-        return (Row5) super.fieldsRow();
+    public Row6<Long, Long, Long, String, Integer, Boolean> fieldsRow() {
+        return (Row6) super.fieldsRow();
     }
 }

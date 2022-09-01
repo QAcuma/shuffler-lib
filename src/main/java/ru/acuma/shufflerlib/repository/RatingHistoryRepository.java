@@ -12,4 +12,8 @@ public interface RatingHistoryRepository {
 
     List<WebGame> findHistory(Filter filter);
 
+    int findGamesCountBySeasonIdAndPlayerId(Long seasonId, Long playerId);
+
+    List<RatingHistory> findHistoryBySeasonIdAndPlayerId(Long seasonId, Long playerId);
+
 }

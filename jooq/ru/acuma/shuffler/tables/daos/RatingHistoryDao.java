@@ -131,4 +131,19 @@ public class RatingHistoryDao extends DAOImpl<RatingHistoryRecord, ru.acuma.shuf
     public List<ru.acuma.shuffler.tables.pojos.RatingHistory> fetchByScore(Integer... values) {
         return fetch(RatingHistory.RATING_HISTORY.SCORE, values);
     }
+
+    /**
+     * Fetch records that have <code>season_id BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<ru.acuma.shuffler.tables.pojos.RatingHistory> fetchRangeOfSeasonId(Long lowerInclusive, Long upperInclusive) {
+        return fetchRange(RatingHistory.RATING_HISTORY.SEASON_ID, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>season_id IN (values)</code>
+     */
+    public List<ru.acuma.shuffler.tables.pojos.RatingHistory> fetchBySeasonId(Long... values) {
+        return fetch(RatingHistory.RATING_HISTORY.SEASON_ID, values);
+    }
 }

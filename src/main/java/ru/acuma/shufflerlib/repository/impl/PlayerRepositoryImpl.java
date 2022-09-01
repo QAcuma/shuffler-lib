@@ -5,17 +5,24 @@ import lombok.extern.log4j.Log4j2;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
+import ru.acuma.shuffler.tables.Event;
+import ru.acuma.shuffler.tables.Game;
+import ru.acuma.shuffler.tables.Rating;
 import ru.acuma.shuffler.tables.daos.PlayerDao;
 import ru.acuma.shuffler.tables.pojos.Player;
 import ru.acuma.shufflerlib.model.Filter;
+import ru.acuma.shufflerlib.model.web.entity.WebPlayer;
 import ru.acuma.shufflerlib.model.web.entity.WebPlayerDetails;
 import ru.acuma.shufflerlib.repository.PlayerRepository;
 import ru.acuma.shufflerlib.repository.util.FilterUtil;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 import static org.jooq.impl.DSL.concat;
+import static org.jooq.impl.DSL.exists;
 import static org.jooq.impl.DSL.field;
+import static org.jooq.impl.DSL.select;
 import static org.jooq.impl.DSL.selectCount;
 import static org.jooq.impl.DSL.substring;
 import static org.jooq.impl.DSL.val;
@@ -25,7 +32,9 @@ import static ru.acuma.shuffler.Tables.GAME;
 import static ru.acuma.shuffler.Tables.RATING;
 import static ru.acuma.shuffler.Tables.TEAM;
 import static ru.acuma.shuffler.Tables.TEAM_PLAYER;
+import static ru.acuma.shuffler.tables.GroupInfo.GROUP_INFO;
 import static ru.acuma.shuffler.tables.Player.PLAYER;
+import static ru.acuma.shuffler.tables.RatingHistory.RATING_HISTORY;
 import static ru.acuma.shuffler.tables.UserInfo.USER_INFO;
 
 @Log4j2
@@ -110,6 +119,49 @@ public class PlayerRepositoryImpl implements PlayerRepository {
                 .where(RATING.DISCIPLINE.eq(filter.getDiscipline().name()))
                 .and(PLAYER.ID.eq(filter.getPlayerId()))
                 .fetchOneInto(WebPlayerDetails.class);
+    }
+
+    @Override
+    public List<WebPlayer> buildLadderData(Filter filter) {
+        return dsl.select(
+                        PLAYER.ID,
+                        concat(
+                                when(USER_INFO.FIRST_NAME.isNotNull(), USER_INFO.FIRST_NAME).otherwise(""),
+                                val(" "),
+                                when(USER_INFO.LAST_NAME.isNotNull(), substring(USER_INFO.LAST_NAME, 0, 2).concat(".")).otherwise("")
+                        ).as("name"),
+                        concat(
+                                val(mediaLink),
+                                USER_INFO.MEDIA_ID
+                        ).as("avatar"),
+                        Rating.RATING.SCORE
+                )
+                .from(PLAYER)
+                .join(USER_INFO).on(PLAYER.USER_ID.eq(USER_INFO.TELEGRAM_ID))
+                .join(Rating.RATING).on(Rating.RATING.PLAYER_ID.eq(PLAYER.ID))
+                .join(GROUP_INFO).on(PLAYER.CHAT_ID.eq(GROUP_INFO.CHAT_ID))
+                .where(GROUP_INFO.NAME.eq(filter.getChatName()))
+                .and(Rating.RATING.DISCIPLINE.eq(filter.getDiscipline().name()))
+                .and(
+                        exists(
+                                select(RATING_HISTORY.ID)
+                                        .from(RATING_HISTORY)
+                                        .join(Game.GAME).on(Game.GAME.ID.eq(RATING_HISTORY.GAME_ID))
+                                        .join(Event.EVENT).on(Event.EVENT.ID.eq(Game.GAME.EVENT_ID))
+                                        .where(FilterUtil.eventSeasonAndDisciplineCondition(filter))
+                                        .and(RATING_HISTORY.PLAYER_ID.eq(PLAYER.ID))
+                        )
+                )
+                .fetchInto(WebPlayer.class);
+    }
+
+    @Override
+    public List<Long> findActivePlayers(Filter filter) {
+        return dsl.select(PLAYER.ID)
+                .from(PLAYER)
+                .join(RATING).on(RATING.PLAYER_ID.eq(PLAYER.ID))
+                .where(FilterUtil.ratingSeasonAndDisciplineCondition(filter))
+                .fetchInto(Long.class);
     }
 
 }

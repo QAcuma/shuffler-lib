@@ -12,7 +12,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row5;
+import org.jooq.Row6;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -73,6 +73,11 @@ public class RatingHistory extends TableImpl<RatingHistoryRecord> {
      */
     public final TableField<RatingHistoryRecord, Integer> SCORE = createField(DSL.name("score"), SQLDataType.INTEGER, this, "");
 
+    /**
+     * The column <code>public.rating_history.season_id</code>.
+     */
+    public final TableField<RatingHistoryRecord, Long> SEASON_ID = createField(DSL.name("season_id"), SQLDataType.BIGINT.nullable(false), this, "");
+
     private RatingHistory(Name alias, Table<RatingHistoryRecord> aliased) {
         this(alias, aliased, null);
     }
@@ -123,11 +128,12 @@ public class RatingHistory extends TableImpl<RatingHistoryRecord> {
 
     @Override
     public List<ForeignKey<RatingHistoryRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.RATING_HISTORY__FK_EXISTS_GAME, Keys.RATING_HISTORY__FK_EXISTS_PLAYER);
+        return Arrays.asList(Keys.RATING_HISTORY__FK_EXISTS_GAME, Keys.RATING_HISTORY__FK_EXISTS_PLAYER, Keys.RATING_HISTORY__FK_EXISTS_SEASON);
     }
 
     private transient Game _game;
     private transient Player _player;
+    private transient Season _season;
 
     /**
      * Get the implicit join path to the <code>public.game</code> table.
@@ -147,6 +153,16 @@ public class RatingHistory extends TableImpl<RatingHistoryRecord> {
             _player = new Player(this, Keys.RATING_HISTORY__FK_EXISTS_PLAYER);
 
         return _player;
+    }
+
+    /**
+     * Get the implicit join path to the <code>public.season</code> table.
+     */
+    public Season season() {
+        if (_season == null)
+            _season = new Season(this, Keys.RATING_HISTORY__FK_EXISTS_SEASON);
+
+        return _season;
     }
 
     @Override
@@ -176,11 +192,11 @@ public class RatingHistory extends TableImpl<RatingHistoryRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row5 type methods
+    // Row6 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Long, Long, Long, Integer, Integer> fieldsRow() {
-        return (Row5) super.fieldsRow();
+    public Row6<Long, Long, Long, Integer, Integer, Long> fieldsRow() {
+        return (Row6) super.fieldsRow();
     }
 }

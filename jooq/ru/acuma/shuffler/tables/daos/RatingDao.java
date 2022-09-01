@@ -131,4 +131,19 @@ public class RatingDao extends DAOImpl<RatingRecord, ru.acuma.shuffler.tables.po
     public List<ru.acuma.shuffler.tables.pojos.Rating> fetchByScore(Integer... values) {
         return fetch(Rating.RATING.SCORE, values);
     }
+
+    /**
+     * Fetch records that have <code>is_calibrated BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<ru.acuma.shuffler.tables.pojos.Rating> fetchRangeOfIsCalibrated(Boolean lowerInclusive, Boolean upperInclusive) {
+        return fetchRange(Rating.RATING.IS_CALIBRATED, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>is_calibrated IN (values)</code>
+     */
+    public List<ru.acuma.shuffler.tables.pojos.Rating> fetchByIsCalibrated(Boolean... values) {
+        return fetch(Rating.RATING.IS_CALIBRATED, values);
+    }
 }

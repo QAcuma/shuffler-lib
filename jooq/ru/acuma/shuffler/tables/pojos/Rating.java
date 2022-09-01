@@ -20,6 +20,7 @@ public class Rating implements Serializable {
     private Long    seasonId;
     private String  discipline;
     private Integer score;
+    private Boolean isCalibrated;
 
     public Rating() {}
 
@@ -29,6 +30,7 @@ public class Rating implements Serializable {
         this.seasonId = value.seasonId;
         this.discipline = value.discipline;
         this.score = value.score;
+        this.isCalibrated = value.isCalibrated;
     }
 
     public Rating(
@@ -36,13 +38,15 @@ public class Rating implements Serializable {
         Long    playerId,
         Long    seasonId,
         String  discipline,
-        Integer score
+        Integer score,
+        Boolean isCalibrated
     ) {
         this.id = id;
         this.playerId = playerId;
         this.seasonId = seasonId;
         this.discipline = discipline;
         this.score = score;
+        this.isCalibrated = isCalibrated;
     }
 
     /**
@@ -120,6 +124,21 @@ public class Rating implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.rating.is_calibrated</code>.
+     */
+    public Boolean getIsCalibrated() {
+        return this.isCalibrated;
+    }
+
+    /**
+     * Setter for <code>public.rating.is_calibrated</code>.
+     */
+    public Rating setIsCalibrated(Boolean isCalibrated) {
+        this.isCalibrated = isCalibrated;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Rating (");
@@ -129,6 +148,7 @@ public class Rating implements Serializable {
         sb.append(", ").append(seasonId);
         sb.append(", ").append(discipline);
         sb.append(", ").append(score);
+        sb.append(", ").append(isCalibrated);
 
         sb.append(")");
         return sb.toString();
