@@ -24,6 +24,7 @@ val dbPassword = System.getenv("SHUFFLER_DB_PASSWORD") ?: "root" as String?
 repositories {
     mavenLocal()
     mavenCentral()
+    maven("https://jitpack.io")
 }
 
 dependencies {
@@ -50,6 +51,7 @@ catalog {
         version("orika", "2.2.7")
         version("gson", "2.9.0")
         version("lang3", "3.12.0")
+        version("markdown", "1.3.2")
 
         library("shuffler-lib", "ru.acuma", "shuffler-lib").versionRef("shuffler-lib")
 
@@ -73,9 +75,10 @@ catalog {
         library("orika", "dev.akkinoc.spring.boot", "orika-spring-boot-starter").versionRef("orika")
         library("gson", "com.google.code.gson", "gson").versionRef("gson")
         library("lang3", "org.apache.commons", "commons-lang3").versionRef("lang3")
+        library("markdown", "com.github.Steppschuh", "Java-Markdown-Generator").versionRef("markdown")
 
         bundle("data", listOf("spring-jooq", "postgresql", "flyway"))
-        bundle("util", listOf("orika", "gson", "lang3"))
+        bundle("util", listOf("orika", "gson", "lang3", "markdown"))
         bundle("lombok", listOf("lombok"))
         bundle("telegram", listOf("telegrambots", "telegrambotsextensions"))
         bundle("test", listOf("spring-test", "junit", "mockito"))

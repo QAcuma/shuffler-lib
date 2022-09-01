@@ -2,7 +2,10 @@ package ru.acuma.shufflerlib.repository;
 
 import ru.acuma.shuffler.tables.pojos.Player;
 import ru.acuma.shufflerlib.model.Filter;
+import ru.acuma.shufflerlib.model.web.entity.WebPlayer;
 import ru.acuma.shufflerlib.model.web.entity.WebPlayerDetails;
+
+import java.util.List;
 
 public interface PlayerRepository {
 
@@ -16,4 +19,7 @@ public interface PlayerRepository {
 
     WebPlayerDetails findPlayerInfo(Filter filter);
 
+    List<WebPlayer> buildLadderData(Filter filter);
+
+    List<Long> findActivePlayers(Filter filter);
 }
