@@ -26,6 +26,7 @@ import static org.jooq.impl.DSL.val;
 import static org.jooq.impl.DSL.when;
 import static ru.acuma.shuffler.Tables.EVENT;
 import static ru.acuma.shuffler.Tables.GROUP_INFO;
+import static ru.acuma.shuffler.Tables.RATING;
 import static ru.acuma.shuffler.tables.Game.GAME;
 import static ru.acuma.shuffler.tables.Player.PLAYER;
 import static ru.acuma.shuffler.tables.RatingHistory.RATING_HISTORY;
@@ -96,7 +97,15 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
                                                                         .from(RATING_HISTORY)
                                                                         .where(RATING_HISTORY.PLAYER_ID.eq(TEAM_PLAYER.PLAYER_ID))
                                                                         .and(RATING_HISTORY.GAME_ID.eq(GAME.ID))
-                                                        ).as("score")
+                                                        ).as("score"),
+                                                        field(
+                                                                select(
+                                                                        RATING.IS_CALIBRATED
+                                                                )
+                                                                        .from(RATING)
+                                                                        .where(RATING.PLAYER_ID.eq(TEAM_PLAYER.PLAYER_ID))
+                                                                        .and(RATING.SEASON_ID.eq(filter.getSeasonId()))
+                                                        ).as("isCalibrated")
                                                 )
                                                         .from(TEAM_PLAYER)
                                                         .where(TEAM_PLAYER.TEAM_ID.eq(TEAM.ID))

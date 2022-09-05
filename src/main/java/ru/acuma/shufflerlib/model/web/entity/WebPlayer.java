@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import java.awt.*;
-
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -22,5 +20,7 @@ public class WebPlayer {
     private String avatar;
 
     private Integer score;
+
+    private Boolean isCalibrated;
 
 }
