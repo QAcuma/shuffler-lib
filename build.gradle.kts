@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "ru.acuma"
-version = "1.0.6"
+version = "1.0.8"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_13
@@ -39,7 +39,7 @@ catalog {
     versionCatalog {
         plugin("springframework", "org.springframework.boot").versionRef("spring-boot")
 
-        version("shuffler-lib", "1.0.6")
+        version("shuffler-lib", "1.0.8")
         version("spring-boot", "2.7.3")
         version("postgresql", "42.3.4")
         version("flyway", "8.5.10")
@@ -58,6 +58,7 @@ catalog {
         library("spring-starter", "org.springframework.boot", "spring-boot-starter").versionRef("spring-boot")
         library("spring-web", "org.springframework.boot", "spring-boot-starter-web").versionRef("spring-boot")
         library("spring-test", "org.springframework.boot", "spring-boot-starter-test").versionRef("spring-boot")
+        library("spring-security", "org.springframework.boot", "spring-boot-starter-security").versionRef("spring-boot")
 
         library("telegrambots", "org.telegram", "telegrambots").versionRef("telegrambots")
         library("telegrambotsextensions", "org.telegram", "telegrambotsextensions").versionRef("telegrambots")

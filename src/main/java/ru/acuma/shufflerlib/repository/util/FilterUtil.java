@@ -15,6 +15,17 @@ import static ru.acuma.shuffler.tables.TeamPlayer.TEAM_PLAYER;
 
 public class FilterUtil {
 
+    public static Condition chatAndSeasonDisciplineConditionByRating(Filter filter) {
+        Condition result = noCondition();
+
+        result = result
+                .and(GROUP_INFO.NAME.eq(filter.getChatName()))
+                .and(RATING.SEASON_ID.eq(filter.getSeasonId()))
+                .and(RATING.DISCIPLINE.eq(filter.getDiscipline().name()));
+
+        return result;
+    }
+
     public static Condition chatOrPlayerAndSeasonDisciplineCondition(Filter filter) {
         Condition result = noCondition();
         if (filter.getChatName() != null) {

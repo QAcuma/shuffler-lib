@@ -15,8 +15,8 @@ public class WebPlayerDetails extends WebPlayer {
 
     private Integer loseCount;
 
-    public WebPlayerDetails(Long id, String name, String avatar, Integer score, Integer winCount, Integer loseCount) {
-        super(id, name, avatar, score);
+    public WebPlayerDetails(Long id, String name, String avatar, Integer score, Integer winCount, Integer loseCount, Boolean isCalibrated) {
+        super(id, name, avatar, score, isCalibrated);
         this.winCount = winCount;
         this.loseCount = loseCount;
     }

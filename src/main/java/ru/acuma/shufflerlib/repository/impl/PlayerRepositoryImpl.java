@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import ru.acuma.shuffler.tables.Event;
 import ru.acuma.shuffler.tables.Game;
-import ru.acuma.shuffler.tables.Rating;
 import ru.acuma.shuffler.tables.daos.PlayerDao;
 import ru.acuma.shuffler.tables.pojos.Player;
 import ru.acuma.shufflerlib.model.Filter;
@@ -111,12 +110,14 @@ public class PlayerRepositoryImpl implements PlayerRepository {
                                         .join(EVENT).on(EVENT.ID.eq(GAME.EVENT_ID))
                                         .where(TEAM.IS_WINNER.eq(Boolean.FALSE))
                                         .and(FilterUtil.playerDisciplineSeasonGameStateCondition(filter))
-                        ).as("loseCount")
+                        ).as("loseCount"),
+                        RATING.IS_CALIBRATED
                 )
                 .from(PLAYER)
                 .join(USER_INFO).on(USER_INFO.TELEGRAM_ID.eq(PLAYER.USER_ID))
                 .join(RATING).on(RATING.PLAYER_ID.eq(PLAYER.ID))
                 .where(RATING.DISCIPLINE.eq(filter.getDiscipline().name()))
+                .and(RATING.SEASON_ID.eq(filter.getSeasonId()))
                 .and(PLAYER.ID.eq(filter.getPlayerId()))
                 .fetchOneInto(WebPlayerDetails.class);
     }
@@ -134,21 +135,21 @@ public class PlayerRepositoryImpl implements PlayerRepository {
                                 val(mediaLink),
                                 USER_INFO.MEDIA_ID
                         ).as("avatar"),
-                        Rating.RATING.SCORE
+                        RATING.SCORE,
+                        RATING.IS_CALIBRATED
                 )
                 .from(PLAYER)
                 .join(USER_INFO).on(PLAYER.USER_ID.eq(USER_INFO.TELEGRAM_ID))
-                .join(Rating.RATING).on(Rating.RATING.PLAYER_ID.eq(PLAYER.ID))
+                .join(RATING).on(RATING.PLAYER_ID.eq(PLAYER.ID))
                 .join(GROUP_INFO).on(PLAYER.CHAT_ID.eq(GROUP_INFO.CHAT_ID))
-                .where(GROUP_INFO.NAME.eq(filter.getChatName()))
-                .and(Rating.RATING.DISCIPLINE.eq(filter.getDiscipline().name()))
+                .where(FilterUtil.chatAndSeasonDisciplineConditionByRating(filter))
                 .and(
                         exists(
                                 select(RATING_HISTORY.ID)
                                         .from(RATING_HISTORY)
                                         .join(Game.GAME).on(Game.GAME.ID.eq(RATING_HISTORY.GAME_ID))
                                         .join(Event.EVENT).on(Event.EVENT.ID.eq(Game.GAME.EVENT_ID))
-                                        .where(FilterUtil.eventSeasonAndDisciplineCondition(filter))
+                                        .where(FilterUtil.chatOrPlayerAndSeasonDisciplineCondition(filter))
                                         .and(RATING_HISTORY.PLAYER_ID.eq(PLAYER.ID))
                         )
                 )
@@ -161,6 +162,7 @@ public class PlayerRepositoryImpl implements PlayerRepository {
                 .from(PLAYER)
                 .join(RATING).on(RATING.PLAYER_ID.eq(PLAYER.ID))
                 .where(FilterUtil.ratingSeasonAndDisciplineCondition(filter))
+                .and(PLAYER.CHAT_ID.eq(filter.getChatId()))
                 .fetchInto(Long.class);
     }
 
