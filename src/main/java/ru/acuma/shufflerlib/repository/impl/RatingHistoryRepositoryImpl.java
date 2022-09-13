@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import ru.acuma.shuffler.tables.daos.RatingHistoryDao;
 import ru.acuma.shuffler.tables.pojos.RatingHistory;
+import ru.acuma.shufflerlib.model.Discipline;
 import ru.acuma.shufflerlib.model.Filter;
 import ru.acuma.shufflerlib.model.web.entity.WebGame;
 import ru.acuma.shufflerlib.model.web.entity.WebPlayer;
@@ -26,7 +27,6 @@ import static org.jooq.impl.DSL.val;
 import static org.jooq.impl.DSL.when;
 import static ru.acuma.shuffler.Tables.EVENT;
 import static ru.acuma.shuffler.Tables.GROUP_INFO;
-import static ru.acuma.shuffler.Tables.RATING;
 import static ru.acuma.shuffler.tables.Game.GAME;
 import static ru.acuma.shuffler.tables.Player.PLAYER;
 import static ru.acuma.shuffler.tables.RatingHistory.RATING_HISTORY;
@@ -100,11 +100,11 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
                                                         ).as("score"),
                                                         field(
                                                                 select(
-                                                                        RATING.IS_CALIBRATED
+                                                                        RATING_HISTORY.IS_CALIBRATED
                                                                 )
-                                                                        .from(RATING)
-                                                                        .where(RATING.PLAYER_ID.eq(TEAM_PLAYER.PLAYER_ID))
-                                                                        .and(RATING.SEASON_ID.eq(filter.getSeasonId()))
+                                                                        .from(RATING_HISTORY)
+                                                                        .where(RATING_HISTORY.PLAYER_ID.eq(TEAM_PLAYER.PLAYER_ID))
+                                                                        .and(RATING_HISTORY.GAME_ID.eq(GAME.ID))
                                                         ).as("isCalibrated")
                                                 )
                                                         .from(TEAM_PLAYER)
@@ -126,11 +126,14 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
     }
 
     @Override
-    public int findGamesCountBySeasonIdAndPlayerId(Long seasonId, Long playerId) {
+    public int findGamesCountBySeasonIdAndPlayerId(Long seasonId, Long playerId, Discipline discipline) {
         return dsl.select()
                 .from(RATING_HISTORY)
+                .join(GAME).on(RATING_HISTORY.GAME_ID.eq(GAME.ID))
+                .join(EVENT).on(GAME.EVENT_ID.eq(EVENT.ID))
                 .where(RATING_HISTORY.SEASON_ID.eq(seasonId))
                 .and(RATING_HISTORY.PLAYER_ID.eq(playerId))
+                .and(EVENT.DISCIPLINE.eq(discipline.name()))
                 .execute();
     }
 

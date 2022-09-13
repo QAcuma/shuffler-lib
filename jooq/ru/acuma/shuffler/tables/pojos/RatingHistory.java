@@ -21,7 +21,8 @@ public class RatingHistory implements Serializable {
     private Integer change;
     private Integer score;
     private Long seasonId;
-    private Boolean iscalibrated;
+    private Boolean isCalibrated;
+    private String discipline;
 
     public RatingHistory() {
     }
@@ -33,7 +34,8 @@ public class RatingHistory implements Serializable {
         this.change = value.change;
         this.score = value.score;
         this.seasonId = value.seasonId;
-        this.iscalibrated = value.iscalibrated;
+        this.isCalibrated = value.isCalibrated;
+        this.discipline = value.discipline;
     }
 
     public RatingHistory(
@@ -43,7 +45,8 @@ public class RatingHistory implements Serializable {
             Integer change,
             Integer score,
             Long seasonId,
-            Boolean iscalibrated
+            Boolean isCalibrated,
+            String discipline
     ) {
         this.id = id;
         this.gameId = gameId;
@@ -51,7 +54,8 @@ public class RatingHistory implements Serializable {
         this.change = change;
         this.score = score;
         this.seasonId = seasonId;
-        this.iscalibrated = iscalibrated;
+        this.isCalibrated = isCalibrated;
+        this.discipline = discipline;
     }
 
     /**
@@ -145,17 +149,32 @@ public class RatingHistory implements Serializable {
     }
 
     /**
-     * Getter for <code>public.rating_history.iscalibrated</code>.
+     * Getter for <code>public.rating_history.is_calibrated</code>.
      */
-    public Boolean getIscalibrated() {
-        return this.iscalibrated;
+    public Boolean getIsCalibrated() {
+        return this.isCalibrated;
     }
 
     /**
-     * Setter for <code>public.rating_history.iscalibrated</code>.
+     * Setter for <code>public.rating_history.is_calibrated</code>.
      */
-    public RatingHistory setIscalibrated(Boolean iscalibrated) {
-        this.iscalibrated = iscalibrated;
+    public RatingHistory setIsCalibrated(Boolean isCalibrated) {
+        this.isCalibrated = isCalibrated;
+        return this;
+    }
+
+    /**
+     * Getter for <code>public.rating_history.discipline</code>.
+     */
+    public String getDiscipline() {
+        return this.discipline;
+    }
+
+    /**
+     * Setter for <code>public.rating_history.discipline</code>.
+     */
+    public RatingHistory setDiscipline(String discipline) {
+        this.discipline = discipline;
         return this;
     }
 
@@ -169,7 +188,8 @@ public class RatingHistory implements Serializable {
         sb.append(", ").append(change);
         sb.append(", ").append(score);
         sb.append(", ").append(seasonId);
-        sb.append(", ").append(iscalibrated);
+        sb.append(", ").append(isCalibrated);
+        sb.append(", ").append(discipline);
 
         sb.append(")");
         return sb.toString();

@@ -147,17 +147,32 @@ public class RatingHistoryDao extends DAOImpl<RatingHistoryRecord, ru.acuma.shuf
     }
 
     /**
-     * Fetch records that have <code>iscalibrated BETWEEN lowerInclusive AND
+     * Fetch records that have <code>is_calibrated BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<ru.acuma.shuffler.tables.pojos.RatingHistory> fetchRangeOfIscalibrated(Boolean lowerInclusive, Boolean upperInclusive) {
-        return fetchRange(RatingHistory.RATING_HISTORY.ISCALIBRATED, lowerInclusive, upperInclusive);
+    public List<ru.acuma.shuffler.tables.pojos.RatingHistory> fetchRangeOfIsCalibrated(Boolean lowerInclusive, Boolean upperInclusive) {
+        return fetchRange(RatingHistory.RATING_HISTORY.IS_CALIBRATED, lowerInclusive, upperInclusive);
     }
 
     /**
-     * Fetch records that have <code>iscalibrated IN (values)</code>
+     * Fetch records that have <code>is_calibrated IN (values)</code>
      */
-    public List<ru.acuma.shuffler.tables.pojos.RatingHistory> fetchByIscalibrated(Boolean... values) {
-        return fetch(RatingHistory.RATING_HISTORY.ISCALIBRATED, values);
+    public List<ru.acuma.shuffler.tables.pojos.RatingHistory> fetchByIsCalibrated(Boolean... values) {
+        return fetch(RatingHistory.RATING_HISTORY.IS_CALIBRATED, values);
+    }
+
+    /**
+     * Fetch records that have <code>discipline BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<ru.acuma.shuffler.tables.pojos.RatingHistory> fetchRangeOfDiscipline(String lowerInclusive, String upperInclusive) {
+        return fetchRange(RatingHistory.RATING_HISTORY.DISCIPLINE, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>discipline IN (values)</code>
+     */
+    public List<ru.acuma.shuffler.tables.pojos.RatingHistory> fetchByDiscipline(String... values) {
+        return fetch(RatingHistory.RATING_HISTORY.DISCIPLINE, values);
     }
 }

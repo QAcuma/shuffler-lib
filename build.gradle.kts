@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "ru.acuma"
-version = "1.0.8"
+version = "1.0.9"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_13
@@ -39,7 +39,7 @@ catalog {
     versionCatalog {
         plugin("springframework", "org.springframework.boot").versionRef("spring-boot")
 
-        version("shuffler-lib", "1.0.8")
+        version("shuffler-lib", "1.0.9")
         version("spring-boot", "2.7.3")
         version("postgresql", "42.3.4")
         version("flyway", "8.5.10")

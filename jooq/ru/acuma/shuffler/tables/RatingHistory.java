@@ -9,7 +9,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row7;
+import org.jooq.Row8;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -78,9 +78,14 @@ public class RatingHistory extends TableImpl<RatingHistoryRecord> {
     public final TableField<RatingHistoryRecord, Long> SEASON_ID = createField(DSL.name("season_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>public.rating_history.iscalibrated</code>.
+     * The column <code>public.rating_history.is_calibrated</code>.
      */
-    public final TableField<RatingHistoryRecord, Boolean> ISCALIBRATED = createField(DSL.name("iscalibrated"), SQLDataType.BOOLEAN.nullable(false).defaultValue(DSL.field("true", SQLDataType.BOOLEAN)), this, "");
+    public final TableField<RatingHistoryRecord, Boolean> IS_CALIBRATED = createField(DSL.name("is_calibrated"), SQLDataType.BOOLEAN.nullable(false).defaultValue(DSL.field("true", SQLDataType.BOOLEAN)), this, "");
+
+    /**
+     * The column <code>public.rating_history.discipline</code>.
+     */
+    public final TableField<RatingHistoryRecord, String> DISCIPLINE = createField(DSL.name("discipline"), SQLDataType.VARCHAR(32), this, "");
 
     private RatingHistory(Name alias, Table<RatingHistoryRecord> aliased) {
         this(alias, aliased, null);
@@ -196,11 +201,11 @@ public class RatingHistory extends TableImpl<RatingHistoryRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row7 type methods
+    // Row8 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<Long, Long, Long, Integer, Integer, Long, Boolean> fieldsRow() {
-        return (Row7) super.fieldsRow();
+    public Row8<Long, Long, Long, Integer, Integer, Long, Boolean, String> fieldsRow() {
+        return (Row8) super.fieldsRow();
     }
 }
