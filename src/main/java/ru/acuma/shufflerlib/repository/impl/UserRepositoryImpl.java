@@ -1,7 +1,6 @@
 package ru.acuma.shufflerlib.repository.impl;
 
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
@@ -11,6 +10,7 @@ import ru.acuma.shufflerlib.repository.UserRepository;
 
 import javax.annotation.PostConstruct;
 import java.time.OffsetDateTime;
+import java.util.List;
 
 import static ru.acuma.shuffler.Tables.USER_INFO;
 
@@ -47,13 +47,17 @@ public class UserRepositoryImpl implements UserRepository {
         );
     }
 
-    @SneakyThrows
     @Override
     public UserInfo get(Long telegramId) {
         return dsl.select()
                 .from(USER_INFO)
                 .where(USER_INFO.TELEGRAM_ID.eq(telegramId))
                 .fetchOneInto(UserInfo.class);
+    }
+
+    @Override
+    public List<UserInfo> getAll(Boolean... isBlocked) {
+        return userInfoDao.fetchByIsBlocked(isBlocked);
     }
 
     @Override

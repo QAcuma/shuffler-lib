@@ -2,6 +2,8 @@ package ru.acuma.shufflerlib.repository;
 
 import ru.acuma.shuffler.tables.pojos.UserInfo;
 
+import java.util.List;
+
 public interface UserRepository {
 
     boolean isActive(Long telegramId);
@@ -9,6 +11,8 @@ public interface UserRepository {
     boolean isBlocked(Long telegramId);
 
     UserInfo get(Long telegramId);
+
+    List<UserInfo> getAll(Boolean... isBlocked);
 
     long save(UserInfo user);
 
