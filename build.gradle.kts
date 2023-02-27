@@ -2,17 +2,17 @@ plugins {
     id("java-library")
     id("version-catalog")
     id("maven-publish")
-    id("org.springframework.boot") version "2.7.3"
+    id("org.springframework.boot") version "3.0.3"
     id("org.flywaydb.flyway") version "8.2.3"
     id("nu.studer.jooq") version "5.2"
 }
 
 group = "ru.acuma"
-version = "2.0.1"
+version = "3.0.3"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_13
-    targetCompatibility = JavaVersion.VERSION_13
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 val dbHost = System.getenv("SHUFFLER_DB_SERVER_HOST") ?: "localhost" as String?
@@ -37,6 +37,16 @@ dependencies {
 }
 
 publishing {
+    repositories {
+        maven {
+            name = "shuffler-lib"
+            url = uri("https://maven.pkg.github.com/QAcuma/shuffler-lib")
+            credentials {
+                username = System.getenv("GITHUB_USERNAME")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
     publications {
         create<MavenPublication>("shuffler-lib") {
             artifactId = "shuffler-lib"

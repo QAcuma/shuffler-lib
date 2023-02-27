@@ -1,5 +1,6 @@
 package ru.acuma.shufflerlib.repository.impl;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
@@ -7,8 +8,6 @@ import ru.acuma.shuffler.tables.daos.RatingDao;
 import ru.acuma.shuffler.tables.pojos.Rating;
 import ru.acuma.shufflerlib.model.Filter;
 import ru.acuma.shufflerlib.repository.RatingRepository;
-
-import javax.annotation.PostConstruct;
 
 import static ru.acuma.shuffler.tables.Rating.RATING;
 

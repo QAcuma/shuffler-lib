@@ -1,5 +1,6 @@
 package ru.acuma.shufflerlib.repository.impl;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.jooq.DSLContext;
@@ -15,7 +16,6 @@ import ru.acuma.shufflerlib.model.web.entity.WebPlayerDetails;
 import ru.acuma.shufflerlib.repository.PlayerRepository;
 import ru.acuma.shufflerlib.repository.util.FilterUtil;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 import static org.jooq.impl.DSL.concat;
@@ -41,10 +41,9 @@ import static ru.acuma.shuffler.tables.UserInfo.USER_INFO;
 @RequiredArgsConstructor
 public class PlayerRepositoryImpl implements PlayerRepository {
 
+    private final DSLContext dsl;
     @Value("${media.link:localhost}")
     private String mediaLink;
-
-    private final DSLContext dsl;
     private PlayerDao playerDao;
 
     @PostConstruct

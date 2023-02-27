@@ -1,15 +1,13 @@
 package ru.acuma.shufflerlib.repository.impl;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
-import ru.acuma.shuffler.tables.daos.GameDao;
 import ru.acuma.shuffler.tables.daos.TeamDao;
 import ru.acuma.shuffler.tables.pojos.Team;
-import ru.acuma.shuffler.tables.records.TeamRecord;
 import ru.acuma.shufflerlib.repository.TeamRepository;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 import static ru.acuma.shuffler.Tables.TEAM;

@@ -1,5 +1,6 @@
 package ru.acuma.shufflerlib.repository.impl;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;
@@ -8,7 +9,6 @@ import ru.acuma.shuffler.tables.daos.UserInfoDao;
 import ru.acuma.shuffler.tables.pojos.UserInfo;
 import ru.acuma.shufflerlib.repository.UserRepository;
 
-import javax.annotation.PostConstruct;
 import java.time.OffsetDateTime;
 import java.util.List;
 

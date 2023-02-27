@@ -1,16 +1,14 @@
 package ru.acuma.shufflerlib.repository.impl;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 import ru.acuma.shuffler.tables.daos.EventDao;
-import ru.acuma.shuffler.tables.daos.GameDao;
 import ru.acuma.shuffler.tables.pojos.Event;
-import ru.acuma.shuffler.tables.records.EventRecord;
-import ru.acuma.shufflerlib.repository.EventRepository;
 import ru.acuma.shufflerlib.model.Discipline;
+import ru.acuma.shufflerlib.repository.EventRepository;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 import static ru.acuma.shuffler.tables.Event.EVENT;

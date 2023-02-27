@@ -3,7 +3,6 @@ package ru.acuma.shufflerlib.repository.impl;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ru.acuma.shuffler.tables.pojos.Season;
 import ru.acuma.shufflerlib.repository.SeasonRepository;
 
@@ -27,7 +26,6 @@ public class SeasonRepositoryImpl implements SeasonRepository {
     }
 
     @Override
-    @Transactional
     public void startNewSeason(String name) {
         dsl.update(SEASON)
                 .set(SEASON.FINISHED_AT, OffsetDateTime.now())

@@ -1,5 +1,6 @@
 package ru.acuma.shufflerlib.repository.impl;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +15,6 @@ import ru.acuma.shufflerlib.model.web.entity.WebTeam;
 import ru.acuma.shufflerlib.repository.RatingHistoryRepository;
 import ru.acuma.shufflerlib.repository.util.FilterUtil;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 import static org.jooq.Records.mapping;
@@ -38,11 +38,9 @@ import static ru.acuma.shuffler.tables.UserInfo.USER_INFO;
 @RequiredArgsConstructor
 public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
 
+    private final DSLContext dsl;
     @Value("${media.link:localhost}")
     private String mediaLink;
-
-    private final DSLContext dsl;
-
     private RatingHistoryDao historyDao;
 
     @PostConstruct
