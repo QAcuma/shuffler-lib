@@ -3,7 +3,6 @@ plugins {
     id("version-catalog")
     id("maven-publish")
     id("org.springframework.boot") version "3.0.3"
-    id("org.flywaydb.flyway") version "8.2.3"
     id("nu.studer.jooq") version "5.2"
 }
 
@@ -53,15 +52,6 @@ publishing {
             from(components["java"])
         }
     }
-}
-
-flyway {
-    driver = "org.postgresql.Driver"
-    url = "jdbc:postgresql://$dbHost:$dbPort/$dbName"
-    user = dbUser
-    password = dbPassword
-    cleanDisabled = false
-    encoding = "UTF-8"
 }
 
 jooq {
