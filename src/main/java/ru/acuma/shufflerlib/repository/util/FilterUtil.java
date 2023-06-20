@@ -83,7 +83,7 @@ public class FilterUtil {
                 .and(TEAM_PLAYER.PLAYER_ID.eq(filter.getPlayerId()))
                 .and(EVENT.DISCIPLINE.eq(filter.getDiscipline().name()))
                 .and(EVENT.SEASON_ID.eq(filter.getSeasonId()))
-                .and(GAME.STATE.eq("FINISHED"));
+                .and(GAME.STATUS.eq("FINISHED"));
 
         return result;
     }

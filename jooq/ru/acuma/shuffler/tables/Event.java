@@ -65,9 +65,9 @@ public class Event extends TableImpl<EventRecord> {
     public final TableField<EventRecord, Long> SEASON_ID = createField(DSL.name("season_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>public.event.state</code>.
+     * The column <code>public.event.status</code>.
      */
-    public final TableField<EventRecord, String> STATE = createField(DSL.name("state"), SQLDataType.VARCHAR(32).nullable(false), this, "");
+    public final TableField<EventRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.VARCHAR(32).nullable(false), this, "");
 
     /**
      * The column <code>public.event.discipline</code>.

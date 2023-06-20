@@ -41,36 +41,36 @@ public class UserInfoDao extends DAOImpl<UserInfoRecord, ru.acuma.shuffler.table
 
     @Override
     public Long getId(ru.acuma.shuffler.tables.pojos.UserInfo object) {
-        return object.getTelegramId();
+        return object.getId();
     }
 
     /**
-     * Fetch records that have <code>telegram_id BETWEEN lowerInclusive AND
+     * Fetch records that have <code>id BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchRangeOfTelegramId(Long lowerInclusive, Long upperInclusive) {
-        return fetchRange(UserInfo.USER_INFO.TELEGRAM_ID, lowerInclusive, upperInclusive);
+    public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchRangeOfId(Long lowerInclusive, Long upperInclusive) {
+        return fetchRange(UserInfo.USER_INFO.ID, lowerInclusive, upperInclusive);
     }
 
     /**
-     * Fetch records that have <code>telegram_id IN (values)</code>
+     * Fetch records that have <code>id IN (values)</code>
      */
-    public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchByTelegramId(Long... values) {
-        return fetch(UserInfo.USER_INFO.TELEGRAM_ID, values);
+    public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchById(Long... values) {
+        return fetch(UserInfo.USER_INFO.ID, values);
     }
 
     /**
-     * Fetch a unique record that has <code>telegram_id = value</code>
+     * Fetch a unique record that has <code>id = value</code>
      */
-    public ru.acuma.shuffler.tables.pojos.UserInfo fetchOneByTelegramId(Long value) {
-        return fetchOne(UserInfo.USER_INFO.TELEGRAM_ID, value);
+    public ru.acuma.shuffler.tables.pojos.UserInfo fetchOneById(Long value) {
+        return fetchOne(UserInfo.USER_INFO.ID, value);
     }
 
     /**
-     * Fetch a unique record that has <code>telegram_id = value</code>
+     * Fetch a unique record that has <code>id = value</code>
      */
-    public Optional<ru.acuma.shuffler.tables.pojos.UserInfo> fetchOptionalByTelegramId(Long value) {
-        return fetchOptional(UserInfo.USER_INFO.TELEGRAM_ID, value);
+    public Optional<ru.acuma.shuffler.tables.pojos.UserInfo> fetchOptionalById(Long value) {
+        return fetchOptional(UserInfo.USER_INFO.ID, value);
     }
 
     /**
@@ -86,21 +86,6 @@ public class UserInfoDao extends DAOImpl<UserInfoRecord, ru.acuma.shuffler.table
      */
     public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchByLanguageCode(String... values) {
         return fetch(UserInfo.USER_INFO.LANGUAGE_CODE, values);
-    }
-
-    /**
-     * Fetch records that have <code>is_bot BETWEEN lowerInclusive AND
-     * upperInclusive</code>
-     */
-    public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchRangeOfIsBot(Boolean lowerInclusive, Boolean upperInclusive) {
-        return fetchRange(UserInfo.USER_INFO.IS_BOT, lowerInclusive, upperInclusive);
-    }
-
-    /**
-     * Fetch records that have <code>is_bot IN (values)</code>
-     */
-    public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchByIsBot(Boolean... values) {
-        return fetch(UserInfo.USER_INFO.IS_BOT, values);
     }
 
     /**
@@ -149,33 +134,18 @@ public class UserInfoDao extends DAOImpl<UserInfoRecord, ru.acuma.shuffler.table
     }
 
     /**
-     * Fetch records that have <code>is_blocked BETWEEN lowerInclusive AND
+     * Fetch records that have <code>is_active BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchRangeOfIsBlocked(Boolean lowerInclusive, Boolean upperInclusive) {
-        return fetchRange(UserInfo.USER_INFO.IS_BLOCKED, lowerInclusive, upperInclusive);
+    public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchRangeOfIsActive(Boolean lowerInclusive, Boolean upperInclusive) {
+        return fetchRange(UserInfo.USER_INFO.IS_ACTIVE, lowerInclusive, upperInclusive);
     }
 
     /**
-     * Fetch records that have <code>is_blocked IN (values)</code>
+     * Fetch records that have <code>is_active IN (values)</code>
      */
-    public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchByIsBlocked(Boolean... values) {
-        return fetch(UserInfo.USER_INFO.IS_BLOCKED, values);
-    }
-
-    /**
-     * Fetch records that have <code>last_message_at BETWEEN lowerInclusive AND
-     * upperInclusive</code>
-     */
-    public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchRangeOfLastMessageAt(OffsetDateTime lowerInclusive, OffsetDateTime upperInclusive) {
-        return fetchRange(UserInfo.USER_INFO.LAST_MESSAGE_AT, lowerInclusive, upperInclusive);
-    }
-
-    /**
-     * Fetch records that have <code>last_message_at IN (values)</code>
-     */
-    public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchByLastMessageAt(OffsetDateTime... values) {
-        return fetch(UserInfo.USER_INFO.LAST_MESSAGE_AT, values);
+    public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchByIsActive(Boolean... values) {
+        return fetch(UserInfo.USER_INFO.IS_ACTIVE, values);
     }
 
     /**
@@ -221,21 +191,6 @@ public class UserInfoDao extends DAOImpl<UserInfoRecord, ru.acuma.shuffler.table
      */
     public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchByDeletedAt(OffsetDateTime... values) {
         return fetch(UserInfo.USER_INFO.DELETED_AT, values);
-    }
-
-    /**
-     * Fetch records that have <code>media_blob BETWEEN lowerInclusive AND
-     * upperInclusive</code>
-     */
-    public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchRangeOfMediaBlob(byte[] lowerInclusive, byte[] upperInclusive) {
-        return fetchRange(UserInfo.USER_INFO.MEDIA_BLOB, lowerInclusive, upperInclusive);
-    }
-
-    /**
-     * Fetch records that have <code>media_blob IN (values)</code>
-     */
-    public List<ru.acuma.shuffler.tables.pojos.UserInfo> fetchByMediaBlob(byte[]... values) {
-        return fetch(UserInfo.USER_INFO.MEDIA_BLOB, values);
     }
 
     /**

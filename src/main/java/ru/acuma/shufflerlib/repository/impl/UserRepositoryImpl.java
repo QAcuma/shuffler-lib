@@ -32,8 +32,8 @@ public class UserRepositoryImpl implements UserRepository {
     public boolean isBlocked(Long telegramId) {
         return dsl.fetchExists(
                 dsl.selectFrom(USER_INFO)
-                        .where(USER_INFO.TELEGRAM_ID.eq(telegramId))
-                        .and(USER_INFO.IS_BLOCKED.eq(Boolean.TRUE))
+                        .where(USER_INFO.ID.eq(telegramId))
+                        .and(USER_INFO.IS_ACTIVE.eq(Boolean.FALSE))
         );
     }
 
@@ -41,8 +41,8 @@ public class UserRepositoryImpl implements UserRepository {
     public boolean isActive(Long telegramId) {
         return dsl.fetchExists(
                 dsl.selectFrom(USER_INFO)
-                        .where(USER_INFO.TELEGRAM_ID.eq(telegramId))
-                        .and(USER_INFO.IS_BLOCKED.eq(Boolean.FALSE))
+                        .where(USER_INFO.ID.eq(telegramId))
+                        .and(USER_INFO.IS_ACTIVE.eq(Boolean.TRUE))
                         .and(USER_INFO.DELETED_AT.isNull())
         );
     }
@@ -52,7 +52,7 @@ public class UserRepositoryImpl implements UserRepository {
     public UserInfo get(Long telegramId) {
         return dsl.select()
                 .from(USER_INFO)
-                .where(USER_INFO.TELEGRAM_ID.eq(telegramId))
+                .where(USER_INFO.ID.eq(telegramId))
                 .fetchOneInto(UserInfo.class);
     }
 
@@ -60,22 +60,14 @@ public class UserRepositoryImpl implements UserRepository {
     public long save(UserInfo userInfo) {
         userInfoDao.insert(userInfo);
 
-        return userInfo.getTelegramId();
-    }
-
-    @Override
-    public long saveProfilePhoto(Long telegramId, byte[] blob) {
-        return dsl.update(USER_INFO)
-                .set(USER_INFO.MEDIA_BLOB, blob)
-                .where(USER_INFO.TELEGRAM_ID.eq(telegramId))
-                .execute();
+        return userInfo.getId();
     }
 
     @Override
     public long saveProfilePhotoId(Long telegramId, String mediaId) {
         return dsl.update(USER_INFO)
                 .set(USER_INFO.MEDIA_ID, mediaId)
-                .where(USER_INFO.TELEGRAM_ID.eq(telegramId))
+                .where(USER_INFO.ID.eq(telegramId))
                 .execute();
     }
 
@@ -83,15 +75,15 @@ public class UserRepositoryImpl implements UserRepository {
     public long update(UserInfo userInfo) {
         userInfoDao.update(userInfo);
 
-        return userInfo.getTelegramId();
+        return userInfo.getId();
     }
 
     @Override
     public void delete(Long telegramId) {
         dsl.update(USER_INFO)
                 .set(USER_INFO.DELETED_AT, OffsetDateTime.now())
-                .set(USER_INFO.IS_BLOCKED, true)
-                .where(USER_INFO.TELEGRAM_ID.eq(telegramId))
+                .set(USER_INFO.IS_ACTIVE, false)
+                .where(USER_INFO.ID.eq(telegramId))
                 .execute();
     }
 }

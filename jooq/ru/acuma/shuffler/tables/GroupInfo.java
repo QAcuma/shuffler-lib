@@ -11,7 +11,7 @@ import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row4;
+import org.jooq.Row5;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -48,9 +48,9 @@ public class GroupInfo extends TableImpl<GroupInfoRecord> {
     }
 
     /**
-     * The column <code>public.group_info.chat_id</code>.
+     * The column <code>public.group_info.id</code>.
      */
-    public final TableField<GroupInfoRecord, Long> CHAT_ID = createField(DSL.name("chat_id"), SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<GroupInfoRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>public.group_info.title</code>.
@@ -58,14 +58,19 @@ public class GroupInfo extends TableImpl<GroupInfoRecord> {
     public final TableField<GroupInfoRecord, String> TITLE = createField(DSL.name("title"), SQLDataType.CLOB, this, "");
 
     /**
-     * The column <code>public.group_info.is_blocked</code>.
+     * The column <code>public.group_info.is_active</code>.
      */
-    public final TableField<GroupInfoRecord, Boolean> IS_BLOCKED = createField(DSL.name("is_blocked"), SQLDataType.BOOLEAN, this, "");
+    public final TableField<GroupInfoRecord, Boolean> IS_ACTIVE = createField(DSL.name("is_active"), SQLDataType.BOOLEAN, this, "");
 
     /**
      * The column <code>public.group_info.name</code>.
      */
     public final TableField<GroupInfoRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(16), this, "");
+
+    /**
+     * The column <code>public.group_info.telegram_name</code>.
+     */
+    public final TableField<GroupInfoRecord, String> TELEGRAM_NAME = createField(DSL.name("telegram_name"), SQLDataType.CLOB, this, "");
 
     private GroupInfo(Name alias, Table<GroupInfoRecord> aliased) {
         this(alias, aliased, null);
@@ -142,11 +147,11 @@ public class GroupInfo extends TableImpl<GroupInfoRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row5 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Long, String, Boolean, String> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row5<Long, String, Boolean, String, String> fieldsRow() {
+        return (Row5) super.fieldsRow();
     }
 }

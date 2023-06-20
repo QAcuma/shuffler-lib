@@ -40,36 +40,36 @@ public class GroupInfoDao extends DAOImpl<GroupInfoRecord, ru.acuma.shuffler.tab
 
     @Override
     public Long getId(ru.acuma.shuffler.tables.pojos.GroupInfo object) {
-        return object.getChatId();
+        return object.getId();
     }
 
     /**
-     * Fetch records that have <code>chat_id BETWEEN lowerInclusive AND
+     * Fetch records that have <code>id BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<ru.acuma.shuffler.tables.pojos.GroupInfo> fetchRangeOfChatId(Long lowerInclusive, Long upperInclusive) {
-        return fetchRange(GroupInfo.GROUP_INFO.CHAT_ID, lowerInclusive, upperInclusive);
+    public List<ru.acuma.shuffler.tables.pojos.GroupInfo> fetchRangeOfId(Long lowerInclusive, Long upperInclusive) {
+        return fetchRange(GroupInfo.GROUP_INFO.ID, lowerInclusive, upperInclusive);
     }
 
     /**
-     * Fetch records that have <code>chat_id IN (values)</code>
+     * Fetch records that have <code>id IN (values)</code>
      */
-    public List<ru.acuma.shuffler.tables.pojos.GroupInfo> fetchByChatId(Long... values) {
-        return fetch(GroupInfo.GROUP_INFO.CHAT_ID, values);
+    public List<ru.acuma.shuffler.tables.pojos.GroupInfo> fetchById(Long... values) {
+        return fetch(GroupInfo.GROUP_INFO.ID, values);
     }
 
     /**
-     * Fetch a unique record that has <code>chat_id = value</code>
+     * Fetch a unique record that has <code>id = value</code>
      */
-    public ru.acuma.shuffler.tables.pojos.GroupInfo fetchOneByChatId(Long value) {
-        return fetchOne(GroupInfo.GROUP_INFO.CHAT_ID, value);
+    public ru.acuma.shuffler.tables.pojos.GroupInfo fetchOneById(Long value) {
+        return fetchOne(GroupInfo.GROUP_INFO.ID, value);
     }
 
     /**
-     * Fetch a unique record that has <code>chat_id = value</code>
+     * Fetch a unique record that has <code>id = value</code>
      */
-    public Optional<ru.acuma.shuffler.tables.pojos.GroupInfo> fetchOptionalByChatId(Long value) {
-        return fetchOptional(GroupInfo.GROUP_INFO.CHAT_ID, value);
+    public Optional<ru.acuma.shuffler.tables.pojos.GroupInfo> fetchOptionalById(Long value) {
+        return fetchOptional(GroupInfo.GROUP_INFO.ID, value);
     }
 
     /**
@@ -88,18 +88,18 @@ public class GroupInfoDao extends DAOImpl<GroupInfoRecord, ru.acuma.shuffler.tab
     }
 
     /**
-     * Fetch records that have <code>is_blocked BETWEEN lowerInclusive AND
+     * Fetch records that have <code>is_active BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<ru.acuma.shuffler.tables.pojos.GroupInfo> fetchRangeOfIsBlocked(Boolean lowerInclusive, Boolean upperInclusive) {
-        return fetchRange(GroupInfo.GROUP_INFO.IS_BLOCKED, lowerInclusive, upperInclusive);
+    public List<ru.acuma.shuffler.tables.pojos.GroupInfo> fetchRangeOfIsActive(Boolean lowerInclusive, Boolean upperInclusive) {
+        return fetchRange(GroupInfo.GROUP_INFO.IS_ACTIVE, lowerInclusive, upperInclusive);
     }
 
     /**
-     * Fetch records that have <code>is_blocked IN (values)</code>
+     * Fetch records that have <code>is_active IN (values)</code>
      */
-    public List<ru.acuma.shuffler.tables.pojos.GroupInfo> fetchByIsBlocked(Boolean... values) {
-        return fetch(GroupInfo.GROUP_INFO.IS_BLOCKED, values);
+    public List<ru.acuma.shuffler.tables.pojos.GroupInfo> fetchByIsActive(Boolean... values) {
+        return fetch(GroupInfo.GROUP_INFO.IS_ACTIVE, values);
     }
 
     /**
@@ -129,5 +129,20 @@ public class GroupInfoDao extends DAOImpl<GroupInfoRecord, ru.acuma.shuffler.tab
      */
     public Optional<ru.acuma.shuffler.tables.pojos.GroupInfo> fetchOptionalByName(String value) {
         return fetchOptional(GroupInfo.GROUP_INFO.NAME, value);
+    }
+
+    /**
+     * Fetch records that have <code>telegram_name BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<ru.acuma.shuffler.tables.pojos.GroupInfo> fetchRangeOfTelegramName(String lowerInclusive, String upperInclusive) {
+        return fetchRange(GroupInfo.GROUP_INFO.TELEGRAM_NAME, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>telegram_name IN (values)</code>
+     */
+    public List<ru.acuma.shuffler.tables.pojos.GroupInfo> fetchByTelegramName(String... values) {
+        return fetch(GroupInfo.GROUP_INFO.TELEGRAM_NAME, values);
     }
 }

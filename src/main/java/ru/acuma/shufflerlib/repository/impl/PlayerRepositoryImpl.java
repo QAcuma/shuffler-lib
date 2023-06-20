@@ -110,11 +110,10 @@ public class PlayerRepositoryImpl implements PlayerRepository {
                                         .join(EVENT).on(EVENT.ID.eq(GAME.EVENT_ID))
                                         .where(TEAM.IS_WINNER.eq(Boolean.FALSE))
                                         .and(FilterUtil.playerDisciplineSeasonGameStateCondition(filter))
-                        ).as("loseCount"),
-                        RATING.IS_CALIBRATED
+                        ).as("loseCount")
                 )
                 .from(PLAYER)
-                .join(USER_INFO).on(USER_INFO.TELEGRAM_ID.eq(PLAYER.USER_ID))
+                .join(USER_INFO).on(USER_INFO.ID.eq(PLAYER.USER_ID))
                 .join(RATING).on(RATING.PLAYER_ID.eq(PLAYER.ID))
                 .where(RATING.DISCIPLINE.eq(filter.getDiscipline().name()))
                 .and(RATING.SEASON_ID.eq(filter.getSeasonId()))
@@ -135,13 +134,12 @@ public class PlayerRepositoryImpl implements PlayerRepository {
                                 val(mediaLink),
                                 USER_INFO.MEDIA_ID
                         ).as("avatar"),
-                        RATING.SCORE,
-                        RATING.IS_CALIBRATED
+                        RATING.SCORE
                 )
                 .from(PLAYER)
-                .join(USER_INFO).on(PLAYER.USER_ID.eq(USER_INFO.TELEGRAM_ID))
+                .join(USER_INFO).on(PLAYER.USER_ID.eq(USER_INFO.ID))
                 .join(RATING).on(RATING.PLAYER_ID.eq(PLAYER.ID))
-                .join(GROUP_INFO).on(PLAYER.CHAT_ID.eq(GROUP_INFO.CHAT_ID))
+                .join(GROUP_INFO).on(PLAYER.CHAT_ID.eq(GROUP_INFO.ID))
                 .where(FilterUtil.chatAndSeasonDisciplineConditionByRating(filter))
                 .and(
                         exists(

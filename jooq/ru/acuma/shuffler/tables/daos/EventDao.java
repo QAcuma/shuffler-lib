@@ -104,18 +104,18 @@ public class EventDao extends DAOImpl<EventRecord, ru.acuma.shuffler.tables.pojo
     }
 
     /**
-     * Fetch records that have <code>state BETWEEN lowerInclusive AND
+     * Fetch records that have <code>status BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<ru.acuma.shuffler.tables.pojos.Event> fetchRangeOfState(String lowerInclusive, String upperInclusive) {
-        return fetchRange(Event.EVENT.STATE, lowerInclusive, upperInclusive);
+    public List<ru.acuma.shuffler.tables.pojos.Event> fetchRangeOfStatus(String lowerInclusive, String upperInclusive) {
+        return fetchRange(Event.EVENT.STATUS, lowerInclusive, upperInclusive);
     }
 
     /**
-     * Fetch records that have <code>state IN (values)</code>
+     * Fetch records that have <code>status IN (values)</code>
      */
-    public List<ru.acuma.shuffler.tables.pojos.Event> fetchByState(String... values) {
-        return fetch(Event.EVENT.STATE, values);
+    public List<ru.acuma.shuffler.tables.pojos.Event> fetchByStatus(String... values) {
+        return fetch(Event.EVENT.STATUS, values);
     }
 
     /**

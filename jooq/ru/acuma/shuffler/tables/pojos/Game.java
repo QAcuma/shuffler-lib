@@ -18,7 +18,7 @@ public class Game implements Serializable {
 
     private Long           id;
     private Long           eventId;
-    private String         state;
+    private String         status;
     private OffsetDateTime startedAt;
     private OffsetDateTime finishedAt;
 
@@ -27,7 +27,7 @@ public class Game implements Serializable {
     public Game(Game value) {
         this.id = value.id;
         this.eventId = value.eventId;
-        this.state = value.state;
+        this.status = value.status;
         this.startedAt = value.startedAt;
         this.finishedAt = value.finishedAt;
     }
@@ -35,13 +35,13 @@ public class Game implements Serializable {
     public Game(
         Long           id,
         Long           eventId,
-        String         state,
+        String         status,
         OffsetDateTime startedAt,
         OffsetDateTime finishedAt
     ) {
         this.id = id;
         this.eventId = eventId;
-        this.state = state;
+        this.status = status;
         this.startedAt = startedAt;
         this.finishedAt = finishedAt;
     }
@@ -77,17 +77,17 @@ public class Game implements Serializable {
     }
 
     /**
-     * Getter for <code>public.game.state</code>.
+     * Getter for <code>public.game.status</code>.
      */
-    public String getState() {
-        return this.state;
+    public String getStatus() {
+        return this.status;
     }
 
     /**
-     * Setter for <code>public.game.state</code>.
+     * Setter for <code>public.game.status</code>.
      */
-    public Game setState(String state) {
-        this.state = state;
+    public Game setStatus(String status) {
+        this.status = status;
         return this;
     }
 
@@ -127,7 +127,7 @@ public class Game implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(eventId);
-        sb.append(", ").append(state);
+        sb.append(", ").append(status);
         sb.append(", ").append(startedAt);
         sb.append(", ").append(finishedAt);
 

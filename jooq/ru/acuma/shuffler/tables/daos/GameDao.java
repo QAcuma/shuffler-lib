@@ -89,18 +89,18 @@ public class GameDao extends DAOImpl<GameRecord, ru.acuma.shuffler.tables.pojos.
     }
 
     /**
-     * Fetch records that have <code>state BETWEEN lowerInclusive AND
+     * Fetch records that have <code>status BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<ru.acuma.shuffler.tables.pojos.Game> fetchRangeOfState(String lowerInclusive, String upperInclusive) {
-        return fetchRange(Game.GAME.STATE, lowerInclusive, upperInclusive);
+    public List<ru.acuma.shuffler.tables.pojos.Game> fetchRangeOfStatus(String lowerInclusive, String upperInclusive) {
+        return fetchRange(Game.GAME.STATUS, lowerInclusive, upperInclusive);
     }
 
     /**
-     * Fetch records that have <code>state IN (values)</code>
+     * Fetch records that have <code>status IN (values)</code>
      */
-    public List<ru.acuma.shuffler.tables.pojos.Game> fetchByState(String... values) {
-        return fetch(Game.GAME.STATE, values);
+    public List<ru.acuma.shuffler.tables.pojos.Game> fetchByStatus(String... values) {
+        return fetch(Game.GAME.STATUS, values);
     }
 
     /**

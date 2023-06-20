@@ -16,80 +16,68 @@ public class UserInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long           telegramId;
+    private Long           id;
     private String         languageCode;
-    private Boolean        isBot;
     private String         firstName;
     private String         lastName;
     private String         userName;
-    private Boolean        isBlocked;
-    private OffsetDateTime lastMessageAt;
+    private Boolean        isActive;
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
     private OffsetDateTime deletedAt;
-    private byte[]         mediaBlob;
     private String         mediaId;
 
     public UserInfo() {}
 
     public UserInfo(UserInfo value) {
-        this.telegramId = value.telegramId;
+        this.id = value.id;
         this.languageCode = value.languageCode;
-        this.isBot = value.isBot;
         this.firstName = value.firstName;
         this.lastName = value.lastName;
         this.userName = value.userName;
-        this.isBlocked = value.isBlocked;
-        this.lastMessageAt = value.lastMessageAt;
+        this.isActive = value.isActive;
         this.createdAt = value.createdAt;
         this.updatedAt = value.updatedAt;
         this.deletedAt = value.deletedAt;
-        this.mediaBlob = value.mediaBlob;
         this.mediaId = value.mediaId;
     }
 
     public UserInfo(
-        Long           telegramId,
+        Long           id,
         String         languageCode,
-        Boolean        isBot,
         String         firstName,
         String         lastName,
         String         userName,
-        Boolean        isBlocked,
-        OffsetDateTime lastMessageAt,
+        Boolean        isActive,
         OffsetDateTime createdAt,
         OffsetDateTime updatedAt,
         OffsetDateTime deletedAt,
-        byte[]         mediaBlob,
         String         mediaId
     ) {
-        this.telegramId = telegramId;
+        this.id = id;
         this.languageCode = languageCode;
-        this.isBot = isBot;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
-        this.isBlocked = isBlocked;
-        this.lastMessageAt = lastMessageAt;
+        this.isActive = isActive;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        this.mediaBlob = mediaBlob;
         this.mediaId = mediaId;
     }
 
     /**
-     * Getter for <code>public.user_info.telegram_id</code>.
+     * Getter for <code>public.user_info.id</code>.
      */
-    public Long getTelegramId() {
-        return this.telegramId;
+    public Long getId() {
+        return this.id;
     }
 
     /**
-     * Setter for <code>public.user_info.telegram_id</code>.
+     * Setter for <code>public.user_info.id</code>.
      */
-    public UserInfo setTelegramId(Long telegramId) {
-        this.telegramId = telegramId;
+    public UserInfo setId(Long id) {
+        this.id = id;
         return this;
     }
 
@@ -105,21 +93,6 @@ public class UserInfo implements Serializable {
      */
     public UserInfo setLanguageCode(String languageCode) {
         this.languageCode = languageCode;
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.user_info.is_bot</code>.
-     */
-    public Boolean getIsBot() {
-        return this.isBot;
-    }
-
-    /**
-     * Setter for <code>public.user_info.is_bot</code>.
-     */
-    public UserInfo setIsBot(Boolean isBot) {
-        this.isBot = isBot;
         return this;
     }
 
@@ -169,32 +142,17 @@ public class UserInfo implements Serializable {
     }
 
     /**
-     * Getter for <code>public.user_info.is_blocked</code>.
+     * Getter for <code>public.user_info.is_active</code>.
      */
-    public Boolean getIsBlocked() {
-        return this.isBlocked;
+    public Boolean getIsActive() {
+        return this.isActive;
     }
 
     /**
-     * Setter for <code>public.user_info.is_blocked</code>.
+     * Setter for <code>public.user_info.is_active</code>.
      */
-    public UserInfo setIsBlocked(Boolean isBlocked) {
-        this.isBlocked = isBlocked;
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.user_info.last_message_at</code>.
-     */
-    public OffsetDateTime getLastMessageAt() {
-        return this.lastMessageAt;
-    }
-
-    /**
-     * Setter for <code>public.user_info.last_message_at</code>.
-     */
-    public UserInfo setLastMessageAt(OffsetDateTime lastMessageAt) {
-        this.lastMessageAt = lastMessageAt;
+    public UserInfo setIsActive(Boolean isActive) {
+        this.isActive = isActive;
         return this;
     }
 
@@ -244,21 +202,6 @@ public class UserInfo implements Serializable {
     }
 
     /**
-     * Getter for <code>public.user_info.media_blob</code>.
-     */
-    public byte[] getMediaBlob() {
-        return this.mediaBlob;
-    }
-
-    /**
-     * Setter for <code>public.user_info.media_blob</code>.
-     */
-    public UserInfo setMediaBlob(byte[] mediaBlob) {
-        this.mediaBlob = mediaBlob;
-        return this;
-    }
-
-    /**
      * Getter for <code>public.user_info.media_id</code>.
      */
     public String getMediaId() {
@@ -277,18 +220,15 @@ public class UserInfo implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("UserInfo (");
 
-        sb.append(telegramId);
+        sb.append(id);
         sb.append(", ").append(languageCode);
-        sb.append(", ").append(isBot);
         sb.append(", ").append(firstName);
         sb.append(", ").append(lastName);
         sb.append(", ").append(userName);
-        sb.append(", ").append(isBlocked);
-        sb.append(", ").append(lastMessageAt);
+        sb.append(", ").append(isActive);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(updatedAt);
         sb.append(", ").append(deletedAt);
-        sb.append(", ").append("[binary...]");
         sb.append(", ").append(mediaId);
 
         sb.append(")");

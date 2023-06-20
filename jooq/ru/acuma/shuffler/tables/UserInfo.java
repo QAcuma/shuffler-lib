@@ -10,7 +10,7 @@ import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row13;
+import org.jooq.Row10;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -47,19 +47,14 @@ public class UserInfo extends TableImpl<UserInfoRecord> {
     }
 
     /**
-     * The column <code>public.user_info.telegram_id</code>.
+     * The column <code>public.user_info.id</code>.
      */
-    public final TableField<UserInfoRecord, Long> TELEGRAM_ID = createField(DSL.name("telegram_id"), SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<UserInfoRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>public.user_info.language_code</code>.
      */
     public final TableField<UserInfoRecord, String> LANGUAGE_CODE = createField(DSL.name("language_code"), SQLDataType.CLOB, this, "");
-
-    /**
-     * The column <code>public.user_info.is_bot</code>.
-     */
-    public final TableField<UserInfoRecord, Boolean> IS_BOT = createField(DSL.name("is_bot"), SQLDataType.BOOLEAN, this, "");
 
     /**
      * The column <code>public.user_info.first_name</code>.
@@ -77,14 +72,9 @@ public class UserInfo extends TableImpl<UserInfoRecord> {
     public final TableField<UserInfoRecord, String> USER_NAME = createField(DSL.name("user_name"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
-     * The column <code>public.user_info.is_blocked</code>.
+     * The column <code>public.user_info.is_active</code>.
      */
-    public final TableField<UserInfoRecord, Boolean> IS_BLOCKED = createField(DSL.name("is_blocked"), SQLDataType.BOOLEAN.nullable(false), this, "");
-
-    /**
-     * The column <code>public.user_info.last_message_at</code>.
-     */
-    public final TableField<UserInfoRecord, OffsetDateTime> LAST_MESSAGE_AT = createField(DSL.name("last_message_at"), SQLDataType.TIMESTAMPWITHTIMEZONE(6), this, "");
+    public final TableField<UserInfoRecord, Boolean> IS_ACTIVE = createField(DSL.name("is_active"), SQLDataType.BOOLEAN.nullable(false), this, "");
 
     /**
      * The column <code>public.user_info.created_at</code>.
@@ -100,11 +90,6 @@ public class UserInfo extends TableImpl<UserInfoRecord> {
      * The column <code>public.user_info.deleted_at</code>.
      */
     public final TableField<UserInfoRecord, OffsetDateTime> DELETED_AT = createField(DSL.name("deleted_at"), SQLDataType.TIMESTAMPWITHTIMEZONE(6), this, "");
-
-    /**
-     * The column <code>public.user_info.media_blob</code>.
-     */
-    public final TableField<UserInfoRecord, byte[]> MEDIA_BLOB = createField(DSL.name("media_blob"), SQLDataType.BLOB, this, "");
 
     /**
      * The column <code>public.user_info.media_id</code>.
@@ -181,11 +166,11 @@ public class UserInfo extends TableImpl<UserInfoRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row13 type methods
+    // Row10 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row13<Long, String, Boolean, String, String, String, Boolean, OffsetDateTime, OffsetDateTime, OffsetDateTime, OffsetDateTime, byte[], String> fieldsRow() {
-        return (Row13) super.fieldsRow();
+    public Row10<Long, String, String, String, String, Boolean, OffsetDateTime, OffsetDateTime, OffsetDateTime, String> fieldsRow() {
+        return (Row10) super.fieldsRow();
     }
 }

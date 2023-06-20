@@ -77,7 +77,7 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
                                                                         )
                                                                 )
                                                                         .from(PLAYER)
-                                                                        .join(USER_INFO).on(USER_INFO.TELEGRAM_ID.eq(PLAYER.USER_ID))
+                                                                        .join(USER_INFO).on(USER_INFO.ID.eq(PLAYER.USER_ID))
                                                                         .where(PLAYER.ID.eq(TEAM_PLAYER.PLAYER_ID))
                                                         ).as("name"),
                                                         concat(
@@ -87,7 +87,7 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
                                                                                 USER_INFO.MEDIA_ID
                                                                         )
                                                                                 .from(USER_INFO)
-                                                                                .join(PLAYER).on(PLAYER.USER_ID.eq(USER_INFO.TELEGRAM_ID))
+                                                                                .join(PLAYER).on(PLAYER.USER_ID.eq(USER_INFO.ID))
                                                                                 .where(PLAYER.ID.eq(TEAM_PLAYER.PLAYER_ID)))
                                                         ).as("avatar"),
                                                         field(
@@ -97,15 +97,7 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
                                                                         .from(RATING_HISTORY)
                                                                         .where(RATING_HISTORY.PLAYER_ID.eq(TEAM_PLAYER.PLAYER_ID))
                                                                         .and(RATING_HISTORY.GAME_ID.eq(GAME.ID))
-                                                        ).as("score"),
-                                                        field(
-                                                                select(
-                                                                        RATING_HISTORY.IS_CALIBRATED
-                                                                )
-                                                                        .from(RATING_HISTORY)
-                                                                        .where(RATING_HISTORY.PLAYER_ID.eq(TEAM_PLAYER.PLAYER_ID))
-                                                                        .and(RATING_HISTORY.GAME_ID.eq(GAME.ID))
-                                                        ).as("isCalibrated")
+                                                        ).as("score")
                                                 )
                                                         .from(TEAM_PLAYER)
                                                         .where(TEAM_PLAYER.TEAM_ID.eq(TEAM.ID))
@@ -119,7 +111,7 @@ public class RatingHistoryRepositoryImpl implements RatingHistoryRepository {
                 .from(GAME)
                 .join(EVENT).on(EVENT.ID.eq(GAME.EVENT_ID))
                 .join(RATING_HISTORY).on(RATING_HISTORY.GAME_ID.eq(GAME.ID))
-                .join(GROUP_INFO).on(GROUP_INFO.CHAT_ID.eq(EVENT.CHAT_ID))
+                .join(GROUP_INFO).on(GROUP_INFO.ID.eq(EVENT.CHAT_ID))
                 .where(FilterUtil.chatOrPlayerAndSeasonDisciplineCondition(filter))
                 .orderBy(GAME.FINISHED_AT.desc())
                 .fetchInto(WebGame.class);

@@ -15,44 +15,48 @@ public class GroupInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long    chatId;
+    private Long    id;
     private String  title;
-    private Boolean isBlocked;
+    private Boolean isActive;
     private String  name;
+    private String  telegramName;
 
     public GroupInfo() {}
 
     public GroupInfo(GroupInfo value) {
-        this.chatId = value.chatId;
+        this.id = value.id;
         this.title = value.title;
-        this.isBlocked = value.isBlocked;
+        this.isActive = value.isActive;
         this.name = value.name;
+        this.telegramName = value.telegramName;
     }
 
     public GroupInfo(
-        Long    chatId,
+        Long    id,
         String  title,
-        Boolean isBlocked,
-        String  name
+        Boolean isActive,
+        String  name,
+        String  telegramName
     ) {
-        this.chatId = chatId;
+        this.id = id;
         this.title = title;
-        this.isBlocked = isBlocked;
+        this.isActive = isActive;
         this.name = name;
+        this.telegramName = telegramName;
     }
 
     /**
-     * Getter for <code>public.group_info.chat_id</code>.
+     * Getter for <code>public.group_info.id</code>.
      */
-    public Long getChatId() {
-        return this.chatId;
+    public Long getId() {
+        return this.id;
     }
 
     /**
-     * Setter for <code>public.group_info.chat_id</code>.
+     * Setter for <code>public.group_info.id</code>.
      */
-    public GroupInfo setChatId(Long chatId) {
-        this.chatId = chatId;
+    public GroupInfo setId(Long id) {
+        this.id = id;
         return this;
     }
 
@@ -72,17 +76,17 @@ public class GroupInfo implements Serializable {
     }
 
     /**
-     * Getter for <code>public.group_info.is_blocked</code>.
+     * Getter for <code>public.group_info.is_active</code>.
      */
-    public Boolean getIsBlocked() {
-        return this.isBlocked;
+    public Boolean getIsActive() {
+        return this.isActive;
     }
 
     /**
-     * Setter for <code>public.group_info.is_blocked</code>.
+     * Setter for <code>public.group_info.is_active</code>.
      */
-    public GroupInfo setIsBlocked(Boolean isBlocked) {
-        this.isBlocked = isBlocked;
+    public GroupInfo setIsActive(Boolean isActive) {
+        this.isActive = isActive;
         return this;
     }
 
@@ -101,14 +105,30 @@ public class GroupInfo implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.group_info.telegram_name</code>.
+     */
+    public String getTelegramName() {
+        return this.telegramName;
+    }
+
+    /**
+     * Setter for <code>public.group_info.telegram_name</code>.
+     */
+    public GroupInfo setTelegramName(String telegramName) {
+        this.telegramName = telegramName;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("GroupInfo (");
 
-        sb.append(chatId);
+        sb.append(id);
         sb.append(", ").append(title);
-        sb.append(", ").append(isBlocked);
+        sb.append(", ").append(isActive);
         sb.append(", ").append(name);
+        sb.append(", ").append(telegramName);
 
         sb.append(")");
         return sb.toString();

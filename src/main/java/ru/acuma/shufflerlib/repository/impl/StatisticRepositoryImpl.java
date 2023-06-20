@@ -41,12 +41,12 @@ public class StatisticRepositoryImpl implements StatisticRepository {
                                         .join(TEAM_PLAYER).on(TEAM_PLAYER.TEAM_ID.eq(TEAM.ID))
                                         .where(RATING_HISTORY.PLAYER_ID.eq(PLAYER.ID))
                                         .and(FilterUtil.eventSeasonAndDisciplineCondition(filter))
-                                        .and(GAME.STATE.eq("FINISHED"))
+                                        .and(GAME.STATUS.eq("FINISHED"))
                                         .orderBy(GAME.FINISHED_AT)
                         ).as("coordinates").convertFrom(r -> r.map(mapping(WebCoordinate::new)))
                 )
                 .from(PLAYER)
-                .join(GROUP_INFO).on(GROUP_INFO.CHAT_ID.eq(PLAYER.CHAT_ID))
+                .join(GROUP_INFO).on(GROUP_INFO.ID.eq(PLAYER.CHAT_ID))
                 .where(FilterUtil.requiredPlayerCondition(filter))
                 .fetchOneInto(WebGraph.class);
     }

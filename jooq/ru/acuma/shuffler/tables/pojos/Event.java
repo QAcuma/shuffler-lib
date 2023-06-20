@@ -19,7 +19,7 @@ public class Event implements Serializable {
     private Long           id;
     private Long           chatId;
     private Long           seasonId;
-    private String         state;
+    private String         status;
     private String         discipline;
     private OffsetDateTime startedAt;
     private OffsetDateTime finishedAt;
@@ -30,7 +30,7 @@ public class Event implements Serializable {
         this.id = value.id;
         this.chatId = value.chatId;
         this.seasonId = value.seasonId;
-        this.state = value.state;
+        this.status = value.status;
         this.discipline = value.discipline;
         this.startedAt = value.startedAt;
         this.finishedAt = value.finishedAt;
@@ -40,7 +40,7 @@ public class Event implements Serializable {
         Long           id,
         Long           chatId,
         Long           seasonId,
-        String         state,
+        String         status,
         String         discipline,
         OffsetDateTime startedAt,
         OffsetDateTime finishedAt
@@ -48,7 +48,7 @@ public class Event implements Serializable {
         this.id = id;
         this.chatId = chatId;
         this.seasonId = seasonId;
-        this.state = state;
+        this.status = status;
         this.discipline = discipline;
         this.startedAt = startedAt;
         this.finishedAt = finishedAt;
@@ -100,17 +100,17 @@ public class Event implements Serializable {
     }
 
     /**
-     * Getter for <code>public.event.state</code>.
+     * Getter for <code>public.event.status</code>.
      */
-    public String getState() {
-        return this.state;
+    public String getStatus() {
+        return this.status;
     }
 
     /**
-     * Setter for <code>public.event.state</code>.
+     * Setter for <code>public.event.status</code>.
      */
-    public Event setState(String state) {
-        this.state = state;
+    public Event setStatus(String status) {
+        this.status = status;
         return this;
     }
 
@@ -166,7 +166,7 @@ public class Event implements Serializable {
         sb.append(id);
         sb.append(", ").append(chatId);
         sb.append(", ").append(seasonId);
-        sb.append(", ").append(state);
+        sb.append(", ").append(status);
         sb.append(", ").append(discipline);
         sb.append(", ").append(startedAt);
         sb.append(", ").append(finishedAt);

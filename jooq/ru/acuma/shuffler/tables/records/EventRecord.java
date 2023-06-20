@@ -69,17 +69,17 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
     }
 
     /**
-     * Setter for <code>public.event.state</code>.
+     * Setter for <code>public.event.status</code>.
      */
-    public EventRecord setState(String value) {
+    public EventRecord setStatus(String value) {
         set(3, value);
         return this;
     }
 
     /**
-     * Getter for <code>public.event.state</code>.
+     * Getter for <code>public.event.status</code>.
      */
-    public String getState() {
+    public String getStatus() {
         return (String) get(3);
     }
 
@@ -168,7 +168,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public Field<String> field4() {
-        return Event.EVENT.STATE;
+        return Event.EVENT.STATUS;
     }
 
     @Override
@@ -203,7 +203,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public String component4() {
-        return getState();
+        return getStatus();
     }
 
     @Override
@@ -238,7 +238,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public String value4() {
-        return getState();
+        return getStatus();
     }
 
     @Override
@@ -276,7 +276,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public EventRecord value4(String value) {
-        setState(value);
+        setStatus(value);
         return this;
     }
 
@@ -324,13 +324,13 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
     /**
      * Create a detached, initialised EventRecord
      */
-    public EventRecord(Long id, Long chatId, Long seasonId, String state, String discipline, OffsetDateTime startedAt, OffsetDateTime finishedAt) {
+    public EventRecord(Long id, Long chatId, Long seasonId, String status, String discipline, OffsetDateTime startedAt, OffsetDateTime finishedAt) {
         super(Event.EVENT);
 
         setId(id);
         setChatId(chatId);
         setSeasonId(seasonId);
-        setState(state);
+        setStatus(status);
         setDiscipline(discipline);
         setStartedAt(startedAt);
         setFinishedAt(finishedAt);
@@ -346,7 +346,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
             setId(value.getId());
             setChatId(value.getChatId());
             setSeasonId(value.getSeasonId());
-            setState(value.getState());
+            setStatus(value.getStatus());
             setDiscipline(value.getDiscipline());
             setStartedAt(value.getStartedAt());
             setFinishedAt(value.getFinishedAt());

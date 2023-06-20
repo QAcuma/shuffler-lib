@@ -28,8 +28,8 @@ public class GroupRepositoryImpl implements GroupRepository {
     public boolean isActive(Long chatId) {
         return dsl.fetchExists(
                 dsl.selectFrom(GROUP_INFO)
-                        .where(GROUP_INFO.CHAT_ID.eq(chatId))
-                        .and(GROUP_INFO.IS_BLOCKED.eq(Boolean.FALSE))
+                        .where(GROUP_INFO.ID.eq(chatId))
+                        .and(GROUP_INFO.IS_ACTIVE.eq(Boolean.TRUE))
         );
     }
 
@@ -37,9 +37,9 @@ public class GroupRepositoryImpl implements GroupRepository {
     public List<GroupInfo> findActiveGroups(Long seasonId) {
         return dsl.selectDistinct(GROUP_INFO.fields())
                 .from(EVENT)
-                .join(GROUP_INFO).on(GROUP_INFO.CHAT_ID.eq(EVENT.CHAT_ID))
+                .join(GROUP_INFO).on(GROUP_INFO.ID.eq(EVENT.CHAT_ID))
                 .where(EVENT.SEASON_ID.eq(seasonId))
-                .and(EVENT.STATE.eq("FINISHED"))
+                .and(EVENT.STATUS.eq("FINISHED"))
                 .fetchInto(GroupInfo.class);
     }
 

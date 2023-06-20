@@ -54,17 +54,17 @@ public class GameRecord extends UpdatableRecordImpl<GameRecord> implements Recor
     }
 
     /**
-     * Setter for <code>public.game.state</code>.
+     * Setter for <code>public.game.status</code>.
      */
-    public GameRecord setState(String value) {
+    public GameRecord setStatus(String value) {
         set(2, value);
         return this;
     }
 
     /**
-     * Getter for <code>public.game.state</code>.
+     * Getter for <code>public.game.status</code>.
      */
-    public String getState() {
+    public String getStatus() {
         return (String) get(2);
     }
 
@@ -133,7 +133,7 @@ public class GameRecord extends UpdatableRecordImpl<GameRecord> implements Recor
 
     @Override
     public Field<String> field3() {
-        return Game.GAME.STATE;
+        return Game.GAME.STATUS;
     }
 
     @Override
@@ -158,7 +158,7 @@ public class GameRecord extends UpdatableRecordImpl<GameRecord> implements Recor
 
     @Override
     public String component3() {
-        return getState();
+        return getStatus();
     }
 
     @Override
@@ -183,7 +183,7 @@ public class GameRecord extends UpdatableRecordImpl<GameRecord> implements Recor
 
     @Override
     public String value3() {
-        return getState();
+        return getStatus();
     }
 
     @Override
@@ -210,7 +210,7 @@ public class GameRecord extends UpdatableRecordImpl<GameRecord> implements Recor
 
     @Override
     public GameRecord value3(String value) {
-        setState(value);
+        setStatus(value);
         return this;
     }
 
@@ -250,12 +250,12 @@ public class GameRecord extends UpdatableRecordImpl<GameRecord> implements Recor
     /**
      * Create a detached, initialised GameRecord
      */
-    public GameRecord(Long id, Long eventId, String state, OffsetDateTime startedAt, OffsetDateTime finishedAt) {
+    public GameRecord(Long id, Long eventId, String status, OffsetDateTime startedAt, OffsetDateTime finishedAt) {
         super(Game.GAME);
 
         setId(id);
         setEventId(eventId);
-        setState(state);
+        setStatus(status);
         setStartedAt(startedAt);
         setFinishedAt(finishedAt);
     }
@@ -269,7 +269,7 @@ public class GameRecord extends UpdatableRecordImpl<GameRecord> implements Recor
         if (value != null) {
             setId(value.getId());
             setEventId(value.getEventId());
-            setState(value.getState());
+            setStatus(value.getStatus());
             setStartedAt(value.getStartedAt());
             setFinishedAt(value.getFinishedAt());
         }

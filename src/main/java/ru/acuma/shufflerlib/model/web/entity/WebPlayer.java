@@ -21,6 +21,4 @@ public class WebPlayer {
 
     private Integer score;
 
-    private Boolean isCalibrated;
-
 }
