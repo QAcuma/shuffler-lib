@@ -87,14 +87,19 @@ catalog {
 }
 
 publishing {
+    repositories {
+        maven {
+            name = "shuffler-lib"
+            url = uri("https://maven.pkg.github.com/QAcuma/shuffler-lib")
+            credentials {
+                username = System.getenv("GITHUB_USERNAME")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
     publications {
         create<MavenPublication>("shuffler-lib") {
-            artifactId = "shuffler-lib"
             from(components["java"])
-        }
-        create<MavenPublication>("shuffler-catalog") {
-            artifactId = "shuffler-catalog"
-            from(components["versionCatalog"])
         }
     }
 }
